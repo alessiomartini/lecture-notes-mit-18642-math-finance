@@ -289,3 +289,290 @@ Using the covariance-PCA loadings of \cref{ch07:ex-ps3}:
       that it never exceeds $\Var(\bm V\T\bm r)$.
 \end{enumerate}
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section{Counterparty risk (\cref{ch:counterparty})}\label{exam:ch08}
+
+\begin{exercise}[CVA from exposure (not from the course)]\label{ch08:exam-1}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Derive \cref{ch08:prop-cvaee} and the approximation \eqref{ch08:eq-cvabote}.
+  \item For the exposure profile
+      $\mathrm{EE}(t)=\sigma\sqrt t(1-t/T)/\sqrt{2\pi}$ of \cref{ch08:fig-exposure}, with $r=0$ and constant hazard rate $h$,
+      compute CVA to first order in $h$ and compare with $\mathrm{EPE}\cdot s\cdot T$.
+  \item Explain qualitatively how wrong-way
+      risk changes the result.
+\end{enumerate}
+Its core is \cref{ch08:exam-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[VaR is not subadditive (not from the course)]\label{ch08:exam-2}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Verify all the numbers of the A, B, A+B example (VaR and ES at $95\%$).
+  \item Replace the $4\%$ loss probability by
+      $p$ and find the range of $p$ for which $\mathrm{VaR}_{0.95}(A+B)>\mathrm{VaR}_{0.95}(A)+\mathrm{VaR}_{0.95}(B)$.
+  \item Show that for jointly normal losses VaR is subadditive at any $\beta\ge\frac12$.
+\end{enumerate}
+Its core is \cref{ch08:exam-2-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Normal model and FRTB (not from the course)]\label{ch08:exam-3}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Prove \cref{ch08:prop-normal}.
+  \item Find the confidence level $\beta'$ at which the normal ES equals the normal
+      $99\%$ VaR, and compare it with the $97.5\%$ used by FRTB.
+  \item With $\bm\delta=(3000,4000,2000,1000)$ and the covariance
+      matrix of slide~16 (rows $(1.02,0.97,0.80,0.94)$, $(0.97,1.08,0.82,0.96)$, $(0.80,0.82,0.89,0.76)$,
+      $(0.94,0.96,0.76,0.96)$, all $\times10^{-4}$), reproduce $\sigma_P=96.6$, $\mathrm{VaR}=225$, $\mathrm{ES}=257$, and
+      compute the 10-day values with and without the autocorrelation correction for $\rho=0.1$.
+\end{enumerate}
+Its core is \cref{ch08:exam-3-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Back-testing (not from the course)]\label{ch08:exam-4}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Compute $\Prob(N\ge12)$ for $N\sim\mathrm{Bin}(500,0.01)$ exactly and with the Poisson approximation.
+  \item Find the
+      largest number of exceptions accepted at the $5\%$ level.
+  \item Why is the in-sample back-test of the example biased in
+      favour of the model?
+  \item Explain why a single observed loss cannot ``test'' an ES forecast, and propose a test that
+      uses the ES forecasts and realised losses of many days.
+\end{enumerate}
+Its core is \cref{ch08:exam-4-short} in the text.
+\end{exercise}
+
+\begin{exercise}[ES as a linear program (not from the course)]\label{ch08:exam-5}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Complete the proof of \cref{ch08:thm-ru} for a discrete distribution with $S$ equally likely scenarios, taking
+      $\beta S$ to be an integer, and check that $\min_\alpha F$ is the average of the $(1-\beta)S$ largest losses.
+  \item Write the LP that minimises the $97.5\%$ ES of a long-only fully invested portfolio of the four indices over the
+      500 historical scenarios of 2022--2023.
+  \item Why can the same trick not be used for VaR?
+\end{enumerate}
+Its core is \cref{ch08:exam-5-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Delta--gamma margin (not from the course)]\label{ch08:exam-6}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Prove $\Var(X\T\gamma X)=2\tr((\gamma C)^2)$ for $X\sim N(0,C)$ and symmetric $\gamma$.
+  \item One risk factor with
+      daily variance $c$, delta $\delta$ and gamma $\gamma$: write mean and variance of the 10-day $\Delta P$ and check how each
+      term scales with the horizon.
+  \item For a short option position ($\gamma<0$ in the value to the surviving party) discuss
+      whether the normal approximation over- or underestimates the $99\%$ quantile.
+\end{enumerate}
+Its core is \cref{ch08:exam-6-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Toy margin optimisation (not from the course)]\label{ch08:exam-7}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Four parties on a cycle $A\to B\to C\to D\to A$ with oriented positions $a=(3,-5,8,-1)$: find the optimal
+      circulation $t$ and the margin saving.
+  \item Now add the chord A--C with position $2$: parametrise all hedges satisfying
+      symmetry and flatness (the cycle space has dimension $2$) and minimise the total $\sum|x|$.
+  \item For the fairness table
+      of \cref{ch08:sec-opt}, check the least-squares criterion and propose a different fairness criterion (e.g.\ max--min
+      of relative savings) that gives a different answer on some example.
+\end{enumerate}
+Its core is \cref{ch08:exam-7-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Change of numeraire (not from the course)]\label{ch08:exam-8}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Prove \cref{ch08:prop-numeraire} and deduce that $L_i(t)$ is a $\Prob_{T_{i+1}}$-martingale.
+  \item Show that the swap
+      rate $S_{i,N}(t)$ is a martingale under the annuity measure and that it is a weighted average of forward LIBORs with
+      weights $\delta_jP(t,T_{j+1})/A_{i,N}(t)$.
+  \item Verify \cref{ch08:prop-mginterp} and show by an example that ordinary
+      linear interpolation in maturity $T$ is not a martingale in general.
+\end{enumerate}
+Its core is \cref{ch08:exam-8-short} in the text.
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{Time series (\cref{ch:timeseries})}\label{exam:ch09}
+
+\begin{exercise}[PS6 (2013), Problem 2: an AR(2) as a difference of two MA processes]\label{ch09:ex-ps6-2}
+With $\{\eta_t\}$ i.i.d.\ $\mathrm{WN}(0,\sigma^2)$ let $w_t=5(1-0.5L)^{-1}\eta_t$, $v_t=4(1-0.4L)^{-1}\eta_t$ and $x_t=w_t-v_t$.
+\begin{enumerate}[(a)]
+  \item Solve for the coefficients $\psi_i$ in $x_t=\eta_t+\sum_{i\ge1}\psi_i\eta_{t-i}$.
+  \item Prove $\{x_t\}$ is an AR(2) process.
+  \item Solve for $\phi_1,\phi_2$ in $x_t=\phi_1x_{t-1}+\phi_2x_{t-2}+\eta_t$.
+  \item Prove that any stationary AR(2) process can be written as the difference of two (possibly infinite-order) moving-average processes driven by the same $\{\eta_t\}$.
+\end{enumerate}
+Its core is \cref{ch09:ex-ps6-2-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS4 (2013), Problem 6; PS4 (2024), Problem 6: ARMA(1,1)]\label{ch09:ex-arma11}
+For the covariance-stationary $(1-\phi L)X_t=\phi_0+(1+\theta L)\eta_t$:
+\begin{enumerate}[(a)]
+  \item Prove $\mu=\phi_0/(1-\phi)$.
+  \item Prove $\Var X_t=\gamma(0)=\sigma^2\bigl[1+\frac{(\phi+\theta)^2}{1-\phi^2}\bigr]$
+      (equivalently $\sigma^2(1+2\phi\theta+\theta^2)/(1-\phi^2)$).
+  \item Prove that $\rho_1=\phi+\theta\sigma^2/\gamma(0)$ and $\rho_k=\phi\rho_{k-1}$ for $k>1$.
+  \item Compare the ACF with that of the AR(1) with the same $\phi_0,\phi$: which pattern of the ACF is impossible for an AR(1)?
+      What behaviour would an economic index following such a process show?
+  \item (2024 only) Compare with the ACF of an MA(1) with the same parameters; what is the pattern of an MA(1) and how does it change for MA($q$), $q>1$?
+      Try to obtain (b)--(c) directly from the covariance recursion rather than via the Wold weights used in \cref{ch09:sec-arma11}.
+\end{enumerate}
+Its core is \cref{ch09:ex-arma11-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Dickey--Fuller by simulation (not from the course)]\label{ch09:ex-x-df}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Simulate $10^4$ random walks of length $500$ and compute $t_{\phi=1}$ from the regression of $X_t$ on $X_{t-1}$ with and without intercept; check the $5\%$ quantiles $-1.95$ and $-2.89$.
+  \item Repeat with an AR(1) with $\phi=0.95$ and estimate the power of the test at the $5\%$ level; explain why
+      non-rejection on a persistent yield series is weak evidence for a unit root.
+  \item Verify the identity $\sum_{t=1}^TX_{t-1}\eta_t=\frac12(X_T^2-\sum\eta_t^2)$ and show that its expectation is zero; then estimate $\E[T(\hat\phi-1)]$ by simulation and explain why the ratio in \eqref{ch09:eq-df} is nevertheless biased downwards (the denominator is positively correlated with the numerator's negative part).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS6 (2013), Problem 1: moments of a VAR(1)]\label{ch09:ex-ps6-1}
+Let $\bm X_t=(X_{1,t},X_{2,t})\T$ follow $X_{1,t}=0.3+0.8X_{1,t-1}+\eta_{1,t}$, $X_{2,t}=0.2+0.6X_{1,t-1}+0.4X_{2,t-1}+\eta_{2,t}$, with $(\eta_{1,t},\eta_{2,t})\T$ i.i.d.\ $N(\bm0,\Sigma)$, $\Sigma=\bigl(\begin{smallmatrix}3&-1\\-1&3\end{smallmatrix}\bigr)$.
+Compute
+\begin{enumerate}[(a)]
+  \item $\bm\mu=\E[\bm X_t]$,
+  \item $\Gamma(0)=\Cov\bm X_t$,
+  \item $\Gamma(1)=\Cov(\bm X_t,\bm X_{t-1})$, and
+  \item derive a formula for $\Gamma(h)$, $h\ge1$. (See \cref{ch09:ex-var1} for the method.)
+\end{enumerate}
+Its core is \cref{ch09:ex-ps6-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Cointegration and the VECM (not from the course)]\label{ch09:ex-x-coint}
+For the pair of \cref{ch09:ex-coint}
+\begin{enumerate}[(a)]
+  \item rewrite the system as a VAR(1) in levels and verify that $I+\Pi$ has eigenvalues $1$ and $0.7$.
+  \item Show that $\Pi$ is not invertible and identify $\alpha$ and $\beta$; check that another factorisation $(\alpha G)(\beta G^{-\mathsf T})\T$ gives the same $\Pi$.
+  \item Simulate the system, regress $y_t$ on $x_t$ and apply an ADF test to the residuals (Engle--Granger); do the same for two independent random walks and comment on ``spurious regression''.
+  \item What changes in the VECM if both $\varepsilon_{1t}$ and $u_{t-1}$ enter the equation of $x_t$?
+\end{enumerate}
+Its core is \cref{ch09:ex-x-coint-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Kalman filter by hand (not from the course)]\label{ch09:ex-x-kf}
+Take the local-level model with $Q=1$, $H=4$ and initial state $N(0,10)$.
+\begin{enumerate}[(a)]
+  \item Run the filter for the observations $y_1=1.5$, $y_2=0.8$, $y_3=2.2$: compute $G_t$, $\mu_{t|t}$, $P_{t|t}$.
+  \item Compute the two-step forecast of $y_5$ and its variance.
+  \item Show that $P_{t|t-1}$ converges monotonically to
+      $(Q+\sqrt{Q^2+4QH})/2$.
+  \item Show that $G_t\to0$ as $Q\to0$ and interpret it (the level is constant and the filter reduces to the sample mean).
+\end{enumerate}
+Its core is \cref{ch09:ex-x-kf-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Time-varying beta (not from the course)]\label{ch09:ex-x-beta}
+In the state-space model of the time-varying CAPM, write out the Kalman recursions for $\bm s_t=(\alpha_t,\beta_t)\T$.
+\begin{enumerate}[(a)]
+  \item Show that if $\sigma_\xi=\sigma_\zeta=0$ the recursion reproduces recursive least squares for the simple regression.
+  \item Explain how the ratio
+      $\sigma_\zeta^2/\sigma_\varepsilon^2$ sets the effective window length of the estimate, and relate it to the local-level example.
+  \item With daily data for one stock and the S\&P~500, estimate $\sigma_\zeta^2$ by maximising \eqref{ch09:eq-kfll}.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS4 (2013), Problem 1; PS4 (2024), Problem 5: covariance-stationary AR(2)]\label{ch09:ex-ps4-1}
+Let $X_t=\phi_0+\phi_1X_{t-1}+\phi_2X_{t-2}+\eta_t$, $\eta_t\sim\mathrm{WN}(0,\sigma^2)$, be covariance stationary.
+\begin{enumerate}[(a)]
+  \item Show that $\mu=\E[X_t]=\phi_0/(1-\phi_1-\phi_2)$.
+  \item Show that $\gamma(k)=\phi_1\gamma(k-1)+\phi_2\gamma(k-2)$, $k\ge1$.
+  \item Show that $\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}$.
+  \item The Yule--Walker equations for $k=1,2$ are $\rho_1=\phi_1+\phi_2\rho_1$ and $\rho_2=\phi_1\rho_1+\phi_2$ (using $\rho_0=1$, $\rho_{-k}=\rho_k$): solve for $\rho_1,\rho_2$ in terms of $\phi_1,\phi_2$.
+  \item Solve for $\phi_1,\phi_2$ in terms of $\rho_1,\rho_2$.
+  \item (2013 only) Derive complete formulas for $\rho_k$, $k>2$, using Problem~4(b) below.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS4 (2013), Problem 2: difference equations of an AR($p$)]\label{ch09:ex-ps4-2}
+Let $\phi(L)X_t=\phi_0+\eta_t$ be an AR($p$) with $\phi(L)=1-\phi_1L-\dots-\phi_pL^p$, and consider the homogeneous equation $\phi(L)g(t)=0$.
+\begin{enumerate}[(a)]
+  \item Show $\mu=\phi_0/(1-\sum_i\phi_i)$, so $\mu=0$ iff $\phi_0=0$
+      (``de-meaning'' removes the constant).
+  \item For $\gamma(t)=\Cov(X_t,X_0)$ prove $\phi(L)\gamma(t)=0$ for all $t\ge1$.
+  \item Same for $\rho(t)=\Corr(X_t,X_0)$.
+  \item Given $x_0,\dots,x_t$, let $\hat x_t(h)=\E[X_{t+h}\mid x_t,\dots,x_0]$ for $h>0$
+      and $\hat x_t(h)=x_{t+h}$ for $h\le0$; show $\hat x_t(h)=\phi_0+\sum_i\phi_i\hat x_t(h-i)$ for every $h>0$.
+  \item For the de-meaned process show that the forecast function satisfies $\phi(L)\hat x_t(h)=0$ in $h$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS4 (2013), Problem 3: solutions of the difference equations]\label{ch09:ex-ps4-3}
+Consider $\phi(L)g(t)=0$, $t=0,1,2,\dots$
+\begin{enumerate}[(a)]
+  \item Show that $g(t)=Ce^{-\lambda t}$ solves it if $z=e^{\lambda}$ is a root of $\phi(z)=1-\sum_i\phi_iz^i=0$.
+  \item Show that $g(t)=CG^t$ solves it if $G^{-1}$ is a root.
+  \item If the $p$ roots
+      $z_i=G_i^{-1}$ are distinct, show that $g(t)=\sum_iC_iG_i^t$ is a solution.
+  \item If all roots are outside the unit circle, show every such solution is bounded; since the autocovariance is a solution, this is the necessary and sufficient
+      condition for covariance stationarity.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS4 (2013), Problem 4: the AR(2) process]\label{ch09:ex-ar2}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Solve for the two roots $z_1,z_2$ of the characteristic equation and give the conditions under which they are distinct and real, coincident and real, or complex conjugates.
+  \item Prove $\rho_k=C_1G_1^k+C_2G_2^k$
+      with $G_i=z_i^{-1}$; solve for $C_1,C_2$ when the roots are distinct and show that $\rho_k=\dfrac{G_1(1-G_2^2)G_1^k-G_2(1-G_1^2)G_2^k}{(G_1-G_2)(1+G_1G_2)}$.
+  \item For distinct real roots show that the autocovariance decreases geometrically in magnitude.
+  \item Under what conditions on $\phi_1$ is it always positive, and when does it alternate in sign?
+  \item \emph{Optional.} For complex roots write $G_{1,2}=de^{\pm\mathrm i2\pi f_0}$ and show
+      $\rho_k=[\mathrm{sgn}(\phi_1)]^k|d|^k\sin(2\pi f_0k+F)/\sin F$ with $|d|=\sqrt{-\phi_2}$, $2\pi f_0=\arccos\bigl(|\phi_1|/(2\sqrt{-\phi_2})\bigr)$ and $\tan F=\frac{1+d^2}{1-d^2}\tan(2\pi f_0)$.
+\end{enumerate}
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{Portfolio theory (\cref{ch:portfolio})}\label{exam:ch10}
+
+\begin{exercise}[not from the course: the frontier]\label{ch10:exam-1}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Verify that $\bm w_g$ of \cref{ch10:cor-gmv} minimises $\bm w\T\Sigma\bm w$ under $\bm w\T\bm 1=1$ and that the frontier
+      \eqref{ch10:eq-frontier} has asymptotes $\mu=b/c\pm\sqrt{\Delta/c}\,\sigma$.
+  \item Show that the difference of two efficient portfolios is proportional to $\bm v$ of
+      \eqref{ch10:eq-twofund} and deduce the two-fund theorem.
+  \item Show that, if $r_0<\mu_g$, the tangency portfolio maximises the
+      Sharpe ratio over the fully invested portfolios, and find the tangency point of the line through $(0,r_0)$ with the hyperbola.
+\end{enumerate}
+Its core is \cref{ch10:exam-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[2024 Investment Game and the gain--loss ratio (ungraded)]\label{ch10:ex-game}
+The 2024 lecture (slide~36) repeats the game of \cref{ex:game}: $\$10{,}000$ in one stock or ETF from the close of 13~September to the
+close of 15~November, one optional switch on 11~October, and the final calculation of $G$, $L$ and $(G-L)/(G+L)$ from the daily
+profits and losses. Carry it out on a two-month window of your choice (for example for the sector ETFs of \cref{ch10:tab-etf}), compute the
+Sharpe ratio of the same daily P\&L, and compare the ranking of two investments by the two measures; see \cref{ch10:prop-gl}.
+\end{exercise}
+
+\begin{exercise}[PS6 (2013), Problem 4: $m>2$ assets, equal volatilities]\label{ch10:ex-ps6-4}
+Now $m>2$ assets with covariance matrix $\Sigma=(\rho_{ij}\sigma_i\sigma_j)$.
+\begin{enumerate}[(a)]
+  \item Prove that $\Var(R_{\bm w})\le\max_j\sigma_j^2$ for every long-only fully invested portfolio.
+  \item If $\sigma_1=\dots=\sigma_m$ and all $\rho_{ij}=0$ ($i\neq j$), find the minimum-variance portfolio, express its variance as a function
+      of $m$ and find its limit as $m\to\infty$.
+  \item If $\sigma_1=\dots=\sigma_m$ and $\rho_{ij}\equiv\rho$ for all $i\neq j$ (\emph{equicorrelation}): first show that
+      $\rho\ge-1/(m-1)$ (hint: $\bm 1$ is an eigenvector of $\Sigma$; compute its eigenvalue and impose that $\Sigma$ be positive
+      semi-definite). Then find the minimum-variance portfolio and its variance, graph the variance as a function of $\rho\in[-\frac1{m-1},1]$,
+      find the limit as $m\to\infty$ and compare it with (b), commenting on the ability to diversify away risk by adding equicorrelated assets.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS6 (2013), Problem 5: unequal variances and the general case]\label{ch10:ex-ps6-5}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item For $m=2$, $\sigma_1\neq\sigma_2$ and $\rho=0$, find the minimum-variance portfolio and its variance.
+  \item For $m>2$ and $\Sigma=\diag(\sigma_1^2,\dots,\sigma_m^2)$ (arbitrary variances, zero correlations) find the minimum-variance
+      portfolio and its variance, and express the variance in terms of $m$ and $\tilde\sigma^2=\bigl(\frac1m\sum_j\sigma_j^{-2}\bigr)^{-1}$.
+  \item For $m>2$ and an arbitrary positive definite $\Sigma$, find the minimum-variance portfolio and its variance.
+\end{enumerate}
+\end{exercise}

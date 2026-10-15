@@ -43,32 +43,10 @@ the SVD of \cref{sec:svd}.
 \section{Bonds, swaps and the yield curve}\label{ch20:sec-bonds}
 
 \subsection{Bond price, yield, duration and convexity}\label{ch20:sec-yield}
-A fixed-rate bond pays cash flows $C_1,\dots,C_N$ (coupons, plus the face value in $C_N$) at times $t_1<\dots<t_N$
-\ts{13}{10}{2:11}. Cash paid later is worth less, so each cash flow is multiplied by a \emph{discount factor}
-$\Lambda_i\in(0,1]$ that decreases with $t_i$ \ts{13}{10}{5:16}, and the fair value is
-$P=\sum_{i=1}^N\Lambda_iC_i$ \ts{13}{10}{6:20}. For a bond the price $P$ is not something to be computed: it is the
-result of a liquid market and is known \ts{13}{10}{7:20}. What is needed is a \emph{model for discounting}. The simplest one uses a single
-parameter, the \emph{yield to maturity} $y$ (continuous compounding, one rate for all dates)
-\ts{13}{10}{8:27}:
-\begin{equation}\label{ch20:eq-yield}
-  \Lambda_i=e^{-yt_i},\qquad P(y)=\sum_{i=1}^Ne^{-yt_i}C_i .
-\end{equation}
-With $C_i>0$ the map $y\mapsto P(y)$ is strictly decreasing, so price and yield determine each other one-to-one
-\ts{13}{10}{9:31}. The yield is therefore not a traded quantity but a \emph{convention} to summarise price and
-cash flows \ts{13}{10}{10:34}. Differentiating,
-\[
-  \frac{\dd P}{\dd y}=-\sum_it_ie^{-yt_i}C_i,\qquad
-  D=-\frac1P\frac{\dd P}{\dd y}=\sum_{i=1}^Nt_i\,\pi_i,\quad \pi_i=\frac{e^{-yt_i}C_i}{P},\ \ \sum_i\pi_i=1,
-\]
-\[
-  \mathcal C=\frac1P\frac{\dd^2P}{\dd y^2}=\sum_it_i^2\pi_i>0 .
-\]
-The \emph{duration} $D$ is the present-value-weighted average time of the cash flows (``weighted time'')
-\ts{13}{10}{11:40}; normalising by $P$ makes it independent of how many bonds are held. A zero-coupon
-bond has one weight, so $D=T$; a coupon bond has $D<t_N$, because every $t_i\le t_N$ and at least one is strictly smaller
-\ts{13}{10}{13:47}. Convexity is a weighted mean of $t_i^2$, hence positive. These are the definitions of
-\cref{sec:duration} in the continuous-compounding convention (\cref{prop:duration}), and \cref{eq:durconv} is the Taylor expansion
-$\Delta P/P\approx-D\Delta y+\frac12\mathcal C(\Delta y)^2$.
+A fixed-rate bond with cash flows $C_i$ at times $t_i$ is priced, duration and convexity included, exactly as in \cref{sec:duration}; the lecture's version, in continuous compounding, is recalled in the margin (in full in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter). The yield is not a traded quantity but a convention to summarise price and cash flows \ts{13}{10}{10:34}.
+\begin{recall}[yield, duration, convexity]
+$P(y)=\sum_ie^{-yt_i}C_i$, strictly decreasing in $y$. $D=-\frac1P\frac{\dd P}{\dd y}=\sum_it_i\pi_i$ and $\mathcal C=\frac1P\frac{\dd^2P}{\dd y^2}=\sum_it_i^2\pi_i$ with weights $\pi_i=e^{-yt_i}C_i/P$; $D=T$ for a zero, $D<t_N$ for a coupon bond; $\Delta P/P\approx-D\Delta y+\frac12\mathcal C(\Delta y)^2$ (\cref{prop:duration}, \cref{eq:durconv}; here \eqref{ch20:eq-yield}).
+\end{recall}
 
 \begin{coursenote}[Sign and letters in the slides]
 Slide~8 defines ``duration'' as $d=\frac1P\frac{\partial P}{\partial y}$, which is \emph{negative} (the speaker says so:
@@ -90,20 +68,10 @@ approximation before the crisis, but with a steep curve, where short rates sit n
 rise, it is not \ts{13}{10}{14:55}. \Cref{ch20:sec-bondspread} replaces $y$ by a full curve.
 
 \subsection{Interest-rate swaps}\label{ch20:sec-swaps}
-In a swap one party pays a fixed rate $C$ and receives a floating rate (three-month LIBOR in the lecture, fixed on the
-day and known in advance for the accrual period) \ts{13}{10}{17:02}. With payment dates $T_1<\dots<T_n$, accrual
-fractions $\delta_i$ (day-count), discount factors $\Lambda_i$ and forward rates $r_i$ for the period ending at $T_i$,
-\[
-  PV_{\rm fixed}=\sum_iC\delta_i\Lambda_i=C\sum_iw_i,\qquad PV_{\rm float}=\sum_ir_i\delta_i\Lambda_i=\sum_ir_iw_i,\qquad w_i=\delta_i\Lambda_i,
-\]
-\ts{13}{10}{18:14}. A swap costs nothing to enter, so the fixed rate is set so that the two legs have the same value
-\ts{13}{10}{19:21}:
-\begin{equation}\label{ch20:eq-swaprate}
-  C=\frac{\sum_ir_iw_i}{\sum_iw_i}\qquad(\text{same payment frequency on both legs}),
-\end{equation}
-the \emph{swap rate}, a weighted average of forward rates, which is what traders quote \ts{13}{10}{20:27}. If the forward
-rates are defined by $\Lambda_{i-1}=(1+r_i\delta_i)\Lambda_i$ (the single-curve convention of \cref{sec:forward}, $\Lambda_0=1$), the floating leg telescopes,
-$PV_{\rm float}=\sum_i(\Lambda_{i-1}-\Lambda_i)=1-\Lambda_n$, and $C=(1-\Lambda_n)/\sum_i\delta_i\Lambda_i$ (my remark, not on the slides). The fixed leg is a bond coupon stream, which is why a swap can be
+Swaps and the par swap rate are those of \cref{ch06:sec-swapval}, recalled in the margin (the lecture's derivation is in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter).
+\begin{recall}[swap rate]
+With $w_i=\delta_i\Lambda_i$, $PV_{\rm fixed}=C\sum_iw_i$ and $PV_{\rm float}=\sum_ir_iw_i$; a swap costs nothing to enter, so $C=\sum_ir_iw_i/\sum_iw_i$, a weighted average of forward rates \ts{13}{10}{20:27}; with single-curve forwards the floating leg telescopes to $1-\Lambda_n$ and $C=(1-\Lambda_n)/\sum_i\delta_i\Lambda_i$ (\cref{ch06:cor-par}; here \eqref{ch20:eq-swaprate}).
+\end{recall} The fixed leg is a bond coupon stream, which is why a swap can be
 hedged with a bond \ts{13}{10}{20:27}, and why swap risk is measured in \emph{buckets} of par rates: the trader wants to know
 the P\&L if the 5-year swap rate moves by 1~bp.
 
@@ -521,14 +489,8 @@ the corrected form of the ``$A\T(A\T A+\lambda^2I)^{-1}A\neq I$'' of slide~47 \t
 (1\% price noise; my computation). From mode 4 on the coefficients stop tracking $s_i$ and stay within one to four times the noise floor $\|\bm\varepsilon\|/\sqrt M$ (dashed), whereas $s_i$ keeps falling: the terms $\bm u_i\T\bm y/s_i$ of \eqref{ch20:eq-pinv} are then dominated by noise.}\label{ch20:fig-spectral}
 \end{figure}
 
-\begin{exercise}[(not from the course)]
-Prove the following for Tikhonov regularisation with $L=I$:
-\begin{enumerate}[(a)]
-  \item $\rho(\lambda)=\|A\bm x_\lambda-\bm y\|$ is non-decreasing and $\|\bm x_\lambda\|$ non-increasing in $\lambda$;
-  \item as $\lambda\to0$, $\bm x_\lambda\to A^\dagger\bm y$ (\cref{ch20:prop-pinv}), also when $A$ is rank-deficient;
-  \item as $\lambda\to\infty$, $\bm x_\lambda\approx A\T\bm y/\lambda^2$;
-  \item $0\le\operatorname{tr}H_\lambda\le r$ and it decreases from $r$ to $0$.
-\end{enumerate}
+\begin{exercise}[(not from the course)]\label{ch20:exam-1-short}
+For Tikhonov regularisation with $L=I$, show that as $\lambda\to\infty$, $\bm x_\lambda\approx A\T\bm y/\lambda^2$. (Monotonicity, the limit $\lambda\to0$ and the effective number of parameters: \cref{ch20:exam-1} in \cref{app:exam}.)
 \end{exercise}
 
 \subsection{General form: weights, smoothness matrices and several penalties}\label{ch20:sec-general}
@@ -635,9 +597,7 @@ $0.063$ with all ten: an unsuitable penalty (here: the minimum norm, which pulls
 \caption{The toy calibration of \cref{ch20:cs-toy} (my computation). (a) The formal exact solution is the ``skyline''; the smoothness-regularised one follows the truth to $0.003$. (b) Error, GCV and residual against $\lambda$ (each normalised as indicated; dotted line: $\rho=\delta$, the discrepancy principle). The minima of the error and of GCV are broad and lie within a factor two of each other.}\label{ch20:fig-toy}
 \end{figure}
 
-\begin{exercise}[(not from the course)]
-Reproduce the toy of \cref{ch20:cs-toy} (any language): choose your own smooth $v$ on $[0,10]$, ten Gaussian-window instruments, $1\%$ noise; compute the formal solution, the Tikhonov solution for a grid of $\lambda$, the discrepancy and GCV parameters. Vary the penalty ($L=I$, first difference, second difference) and the noise level, and report which choice is most sensitive to $\lambda$.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch20:exam-2} in \cref{app:exam}.}
 
 % ==================================================================
 \section{Calibrating a volatility surface}\label{ch20:sec-vol}
@@ -758,3 +718,51 @@ slides' references are the Wikipedia pages on the HJM model, the yield curve, in
   \item Explain why $J\T W^2J$ has rank at most the number of instruments, and why $K$ nevertheless exists.
 \end{enumerate}
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section*{Set aside}\phantomsection\label{ch20:sec-setaside}
+\addcontentsline{toc}{section}{Set aside}
+Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
+
+A fixed-rate bond pays cash flows $C_1,\dots,C_N$ (coupons, plus the face value in $C_N$) at times $t_1<\dots<t_N$
+\ts{13}{10}{2:11}. Cash paid later is worth less, so each cash flow is multiplied by a \emph{discount factor}
+$\Lambda_i\in(0,1]$ that decreases with $t_i$ \ts{13}{10}{5:16}, and the fair value is
+$P=\sum_{i=1}^N\Lambda_iC_i$ \ts{13}{10}{6:20}. For a bond the price $P$ is not something to be computed: it is the
+result of a liquid market and is known \ts{13}{10}{7:20}. What is needed is a \emph{model for discounting}. The simplest one uses a single
+parameter, the \emph{yield to maturity} $y$ (continuous compounding, one rate for all dates)
+\ts{13}{10}{8:27}:
+\begin{equation}\label{ch20:eq-yield}
+  \Lambda_i=e^{-yt_i},\qquad P(y)=\sum_{i=1}^Ne^{-yt_i}C_i .
+\end{equation}
+With $C_i>0$ the map $y\mapsto P(y)$ is strictly decreasing, so price and yield determine each other one-to-one
+\ts{13}{10}{9:31}. The yield is therefore not a traded quantity but a \emph{convention} to summarise price and
+cash flows \ts{13}{10}{10:34}. Differentiating,
+\[
+  \frac{\dd P}{\dd y}=-\sum_it_ie^{-yt_i}C_i,\qquad
+  D=-\frac1P\frac{\dd P}{\dd y}=\sum_{i=1}^Nt_i\,\pi_i,\quad \pi_i=\frac{e^{-yt_i}C_i}{P},\ \ \sum_i\pi_i=1,
+\]
+\[
+  \mathcal C=\frac1P\frac{\dd^2P}{\dd y^2}=\sum_it_i^2\pi_i>0 .
+\]
+The \emph{duration} $D$ is the present-value-weighted average time of the cash flows (``weighted time'')
+\ts{13}{10}{11:40}; normalising by $P$ makes it independent of how many bonds are held. A zero-coupon
+bond has one weight, so $D=T$; a coupon bond has $D<t_N$, because every $t_i\le t_N$ and at least one is strictly smaller
+\ts{13}{10}{13:47}. Convexity is a weighted mean of $t_i^2$, hence positive. These are the definitions of
+\cref{sec:duration} in the continuous-compounding convention (\cref{prop:duration}), and \cref{eq:durconv} is the Taylor expansion
+$\Delta P/P\approx-D\Delta y+\frac12\mathcal C(\Delta y)^2$.
+
+In a swap one party pays a fixed rate $C$ and receives a floating rate (three-month LIBOR in the lecture, fixed on the
+day and known in advance for the accrual period) \ts{13}{10}{17:02}. With payment dates $T_1<\dots<T_n$, accrual
+fractions $\delta_i$ (day-count), discount factors $\Lambda_i$ and forward rates $r_i$ for the period ending at $T_i$,
+\[
+  PV_{\rm fixed}=\sum_iC\delta_i\Lambda_i=C\sum_iw_i,\qquad PV_{\rm float}=\sum_ir_i\delta_i\Lambda_i=\sum_ir_iw_i,\qquad w_i=\delta_i\Lambda_i,
+\]
+\ts{13}{10}{18:14}. A swap costs nothing to enter, so the fixed rate is set so that the two legs have the same value
+\ts{13}{10}{19:21}:
+\begin{equation}\label{ch20:eq-swaprate}
+  C=\frac{\sum_ir_iw_i}{\sum_iw_i}\qquad(\text{same payment frequency on both legs}),
+\end{equation}
+the \emph{swap rate}, a weighted average of forward rates, which is what traders quote \ts{13}{10}{20:27}. If the forward
+rates are defined by $\Lambda_{i-1}=(1+r_i\delta_i)\Lambda_i$ (the single-curve convention of \cref{sec:forward}, $\Lambda_0=1$), the floating leg telescopes,
+$PV_{\rm float}=\sum_i(\Lambda_{i-1}-\Lambda_i)=1-\Lambda_n$, and $C=(1-\Lambda_n)/\sum_i\delta_i\Lambda_i$ (my remark, not on the slides).
+

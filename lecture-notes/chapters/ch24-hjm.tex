@@ -224,9 +224,7 @@ As a second, independent check, \cref{ch24:prop-vasicek} predicts that the short
 \caption{Four simulated forward curves $T\mapsto f(1,T)$ one year into the simulation of \cref{ch24:ex-mc} ($\sigma_0=1.2\%$, $a=0.5$, flat initial curve at 3\%), against the initial curve $f(0,T)$. All curves are driven by the same Brownian path within a curve but differ across paths; the exponential vol makes the short end move most (as $\sigma(t,T)\to\sigma_0$ when $T\to t$) while the long end is comparatively anchored (as $\sigma(t,T)\to0$ when $T-t\to\infty$), the familiar level/slope pattern of \cref{ch:pca}.}\label{ch24:fig-curves}
 \end{figure}
 
-\begin{exercise}[not from the course]\label{ch24:ex-mccode}
-Reproduce the Monte Carlo check of \cref{ch24:ex-mc} in your own code: simulate the exponential-volatility HJM curve on a daily grid, compute $\hat Z(0,T_h)$ for $T_h=1,2,5$ years, and compare with $e^{-f_0T_h}$. Then break the drift condition on purpose (set $\alpha\equiv0$, ``drift-free'' forward rates) and show that the simulated bond price no longer matches $Z(0,T_h)$: absence of arbitrage is not automatic, it is exactly what \eqref{ch24:eq-hjmdrift} enforces.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch24:ex-mccode} in \cref{app:exam}.}
 
 % ==================================================================
 \section{Extension to credit: hazard rates}\label{ch24:sec-credit}
@@ -282,9 +280,7 @@ When rates and hazard rates are correlated, a shock that raises $\sigma(t,s)$-dr
 Specialise \eqref{ch24:eq-hjmcreditdrift} to $\rho=0$ and $\sigma^h(t,T)\equiv\sigma_0^h$ constant (a ``Ho--Lee'' hazard-rate model). Derive the resulting SDE for the short hazard rate $h_t=h(t,t)$ and compare its form with \cref{ch24:prop-holee}.
 \end{exercise}
 
-\begin{exercise}[not from the course]\label{ch24:ex-corr}
-Redo \cref{ch24:ex-mc} with a second, correlated curve $h(t,T)=\sigma_0^he^{-b(T-t)}$-volatility hazard process ($\rho=0.5$ correlation with the rates driver) and the drift \eqref{ch24:eq-hjmcreditdrift}. Check numerically that $\E_\Q[\tilde Z(0,T_h)]$ from simulation matches $Z(0,T_h)\,p(0,T_h)$ from the input curves, as in \eqref{ch24:eq-defbond}.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch24:ex-corr} in \cref{app:exam}.}
 
 \subsection{Why this matters: callable and structured credit}
 The slide motivates the credit HJM model with corporate \emph{callable bonds} \ts{13}{24}{1:14:51}: an issuer who can refinance at a lower all-in rate (risk-free plus credit spread) saves money by calling old, expensive debt, and pricing that option requires simulating \emph{both} $f(t,\cdot)$ and $h(t,\cdot)$ jointly, exactly the setting \eqref{ch24:eq-hjmcredit}--\eqref{ch24:eq-hjmcreditdrift} was built for.

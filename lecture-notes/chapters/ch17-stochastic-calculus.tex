@@ -103,10 +103,9 @@ paths $\omega$, $\mathcal F_t$ the $\sigma$-field of events determined by the pa
 specific path \ts{24}{24}{12:42}. Below $B$ is a Brownian motion
 \emph{with respect to} this filtration: $B_t-B_s$ is $N(0,t-s)$ and independent of $\mathcal F_s$ for $s<t$.
 
-\begin{definition}[Adapted process]\label{ch17:def-adapted}
-A process $\{\Delta_t\}$ is \emph{adapted} (to $B$, or to the filtration $\{\mathcal F_t\}$) if for every $t$ the random variable $\Delta_t$
-depends only on $\{B_s:s\le t\}$, i.e.\ is $\mathcal F_t$-measurable \ts{13}{18}{40:10}.
-\end{definition}
+\begin{recall}[adapted process]
+A process $\{\Delta_t\}$ is adapted to $B$ (to $\{\mathcal F_t\}$) if each $\Delta_t$ depends only on $\{B_s:s\le t\}$, i.e.\ is $\mathcal F_t$-measurable (\cref{ch11:sec-adapted}; the definition as stated in the 2013 lecture, \cref{ch17:def-adapted}, is in \hyperref[ch17:sec-setaside]{\emph{Set aside}} at the end of the chapter).
+\end{recall}
 Adapted means \emph{non-anticipating}: a strategy that decides the position at $t$ from what has been observed until $t$.
 The 2013 lecture gives examples for a process $X$ \ts{13}{18}{42:26}: $\Delta_t=X_t$ is adapted;
 $\Delta_t=\min\{X_t,c\}$ is adapted; $\Delta_t=X_{t+1}$ is not (it looks one unit ahead); $\Delta_t=\max_{0\le s\le T}X_s$, for a fixed
@@ -493,17 +492,8 @@ which is the pair of formulas of \cref{ch17:sec-strat}. Consequently a Langevin 
 in finance the It\^o reading is used because prices must be martingales when there is no drift.
 \end{remark}
 
-\begin{exercise}[PS8 (2013), Problem A-4: It\^o's formula]\label{ch17:ex-a4}
-Use It\^o's formula to compute the differentials of the following ($B_t$ is a Brownian motion):
-\begin{enumerate}[(a)]
-  \item $f(t,B_t)=B_t^3$;
-  \item $\sin B_t$;
-  \item $\cos(t^3+B_t^2)$;
-  \item $e^{B_t^2}$;
-  \item $f(t,B_t)=\int B_t^2\,\dd B_t$;
-  \item $f(t,B_t)=\int B_t\,\dd t$;
-  \item $f(t,X_t)=X_t^2$, where $\dd X_t=\mu\,\dd t+\sigma\,\dd B_t$ with $\mu,\sigma$ constants. (Parts (e) and (f) are printed as indefinite integrals; interpret them as the processes $\int_0^tB_s^2\,\dd B_s$ and $\int_0^tB_s\,\dd s$.)
-\end{enumerate}
+\begin{exercise}[PS8 (2013), Problem A-4(a),(b),(d): It\^o's formula]\label{ch17:ex-a4-short}
+Use It\^o's formula to compute the differentials of $B_t^3$, $\sin B_t$ and $e^{B_t^2}$. (All seven cases: \cref{ch17:ex-a4} in \cref{app:exam}.)
 \end{exercise}
 
 \begin{exercise}[PS8 (2013), Problem B-3: integration by parts]\label{ch17:ex-b3}
@@ -601,16 +591,8 @@ is $\mu h'+\tfrac12\sigma^2h''=0$; the lecture obtains it through $f(t,x)=h(\mu 
 optional stopping applied to $e^{-2\mu X/\sigma^2}$, which is the exponential martingale \eqref{ch17:eq-expmart} with $\theta=-2\mu/\sigma^2$.
 It\^o's lemma gives the same result in one line, and shows why $\mu h'+\tfrac12\sigma^2h''=0$ is the right equation: the operator $\mu\partial_x+\tfrac12\sigma^2\partial_x^2$ is the \emph{generator} of $X$.
 
-\begin{exercise}[PS8 (2013), Problem A-1: identify martingales]\label{ch17:ex-a1}
-Which of the following are martingales (with respect to their natural filtration)?
-\begin{enumerate}[(a)]
-  \item A simple random walk.
-  \item $X_t=|S_t|$ where $S_t$ is a simple random walk.
-  \item $X_0=0$ and $X_{t+1}=X_t+(Y_t-\tfrac1\lambda)$ for $t\ge0$, where the $Y_t$ are i.i.d.\ exponential
-      random variables with parameter $\lambda$.
-  \item $X_0=0$ and $X_{t+1}=X_t+Z_tZ_{t-1}\cdots Z_0$ for $t\ge0$, where the $Z_t$ are i.i.d.\ lognormal.
-  \item $X_t=B^{(1)}_tB^{(2)}_t$, the product of two independent Brownian motions.
-\end{enumerate}
+\begin{exercise}[PS8 (2013), Problem A-1(b),(e): identify martingales]\label{ch17:ex-a1-short}
+Is $|S_t|$ a martingale, for $S_t$ a simple random walk? And the product $B^{(1)}_tB^{(2)}_t$ of two independent Brownian motions? (All five cases: \cref{ch17:ex-a1} in \cref{app:exam}.)
 \end{exercise}
 
 \begin{exercise}[PS8 (2013), Problem A-2]\label{ch17:ex-a2}
@@ -906,3 +888,14 @@ links the PDE condition of \cref{ch17:thm-pde} to expectations. \Cref{ch:bs} use
 & && \Rightarrow\ X\text{ is driftless under }Z\cdot\Prob
 \end{align*}
 \end{keyformulas}
+
+% ------------------------------------------------------------------
+\section*{Set aside}\phantomsection\label{ch17:sec-setaside}
+\addcontentsline{toc}{section}{Set aside}
+Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
+
+\begin{definition}[Adapted process]\label{ch17:def-adapted}
+A process $\{\Delta_t\}$ is \emph{adapted} (to $B$, or to the filtration $\{\mathcal F_t\}$) if for every $t$ the random variable $\Delta_t$
+depends only on $\{B_s:s\le t\}$, i.e.\ is $\mathcal F_t$-measurable \ts{13}{18}{40:10}.
+\end{definition}
+

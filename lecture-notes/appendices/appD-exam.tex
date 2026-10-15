@@ -710,3 +710,77 @@ that its width scales as $n^{-1/2}$, and add a proportional transaction cost $c|
 \begin{exercise}[not from the course: implied volatility]\label{ch15:ex-iv}
 Implement Newton's method for $\sigma_{\mathrm{imp}}$ with the vega as derivative, starting from $\sigma_0=\sqrt{2|\ln(S/K)+r\tau|/\tau}$. Recompute the last column of \cref{ch15:tab-smile}. Why does the iteration fail for deep out-of-the-money options and what is a safer alternative (bisection, Brent)?
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section{Stochastic calculus (\cref{ch:stochcalc})}\label{exam:ch17}
+
+\begin{exercise}[PS8 (2013), Problem A-4: It\^o's formula]\label{ch17:ex-a4}
+Use It\^o's formula to compute the differentials of the following ($B_t$ is a Brownian motion):
+\begin{enumerate}[(a)]
+  \item $f(t,B_t)=B_t^3$;
+  \item $\sin B_t$;
+  \item $\cos(t^3+B_t^2)$;
+  \item $e^{B_t^2}$;
+  \item $f(t,B_t)=\int B_t^2\,\dd B_t$;
+  \item $f(t,B_t)=\int B_t\,\dd t$;
+  \item $f(t,X_t)=X_t^2$, where $\dd X_t=\mu\,\dd t+\sigma\,\dd B_t$ with $\mu,\sigma$ constants. (Parts (e) and (f) are printed as indefinite integrals; interpret them as the processes $\int_0^tB_s^2\,\dd B_s$ and $\int_0^tB_s\,\dd s$.)
+\end{enumerate}
+Its core is \cref{ch17:ex-a4-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS8 (2013), Problem A-1: identify martingales]\label{ch17:ex-a1}
+Which of the following are martingales (with respect to their natural filtration)?
+\begin{enumerate}[(a)]
+  \item A simple random walk.
+  \item $X_t=|S_t|$ where $S_t$ is a simple random walk.
+  \item $X_0=0$ and $X_{t+1}=X_t+(Y_t-\tfrac1\lambda)$ for $t\ge0$, where the $Y_t$ are i.i.d.\ exponential
+      random variables with parameter $\lambda$.
+  \item $X_0=0$ and $X_{t+1}=X_t+Z_tZ_{t-1}\cdots Z_0$ for $t\ge0$, where the $Z_t$ are i.i.d.\ lognormal.
+  \item $X_t=B^{(1)}_tB^{(2)}_t$, the product of two independent Brownian motions.
+\end{enumerate}
+Its core is \cref{ch17:ex-a1-short} in the text.
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{Stochastic differential equations (\cref{ch:sde})}\label{exam:ch18}
+
+\begin{exercise}[not from the course: OU covariance and estimation]\label{ch18:ex-ou}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Derive \eqref{ch18:eq-oucov} and check it against \eqref{ch18:eq-ouvar} at $s=t$.
+  \item Show that the OU process is the only stationary Gaussian Markov process with continuous paths, up to parameters (hint: $\rho(\tau)$ must satisfy $\rho(\tau+\tau')=\rho(\tau)\rho(\tau')$).
+  \item Daily data ($h=1/252$) of a spread give an AR(1) fit with $\hat\phi=0.995$ and residual standard deviation $0.02$. Compute $\hat\kappa$, the half-life in days and the stationary standard deviation of the spread.
+\end{enumerate}
+Its core is \cref{ch18:ex-ou-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: position and velocity]\label{ch18:ex-posvel}
+For the system \eqref{ch18:eq-posvel} with $m=0$, $\sigma_1=0$:
+\begin{enumerate}[(a)]
+  \item derive \eqref{ch18:eq-posvar} without assuming stationarity of $V_0$, taking $V_0=v_0$ deterministic;
+  \item show that the diffusion coefficient in the long-time limit is $D=\sigma^2/(2\kappa^2)$ and relate it to $\gamma$ and $T$ in the physical parametrisation of the intuition box in \cref{ch18:sec-ou};
+  \item show that $X_t$ converges in law to $\sqrt{2D}\,B_t$ in the limit $\kappa\to\infty$ with $\sigma^2/\kappa^2=2D$ fixed.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[not from the course: Vasicek bond]\label{ch18:ex-vasbond}
+Derive the ODEs for $a(\tau),b(\tau)$ in \cref{ch18:fin-bond}, solve them and confirm \eqref{ch18:eq-vasbond}. Compute the yield curve for $\tau=1,2,5,10,30$ years for $\kappa=0.5$, $\theta=4\%$, $\sigma=1\%$, $r_0=3\%$. Show that the yield is a decreasing function of $\sigma$ at long maturities and interpret it.
+\end{exercise}
+
+\begin{exercise}[not from the course: convergence experiment]\label{ch18:ex-conv}
+Repeat \cref{ch18:cs-em} for the OU process (where the exact solution is \eqref{ch18:eq-ar1}) and for the SDE $\dd X=\sin X\,\dd t+\cos X\,\dd B$ (no closed form: use a very fine Euler solution as reference). Fit the strong and weak orders of Euler--Maruyama and Milstein. Why does Milstein give no improvement for OU?
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{Value at risk (\cref{ch:var})}\label{exam:ch19}
+
+\begin{exercise}[not from the course: correlated normals]\label{ch19:exam-1}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Derive the Cholesky factor of $\Sigma=\begin{pmatrix}4&2.4\\2.4&9\end{pmatrix}$ and give the two-line simulation recipe.
+  \item Show that $A=E\Lambda^{1/2}E\T$ (the symmetric square root) also satisfies $AA\T=\Sigma$ and relate it to $E\Lambda^{1/2}$ of \cref{ch19:prop-shocks}.
+  \item For three assets with $\rho_{12}=\rho_{23}=\rho$, show that $\rho_{13}$ must lie in $[2\rho^2-1,1]$, and find the eigenvalues of the matrix of \cref{ch19:ex-psd}.
+  \item Prove the Box--Muller formulas.
+\end{enumerate}
+Its core is \cref{ch19:exam-1-short} in the text.
+\end{exercise}

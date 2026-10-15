@@ -38,16 +38,10 @@ Abbott states it in words: the worst $1\%$ of the possible outcomes \ts{13}{7}{9
 \subsection{Returns, not levels}
 The starting point is a time series of prices, say the Mexican IPC stock index over 1995--96 (slide~7). Prices are close to a random walk (\cref{ch:sp1}): the best forecast of tomorrow's level is today's level, the series is not stationary, and a histogram of \emph{levels} is a meaningless multimodal blob that depends on where the walk happened to wander \ts{13}{7}{12:48}. The histogram of one-day \emph{returns} (percentage changes, log changes or, in some markets, absolute changes) is unimodal and roughly symmetric, with the familiar bell shape (slides 8--9) \ts{13}{7}{16:00}. This is the whole reason for working with returns: they are the increments of the walk, approximately stationary with a mean and a variance that do not drift, and it is for them that a distributional assumption can be made. It is the same step from a Brownian motion to its increments that the physicist takes when computing a diffusion coefficient.
 
-\begin{proposition}[One-asset variance method]\label{ch19:prop-one}
-Let a position of value $V$ have a one-day return $r\sim N(0,\sigma^2)$. Then for $\beta\in(0,1)$
-\[
-  \mathrm{VaR}_\beta=z_\beta\,\sigma\,V,\qquad z_\beta=\Phi^{-1}(\beta),
-\]
-with $z_{0.99}=2.326$ and $z_{0.95}=1.645$. The recipe is: collect prices, compute returns, estimate the variance $\hat\sigma^2=\frac1{n-1}\sum_i(r_i-\bar r)^2$, take the square root, multiply by $z_\beta V$ (slide~14) \ts{13}{7}{30:40}.
-\end{proposition}
-\begin{proof}
-$L=-Vr\sim N(0,\sigma^2V^2)$ and $\Prob(L\le z_\beta\sigma V)=\Phi(z_\beta)=\beta$. This is \cref{ch08:prop-normal} with $\mu=0$; the mean is dropped because for a one-day horizon it is small against $\sigma$.
-\end{proof}
+Abbott's one-asset variance method is the normal VaR of \cref{ch08:prop-normal} with zero mean, recalled in the margin (as stated in this lecture, \cref{ch19:prop-one}, it is in \hyperref[ch19:sec-setaside]{\emph{Set aside}} at the end of the chapter). His recipe (slide~14) \ts{13}{7}{30:40}: collect prices, compute returns, estimate $\hat\sigma^2=\frac1{n-1}\sum_i(r_i-\bar r)^2$, take the square root, multiply by $z_\beta V$.
+\begin{recall}[normal VaR]
+A position of value $V$ with one-day return $r\sim N(0,\sigma^2)$ has loss $L=-Vr\sim N(0,\sigma^2V^2)$, so $\mathrm{VaR}_\beta=z_\beta\sigma V$, $z_\beta=\Phi^{-1}(\beta)$: $z_{0.99}=2.326$, $z_{0.95}=1.645$ (\cref{ch08:prop-normal} with $\mu=0$; the mean is negligible over one day).
+\end{recall}
 The multipliers are \emph{one-sided}: the $99\%$ VaR leaves $1\%$ in a single tail, hence $2.33$ and not the $1.96$ of a two-sided $95\%$ confidence interval, which leaves $2.5\%$ in each tail \ts{13}{7}{10:38}. A student asks about short positions; in this model the answer is that the same number serves for a long or a short position because the density is symmetric, but ``getting your signs right'' is one of Abbott's recurrent themes \ts{13}{7}{24:21}. He also uses the normal quantile as a heuristic on real, skewed data: ``what is a two or three standard-deviation move?'' means something to a manager even when the empirical distribution is lopsided \ts{13}{7}{24:21}.
 
 \begin{example}[Mexican IPC, slides 12--13]\label{ch19:ex-ipc}
@@ -353,14 +347,8 @@ which shows why $|\rho|\le1$ is necessary. Slides 94--95 list the trade-off: Cho
 \end{itemize}
 \end{coursenote}
 
-\begin{exercise}[not from the course: correlated normals]
-\leavevmode
-\begin{enumerate}[(a)]
-  \item Derive the Cholesky factor of $\Sigma=\begin{pmatrix}4&2.4\\2.4&9\end{pmatrix}$ and give the two-line simulation recipe.
-  \item Show that $A=E\Lambda^{1/2}E\T$ (the symmetric square root) also satisfies $AA\T=\Sigma$ and relate it to $E\Lambda^{1/2}$ of \cref{ch19:prop-shocks}.
-  \item For three assets with $\rho_{12}=\rho_{23}=\rho$, show that $\rho_{13}$ must lie in $[2\rho^2-1,1]$, and find the eigenvalues of the matrix of \cref{ch19:ex-psd}.
-  \item Prove the Box--Muller formulas.
-\end{enumerate}
+\begin{exercise}[not from the course: correlated normals]\label{ch19:exam-1-short}
+Derive the Cholesky factor of $\Sigma=\begin{pmatrix}4&2.4\\2.4&9\end{pmatrix}$ and give the two-line simulation recipe. (Symmetric square root, admissible correlations, Box--Muller: \cref{ch19:exam-1} in \cref{app:exam}.)
 \end{exercise}
 
 \subsection{When the covariance matrix is not positive semidefinite}
@@ -513,3 +501,20 @@ A VaR is the location of a quantile of a distribution that one never sees and es
 &\text{Correlation error:} && \mathrm{sd}(\hat\rho)\approx(1-\rho^2)/\sqrt n
 \end{align*}
 \end{keyformulas}
+
+% ------------------------------------------------------------------
+\section*{Set aside}\phantomsection\label{ch19:sec-setaside}
+\addcontentsline{toc}{section}{Set aside}
+Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
+
+\begin{proposition}[One-asset variance method]\label{ch19:prop-one}
+Let a position of value $V$ have a one-day return $r\sim N(0,\sigma^2)$. Then for $\beta\in(0,1)$
+\[
+  \mathrm{VaR}_\beta=z_\beta\,\sigma\,V,\qquad z_\beta=\Phi^{-1}(\beta),
+\]
+with $z_{0.99}=2.326$ and $z_{0.95}=1.645$. The recipe is: collect prices, compute returns, estimate the variance $\hat\sigma^2=\frac1{n-1}\sum_i(r_i-\bar r)^2$, take the square root, multiply by $z_\beta V$ (slide~14) \ts{13}{7}{30:40}.
+\end{proposition}
+\begin{proof}
+$L=-Vr\sim N(0,\sigma^2V^2)$ and $\Prob(L\le z_\beta\sigma V)=\Phi(z_\beta)=\beta$. This is \cref{ch08:prop-normal} with $\mu=0$; the mean is dropped because for a one-day horizon it is small against $\sigma$.
+\end{proof}
+

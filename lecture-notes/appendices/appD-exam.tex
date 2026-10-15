@@ -576,3 +576,137 @@ Now $m>2$ assets with covariance matrix $\Sigma=(\rho_{ij}\sigma_i\sigma_j)$.
   \item For $m>2$ and an arbitrary positive definite $\Sigma$, find the minimum-variance portfolio and its variance.
 \end{enumerate}
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section{Volatility (\cref{ch:volatility})}\label{exam:ch13}
+
+\begin{exercise}[PS5 (2013), Problem 4: are year-to-year differences in volatility significant?]\label{ch13:ex-ps5-4}
+The annual sample variances of the daily log returns of the S\&P~500 close are (year: daily variance, number of days)
+2006: $3.981\times10^{-5}$, 251; 2007: $1.019\times10^{-4}$, 251; 2008: $6.677\times10^{-4}$, 253; 2009: $2.950\times10^{-4}$, 252; 2010: $1.295\times10^{-4}$, 252; 2011: $2.164\times10^{-4}$, 252; 2012: $6.459\times10^{-5}$, 250.
+Model the returns of one year as an i.i.d.\ sample from $N(\mu,\sigma^2)$ and let $\hat\sigma^2$ be the unbiased sample variance.
+\begin{enumerate}[(a)]
+  \item Prove that $\hat\sigma^2\sim\frac{\sigma^2}{n-1}\chi^2_{n-1}$.
+  \item Invert the $\chi^2$ percentiles $q_{0.025},q_{0.975}$ to obtain a two-sided $95\%$ confidence interval for $\sigma^2$ (the problem gives the percentiles for $249$ to $252$ degrees of freedom): compute it for 2008, express it as an annualised volatility ($\sqrt{253}\,\sigma$),
+      and say whether the sample volatility of any other year falls inside it.
+  \item Under the null hypothesis of equal daily variances in two years, show that $S=\hat\sigma^2_{2008}/\hat\sigma^2_{2007}$ has an $F$ distribution (state its degrees of freedom); the problem gives $q_{0.025}=0.7804$, $q_{0.975}=1.2815$ for $F_{252,250}$. Compute $S$ for 2008 against 2007, find the
+      $P$-value (the $\alpha$ at which the test is on the boundary), and repeat for 2008 against 2006.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS5 (2024), Problem 3: the extreme-value estimator of Parkinson (1980)]\label{ch13:ex-ps5-p3}
+Read M.~Parkinson, ``The extreme value method for estimating the variance of the rate of return'', \emph{J.\ Business} 53(1) (1980) 61--65. (b) Explain the definition of the estimator $D_x$ of Section~II. (c) Explain the definition of $D_l$ of Section~III. (d) Using the results of Section~IV,
+explain why the improvement obtained with $D_l$ as an estimate of the variance $V$ (Section~V) could matter particularly in studies of the dependence of $V$ on time and on price, if there is any. (Part (a), ``read the article'', has no answer.) The estimator of \cref{ch13:sec-parkinson} is the one in question.
+\end{exercise}
+
+\begin{exercise}[PS5 (2024), Problem 4: volatility case studies]\label{ch13:ex-ps5-p4}
+The R Markdown files
+\begin{itemize}\item \file{Case_Study_Estimating__SP500_Historical_Volatility.Rmd}, \item \file{Case_Study_Estimating__ARKK_Historical_Volatility.Rmd}\end{itemize}
+produce the S\&P~500 and ARKK case studies (\cref{ch13:cs-ohlc}), which use the naive, ARIMA and seasonal ARIMA methods of Hyndman and Athanasopoulos,
+\emph{Forecasting: Principles and Practice} (2nd ed.), Chapter~3 (naive method, residual diagnostics) and Chapter~8 (automatic ARIMA).
+\begin{enumerate}[(a)]
+  \item Comment on the S\&P~500 results you find interesting or significant.
+  \item The same for ARKK.
+  \item Compare the volatility findings for ARKK and the S\&P~500.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS5 (2024), Problem 5, optional (extra credit): your own stock]\label{ch13:ex-ps5-p5}
+Choose a stock symbol and edit the ARKK file to run the same analysis.
+\begin{enumerate}[(a)]
+  \item Produce the PDF of the case study.
+  \item Comment on results you find interesting.
+  \item Compare your stock with the S\&P~500 and ARKK.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[PS5 (2013), Problem 3: properties of the ARCH$(1)$ model]\label{ch13:ex-ps5-3}
+Let $y_t=\mu_t+\varepsilon_t$, $\varepsilon_t=z_t\sigma_t$, $\sigma_t^2=\alpha_0+\alpha_1\varepsilon_{t-1}^2$, with $z_t$ i.i.d., $\E[z_t]=0$, $\Var z_t=1$, $\E[z_t^3]=0$, $\E[z_t^4]=\kappa_z$ ($=3$ if Gaussian). Prove:
+\begin{enumerate}[(a)]
+  \item $\E[\varepsilon_t^2]=\alpha_0/(1-\alpha_1)$;
+  \item $\E[\varepsilon_t^3]=0$;
+  \item $\E[\varepsilon_t^4]=\kappa_z\alpha_0^2(1+\alpha_1)/[(1-\alpha_1)(1-\kappa_z\alpha_1^2)]$;
+  \item which constraints on $\alpha_0,\alpha_1$ does (c) require for the fourth moment to be finite and stationary;
+  \item the kurtosis of $\varepsilon_t$: for Gaussian $z_t$, is the unconditional distribution of $\varepsilon_t$ heavier-tailed than the Gaussian?
+      (The problem as printed writes the constant $\kappa_z$ in (c) without naming it; it is the kurtosis of $z_t$ stated just before.)
+\end{enumerate}
+Its core is \cref{ch13:ex-ps5-3-short} in the text.
+\end{exercise}
+
+\begin{exercise}[(not from the course): estimation]\label{ch13:ex-extra4}
+Simulate $2000$ returns of a Gaussian GARCH$(1,1)$ with $(\alpha_0,\alpha_1,\beta_1)=(2\times10^{-6},0.08,0.90)$, write the log-likelihood \eqref{ch13:eq-loglik} in the reparametrisation of \cref{ch13:sec-lik} and maximise it; compare the estimates with the truth over $200$ replications and comment on the bias and dispersion of $\hat\alpha_1+\hat\beta_1$.
+\end{exercise}
+
+\begin{exercise}[PS5 (2013), Problem 1; PS4 (2024), Problem 3: equal sampling intervals]\label{ch13:ex-ps5-1}
+Sample at equal increments $h=T/n$, $t_i=ih$.
+\begin{enumerate}[(a)]
+  \item Show that the maximum-likelihood estimators are $\hat\mu_*=\frac1n\sum Y_i$ and $\hat\sigma^2=\frac1n\sum(Y_i-\hat\mu_*)^2$ (the 2024 version normalises by $h$:
+      $\hat\mu_*=\frac1{hn}\sum Y_i$, $\hat\sigma^2=\frac1{hn}\sum(Y_i-h\hat\mu_*)^2$).
+  \item Derive the distribution of $\hat\mu_*$, with its mean and variance.
+  \item Derive the distribution of $\hat\sigma^2$, with its mean and variance.
+  \item Let $n\to\infty$ on the fixed period: what are the limiting distributions of $\hat\mu_{*,n}$ and $\hat\sigma^2_n$?
+  \item An estimator sequence $\hat\theta_n$ is weakly consistent if $\lim_n\Prob(|\hat\theta_n-\theta|>\epsilon)=0$ for every $\epsilon>0$ (the 2013 text writes the condition with a small typo; the 2024 hint is Markov's inequality). Which of the two sequences is weakly consistent?
+\end{enumerate}
+Its core is \cref{ch13:ex-ps5-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS5 (2013), Problem 2; PS4 (2024), Problem 4: variable sampling intervals]\label{ch13:ex-ps5-2}
+Now the increments $h_i>0$ are arbitrary with $\sum_ih_i=T$.
+\begin{enumerate}[(a)]
+  \item Derive the MLE of $\mu_*$ and its distribution for a fixed set $\{h_i\}$.
+  \item Derive the MLE of $\sigma^2$ and its distribution.
+  \item With only $n+1$ price points allowed (including $X_0$ and $X_T$), prove that: the MLE of $\sigma^2$
+      depends on the spacing, but its \emph{variance} is the same for every spacing; and the MLE of $\mu_*$ is the same, with the same variance, for every spacing. (In the 2024 statement the parts of Problem~4 are mislabelled 3(a)--3(c).)
+\end{enumerate}
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{Black--Scholes (\cref{ch:bs})}\label{exam:ch15}
+
+\begin{exercise}[not from the course: the tree]\label{ch15:ex-tree}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Show that the CRR tree prices a forward $(S_T-K)$ exactly, for every $n$.
+  \item Write a program that prices the call of \cref{ch15:tab-crr} and reproduces the $1/n$ error and the odd--even oscillation; then choose the
+      strike lattice-aligned ($K=S_0u^{k}$) and observe the effect.
+  \item Show that with $u=e^{\sigma\sqrt{\dd t}+\nu\dd t}$, $d=e^{-\sigma\sqrt{\dd t}+\nu\dd t}$ (drift $\nu$ in the tree) one still converges to Black--Scholes provided $q$ is defined by the martingale condition.
+\end{enumerate}
+Its core is \cref{ch15:ex-tree-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: the formula by expectation]\label{ch15:ex-formula}
+Derive the put formula \eqref{ch15:eq-put} directly from $P=e^{-r\tau}\E_\Q[(K-S_T)^+]$ and check parity. Evaluate the call and the put for $S=100$, $K=90$, $\tau=0.5$, $r=3\%$, $\sigma=25\%$.
+Show that $C$ is increasing and convex in $S$, increasing in $\sigma$ and $\tau$, and that $(S-Ke^{-r\tau})^+\le C\le S$ (the no-arbitrage bounds).
+Its core is \cref{ch15:ex-formula-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: put--call parity]\label{ch15:ex-parity}
+Prove parity when the stock pays a known cash dividend $D$ at $t_D\in(t,T)$: $C-P=S-De^{-r(t_D-t)}-Ke^{-r\tau}$. Using the numbers of \cref{ch15:tab-ibm} choose an interest rate $r$ that best fits the four strikes by least squares, and comment on the residuals.
+Design an arbitrage (list the trades and the guaranteed profit) if the call in the $K=100$ row of \cref{ch15:tab-aapl} were quoted at 14.50 instead of 14.00.
+Its core is \cref{ch15:ex-parity-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: digital options]\label{ch15:ex-digital}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Prove $D=-\partial C/\partial K$ for any model where $C(K)=e^{-r\tau}\E_\Q[(S_T-K)^+]$.
+  \item Show that a call spread with strikes $K$ and $K+\varepsilon$, scaled by $1/\varepsilon$, \emph{super-replicates} the digital,
+      so that the dealer's ask for the digital is $\le[C(K)-C(K+\varepsilon)]/\varepsilon$, and find the sub-replicating spread giving a bid.
+  \item In a model with a smile, $\sigma=\sigma(K)$, show that $D=e^{-r\tau}\Phi(d_2)-\mathcal V\,\sigma'(K)$ and explain the sign
+      of the correction for the AAPL data of \cref{ch15:tab-smile}.
+\end{enumerate}
+Its core is \cref{ch15:ex-digital-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: Greeks]\label{ch15:ex-greeks}
+Prove $S\varphi(d_1)=Ke^{-r\tau}\varphi(d_2)$, derive $\Delta,\Gamma,\mathcal V,\Theta$ and check that they satisfy the Black--Scholes PDE. For an at-the-money-forward option show that $C\approx0.4\,S\sigma\sqrt\tau$; prove in general that $\mathcal V=S^2\sigma\tau\,\Gamma$. What is the $\Delta$ of a call with $S$ very large? Of a call very close to expiry, at the money?
+Its core is \cref{ch15:ex-greeks-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: delta hedging by simulation]\label{ch15:ex-hedge}
+Reproduce \cref{ch15:tab-hedge}: simulate GBM with drift $\mu$, sell a call at the Black--Scholes price, rebalance the delta at $n$ dates, and record the terminal error. Check that the distribution does not depend on $\mu$ (for large $n$),
+that its width scales as $n^{-1/2}$, and add a proportional transaction cost $c|\Delta a|S$ to find the $n$ that minimises the cost-plus-risk for your favourite risk penalty. What changes if you hedge with a wrong $\sigma$ (say $15\%$ when the true one is $20\%$)?
+\end{exercise}
+
+\begin{exercise}[not from the course: implied volatility]\label{ch15:ex-iv}
+Implement Newton's method for $\sigma_{\mathrm{imp}}$ with the vega as derivative, starting from $\sigma_0=\sqrt{2|\ln(S/K)+r\tau|/\tau}$. Recompute the last column of \cref{ch15:tab-smile}. Why does the iteration fail for deep out-of-the-money options and what is a safer alternative (bisection, Brent)?
+\end{exercise}

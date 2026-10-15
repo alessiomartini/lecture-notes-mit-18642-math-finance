@@ -96,18 +96,7 @@ of $12\%$ annual volatility is uncertain by about $\pm1.9$ percentage points; wi
 heavy-tailed series with $\kappa=6$ the variance of $\hat\sigma^2$ is $2.5$ times larger than in the Gaussian case.
 (This is the quantitative content of the ``trade-off'' below and of 2013 PS5 Problem~4.)
 
-\begin{exercise}[PS5 (2013), Problem 4: are year-to-year differences in volatility significant?]\label{ch13:ex-ps5-4}
-The annual sample variances of the daily log returns of the S\&P~500 close are (year: daily variance, number of days)
-2006: $3.981\times10^{-5}$, 251; 2007: $1.019\times10^{-4}$, 251; 2008: $6.677\times10^{-4}$, 253; 2009: $2.950\times10^{-4}$, 252; 2010: $1.295\times10^{-4}$, 252; 2011: $2.164\times10^{-4}$, 252; 2012: $6.459\times10^{-5}$, 250.
-Model the returns of one year as an i.i.d.\ sample from $N(\mu,\sigma^2)$ and let $\hat\sigma^2$ be the unbiased sample variance.
-\begin{enumerate}[(a)]
-  \item Prove that $\hat\sigma^2\sim\frac{\sigma^2}{n-1}\chi^2_{n-1}$.
-  \item Invert the $\chi^2$ percentiles $q_{0.025},q_{0.975}$ to obtain a two-sided $95\%$ confidence interval for $\sigma^2$ (the problem gives the percentiles for $249$ to $252$ degrees of freedom): compute it for 2008, express it as an annualised volatility ($\sqrt{253}\,\sigma$),
-      and say whether the sample volatility of any other year falls inside it.
-  \item Under the null hypothesis of equal daily variances in two years, show that $S=\hat\sigma^2_{2008}/\hat\sigma^2_{2007}$ has an $F$ distribution (state its degrees of freedom); the problem gives $q_{0.025}=0.7804$, $q_{0.975}=1.2815$ for $F_{252,250}$. Compute $S$ for 2008 against 2007, find the
-      $P$-value (the $\alpha$ at which the test is on the boundary), and repeat for 2008 against 2006.
-\end{enumerate}
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-ps5-4} in \cref{app:exam}.}
 
 \subsection{Historical predictors: simple and exponential averages}\label{ch13:sec-ewma}
 To \emph{predict} volatility one needs a single-period sample estimate $\hat\sigma_t^2$ for each period
@@ -235,7 +224,7 @@ maximum-likelihood estimators are \ts{24}{19}{15:05}\ts{13}{9}{34:41}
   \hat\mu_*=\bar R=\frac1n\sum_{t=1}^nR_t,\qquad \hat\sigma^2=\frac1n\sum_{t=1}^n(R_t-\bar R)^2,
 \end{equation}
 the sample mean and the sample variance with divisor $n$ (not $n-1$); the derivation is 2013 PS5 Problem~1(a)
-(\cref{ch13:ex-ps5-1}). If the $\Delta_j$ vary, ``exercise'' (\cref{ch13:ex-ps5-2}) \ts{24}{19}{17:18}. A question with a striking
+(\cref{ch13:ex-ps5-1-short}). If the $\Delta_j$ vary, ``exercise'' (\cref{ch13:ex-ps5-2}) \ts{24}{19}{17:18}. A question with a striking
 answer is what happens when the number $n$ of observations in a fixed window $[0,T]$ grows, that is when the
 sampling frequency increases \ts{13}{9}{35:46}. The exercises show the following. The maximum-likelihood
 estimator of the drift is always the cumulative return divided by the length of the period, so its variance is
@@ -353,10 +342,7 @@ efficiency $1+4.91=5.91$, not $6.2$. So $a\approx0.17$ is consistent with the ex
 statistical conclusions are unaffected, and the figures $7.4$ and $8.4$ below are reproduced exactly. This is my check, not a statement of the course.
 \end{coursenote}
 
-\begin{exercise}[PS5 (2024), Problem 3: the extreme-value estimator of Parkinson (1980)]\label{ch13:ex-ps5-p3}
-Read M.~Parkinson, ``The extreme value method for estimating the variance of the rate of return'', \emph{J.\ Business} 53(1) (1980) 61--65. (b) Explain the definition of the estimator $D_x$ of Section~II. (c) Explain the definition of $D_l$ of Section~III. (d) Using the results of Section~IV,
-explain why the improvement obtained with $D_l$ as an estimate of the variance $V$ (Section~V) could matter particularly in studies of the dependence of $V$ on time and on price, if there is any. (Part (a), ``read the article'', has no answer.) The estimator of \cref{ch13:sec-parkinson} is the one in question.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-ps5-p3} in \cref{app:exam}.}
 
 \subsection{Garman--Klass, and the ``best analytic'' estimator}\label{ch13:sec-gk}
 Garman and Klass (1980) found the estimator of minimal variance among those that are \emph{scale invariant}, i.e.\ that
@@ -537,26 +523,9 @@ half of $\Var(\Delta v_t)$; the root-mean-square error should drop by the factor
 ``predictability of volatility'' in the case study is the predictability of the estimator's own window, not of the market (our remark).
 \end{secondary}
 
-\begin{exercise}[PS5 (2024), Problem 4: volatility case studies]\label{ch13:ex-ps5-p4}
-The R Markdown files
-\begin{itemize}\item \file{Case_Study_Estimating__SP500_Historical_Volatility.Rmd}, \item \file{Case_Study_Estimating__ARKK_Historical_Volatility.Rmd}\end{itemize}
-produce the S\&P~500 and ARKK case studies (\cref{ch13:cs-ohlc}), which use the naive, ARIMA and seasonal ARIMA methods of Hyndman and Athanasopoulos,
-\emph{Forecasting: Principles and Practice} (2nd ed.), Chapter~3 (naive method, residual diagnostics) and Chapter~8 (automatic ARIMA).
-\begin{enumerate}[(a)]
-  \item Comment on the S\&P~500 results you find interesting or significant.
-  \item The same for ARKK.
-  \item Compare the volatility findings for ARKK and the S\&P~500.
-\end{enumerate}
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-ps5-p4} in \cref{app:exam}.}
 
-\begin{exercise}[PS5 (2024), Problem 5, optional (extra credit): your own stock]\label{ch13:ex-ps5-p5}
-Choose a stock symbol and edit the ARKK file to run the same analysis.
-\begin{enumerate}[(a)]
-  \item Produce the PDF of the case study.
-  \item Comment on results you find interesting.
-  \item Compare your stock with the S\&P~500 and ARKK.
-\end{enumerate}
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-ps5-p5} in \cref{app:exam}.}
 
 
 % ==================================================================
@@ -711,16 +680,8 @@ volatility forecast that reacts to the latest shock. This is the improvement ove
 instead of being estimated.
 \end{finance}
 
-\begin{exercise}[PS5 (2013), Problem 3: properties of the ARCH$(1)$ model]\label{ch13:ex-ps5-3}
-Let $y_t=\mu_t+\varepsilon_t$, $\varepsilon_t=z_t\sigma_t$, $\sigma_t^2=\alpha_0+\alpha_1\varepsilon_{t-1}^2$, with $z_t$ i.i.d., $\E[z_t]=0$, $\Var z_t=1$, $\E[z_t^3]=0$, $\E[z_t^4]=\kappa_z$ ($=3$ if Gaussian). Prove:
-\begin{enumerate}[(a)]
-  \item $\E[\varepsilon_t^2]=\alpha_0/(1-\alpha_1)$;
-  \item $\E[\varepsilon_t^3]=0$;
-  \item $\E[\varepsilon_t^4]=\kappa_z\alpha_0^2(1+\alpha_1)/[(1-\alpha_1)(1-\kappa_z\alpha_1^2)]$;
-  \item which constraints on $\alpha_0,\alpha_1$ does (c) require for the fourth moment to be finite and stationary;
-  \item the kurtosis of $\varepsilon_t$: for Gaussian $z_t$, is the unconditional distribution of $\varepsilon_t$ heavier-tailed than the Gaussian?
-      (The problem as printed writes the constant $\kappa_z$ in (c) without naming it; it is the kurtosis of $z_t$ stated just before.)
-\end{enumerate}
+\begin{exercise}[PS5 (2013), Problem 3(a): variance of an ARCH$(1)$]\label{ch13:ex-ps5-3-short}
+For $\varepsilon_t=z_t\sigma_t$, $\sigma_t^2=\alpha_0+\alpha_1\varepsilon_{t-1}^2$, with $z_t$ i.i.d., $\E[z_t]=0$, $\Var z_t=1$, show that the stationary $\E[\varepsilon_t^2]=\alpha_0/(1-\alpha_1)$. (Third and fourth moments, kurtosis: \cref{ch13:ex-ps5-3} in \cref{app:exam}.)
 \end{exercise}
 
 
@@ -977,7 +938,7 @@ $\kappa_\varepsilon=\kappa_z\E[\sigma^4]/\sigma_*^4=\kappa_z\dfrac{(1+\phi)(1-\p
 \end{proof}
 The mechanism is that of \cref{ch03:prop-mixture}: given the past, $\varepsilon_t$ is normal with variance $\sigma_t^2$, and this variance fluctuates, so the marginal law is a mixture of
 Gaussians with kurtosis $\kappa_z\E[\sigma^4]/(\E[\sigma^2])^2\ge\kappa_z$, strictly unless $\sigma_t$ is constant \ts{13}{11}{24:19}; the slides describe GARCH as a ``stochastic mixture of Gaussians with higher kurtosis''.
-For $\beta_1=0$ one recovers the ARCH$(1)$ formulas of 2013 PS5 Problem~3 (\cref{ch13:ex-ps5-3}): $\E[\varepsilon^4]=\kappa_z\alpha_0^2(1+\alpha_1)/\bigl[(1-\alpha_1)(1-\kappa_z\alpha_1^2)\bigr]$, finite iff $\alpha_1<1/\sqrt3=0.577$ for Gaussian $z$.
+For $\beta_1=0$ one recovers the ARCH$(1)$ formulas of 2013 PS5 Problem~3 (\cref{ch13:ex-ps5-3-short}): $\E[\varepsilon^4]=\kappa_z\alpha_0^2(1+\alpha_1)/\bigl[(1-\alpha_1)(1-\kappa_z\alpha_1^2)\bigr]$, finite iff $\alpha_1<1/\sqrt3=0.577$ for Gaussian $z$.
 
 \begin{secondary}[Kurtosis for typical parameters]
 \begin{center}\small
@@ -1062,9 +1023,7 @@ asymptotic theory is delicate as well. Standard errors in \cref{ch13:sec-fxcs} a
 the remark on the LM test in \cref{ch13:sec-arch-ar}.
 \end{remark}
 
-\begin{exercise}[(not from the course): estimation]\label{ch13:ex-extra4}
-Simulate $2000$ returns of a Gaussian GARCH$(1,1)$ with $(\alpha_0,\alpha_1,\beta_1)=(2\times10^{-6},0.08,0.90)$, write the log-likelihood \eqref{ch13:eq-loglik} in the reparametrisation of \cref{ch13:sec-lik} and maximise it; compare the estimates with the truth over $200$ replications and comment on the bias and dispersion of $\hat\alpha_1+\hat\beta_1$.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-extra4} in \cref{app:exam}.}
 
 \subsection{Innovations with the Student $t$ distribution}\label{ch13:sec-t}
 The Gaussian assumption leaves two symptoms in the residuals of the case study: standardised residuals with values six standard deviations from the mean, and a bend of the Q--Q plot at the extremes
@@ -1317,24 +1276,8 @@ Standalone exercises follow the section they practise. 2013 PS5 Problems~1--2 ar
 \subsection*{From 2013 Problem Set 5 (its Problems 1 and 2 are Problems 3 and 4 of 2024 Problem Set 4)}
 In the first two problems $X(t)$ follows $\dd X/X=\mu\dd t+\sigma\dd W$ and the price is sampled on $[0,T]$, so that the log returns $Y_i=\log(X_i/X_{i-1})$ are independent $N(\mu_*h_i,\sigma^2h_i)$ with $\mu_*=\mu-\tfrac12\sigma^2$ (this is given).
 
-\begin{exercise}[PS5 (2013), Problem 1; PS4 (2024), Problem 3: equal sampling intervals]\label{ch13:ex-ps5-1}
-Sample at equal increments $h=T/n$, $t_i=ih$.
-\begin{enumerate}[(a)]
-  \item Show that the maximum-likelihood estimators are $\hat\mu_*=\frac1n\sum Y_i$ and $\hat\sigma^2=\frac1n\sum(Y_i-\hat\mu_*)^2$ (the 2024 version normalises by $h$:
-      $\hat\mu_*=\frac1{hn}\sum Y_i$, $\hat\sigma^2=\frac1{hn}\sum(Y_i-h\hat\mu_*)^2$).
-  \item Derive the distribution of $\hat\mu_*$, with its mean and variance.
-  \item Derive the distribution of $\hat\sigma^2$, with its mean and variance.
-  \item Let $n\to\infty$ on the fixed period: what are the limiting distributions of $\hat\mu_{*,n}$ and $\hat\sigma^2_n$?
-  \item An estimator sequence $\hat\theta_n$ is weakly consistent if $\lim_n\Prob(|\hat\theta_n-\theta|>\epsilon)=0$ for every $\epsilon>0$ (the 2013 text writes the condition with a small typo; the 2024 hint is Markov's inequality). Which of the two sequences is weakly consistent?
-\end{enumerate}
+\begin{exercise}[PS5 (2013), Problem 1(a): maximum likelihood with equal sampling intervals]\label{ch13:ex-ps5-1-short}
+Sample the Brownian log price at equal increments $h=T/n$. Show that the maximum-likelihood estimators are $\hat\mu_*=\frac1n\sum Y_i$ and $\hat\sigma^2=\frac1n\sum(Y_i-\hat\mu_*)^2$. (Their distributions, limits and consistency: \cref{ch13:ex-ps5-1} in \cref{app:exam}.)
 \end{exercise}
 
-\begin{exercise}[PS5 (2013), Problem 2; PS4 (2024), Problem 4: variable sampling intervals]\label{ch13:ex-ps5-2}
-Now the increments $h_i>0$ are arbitrary with $\sum_ih_i=T$.
-\begin{enumerate}[(a)]
-  \item Derive the MLE of $\mu_*$ and its distribution for a fixed set $\{h_i\}$.
-  \item Derive the MLE of $\sigma^2$ and its distribution.
-  \item With only $n+1$ price points allowed (including $X_0$ and $X_T$), prove that: the MLE of $\sigma^2$
-      depends on the spacing, but its \emph{variance} is the same for every spacing; and the MLE of $\mu_*$ is the same, with the same variance, for every spacing. (In the 2024 statement the parts of Problem~4 are mislabelled 3(a)--3(c).)
-\end{enumerate}
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch13:ex-ps5-2} in \cref{app:exam}.}

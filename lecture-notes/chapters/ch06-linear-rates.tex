@@ -259,19 +259,11 @@ A floating payment that sets in the future can be replicated with fixed flows \t
 apply to $[t_1,t_2]$ with accrual fraction $\Delta$, and suppose zero-coupon bonds maturing at $t_1$ and $t_2$
 can be traded.
 
-\begin{proposition}[Implied forward rate]\label{ch06:prop-fwd}
-The fair (zero-PV) rate fixed today for lending $N$ from $t_1$ to $t_2$ is
-\begin{equation}\label{ch06:eq-fwd}
-  f(t_1,t_2)=\frac1\Delta\Bigl(\frac{Z(t_1)}{Z(t_2)}-1\Bigr).
-\end{equation}
-\end{proposition}
-\begin{proof}
-Lending $N$ at $t_1$ and receiving $N(1+f\Delta)$ at $t_2$ has present value
-$-NZ(t_1)+Nf\Delta\,Z(t_2)+NZ(t_2)$. Setting it to zero gives $1+f\Delta=Z(t_1)/Z(t_2)$. If the market rate were
-higher, lend forward and short the replicating zeros (buy the $t_1$ zero, sell the $t_2$ zero) for a riskless
-profit, and vice versa.
-\end{proof}
-This is \cref{prop:forward} of \cref{ch:markets} with $F_{t_1t_2}=f\Delta$.
+The fair forward rate is that of \cref{prop:forward}, recalled in the margin in this chapter's notation (statement and proof as written for this chapter: \hyperref[ch06:sec-setaside]{\emph{Set aside}} at the end of the chapter).
+\begin{recall}[implied forward rate]
+The zero-PV rate fixed today for lending $N$ from $t_1$ to $t_2$ ($\Delta=t_2-t_1$ in the day count) is
+$f(t_1,t_2)=\frac1\Delta\bigl(Z(t_1)/Z(t_2)-1\bigr)$, because lending $N$ at $t_1$ against $N(1+f\Delta)$ at $t_2$ is worth $-NZ(t_1)+N(1+f\Delta)Z(t_2)$; any other rate is an arbitrage with zeros. \Cref{prop:forward} with $F_{t_1t_2}=f\Delta$; here \cref{ch06:prop-fwd}, \eqref{ch06:eq-fwd}.
+\end{recall}
 
 \begin{coursenote}[Erratum: slide 20]
 The slide states the problem for a period $[t_1,t_2]$ but writes the equations with $t_0,t_1$:
@@ -645,20 +637,8 @@ rates; the 1-year zero rate is $\ln1.04=3.922\%$.}
 \label{ch06:fig-fwd}
 \end{figure}
 
-\begin{exercise}[not from the course]
-Using the quotes of \cref{ch06:ex-boot}:
-
-(a) bootstrap $Z_1,Z_2,Z_3$ by hand;
-
-(b) show that CDF gives $Z_4=\sqrt{Z_3Z_5}$, write the scalar
-equation for $Z_5$ and solve it numerically;
-
-(c) compute the one-year forward rates $f(k-1,k)$,
-$k=1,\dots,5$, and the 4-year par rate;
-
-(d) prove \cref{ch06:prop-cdf} directly from the daily compounding
-definition, and show that the forward curve jumps at a knot unless
-the two adjacent segments have equal slopes of $\ln Z$.
+\begin{exercise}[not from the course]\label{ch06:exam-1-short}
+Using the quotes of \cref{ch06:ex-boot}, bootstrap $Z_1,Z_2,Z_3$ by hand. (Interpolated knots, forward rates and the proof of \cref{ch06:prop-cdf}: \cref{ch06:exam-1} in \cref{app:exam}.)
 \end{exercise}
 
 \bigskip
@@ -785,19 +765,8 @@ gamma, or scenario analysis instead \ts{24}{7}{55:47}.
         endless arguments \ts{24}{7}{56:49}.
 \end{itemize}
 
-\begin{exercise}[not from the course]
-\leavevmode
-\begin{enumerate}[(a)]
-  \item Show that the gamma of slide 31 equals
-      $\epsilon\,\partial^2\mathrm{PV}/\partial r^2+O(\epsilon^3)$.
-  \item For a 10-year zero-coupon bond with continuously compounded
-      rate 4\% and notional \$100M, compute the PV01 and this gamma for
-      $\epsilon=1$\,bp.
-  \item How many revaluations does a full central-difference
-      cross-gamma matrix need for $N$ curve inputs?
-  \item Why does a Monte Carlo pricer need a larger $\epsilon$
-      (\cref{ch:markets})?
-\end{enumerate}
+\begin{exercise}[not from the course]\label{ch06:exam-2-short}
+For a 10-year zero-coupon bond with continuously compounded rate 4\% and notional \$100M, compute the PV01 and the gamma of slide 31 for $\epsilon=1$\,bp. (Why that gamma is a second derivative, and the cost of cross-gammas: \cref{ch06:exam-2} in \cref{app:exam}.)
 \end{exercise}
 
 % ------------------------------------------------------------------
@@ -1066,3 +1035,23 @@ $0.0454$ per 100) and the 5-year swap annuity $A_5=4.5178$:
       Q\&A remark on tax policy.
 \end{enumerate}
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section*{Set aside}\phantomsection\label{ch06:sec-setaside}
+\addcontentsline{toc}{section}{Set aside}
+Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
+
+\begin{proposition}[Implied forward rate]\label{ch06:prop-fwd}
+The fair (zero-PV) rate fixed today for lending $N$ from $t_1$ to $t_2$ is
+\begin{equation}\label{ch06:eq-fwd}
+  f(t_1,t_2)=\frac1\Delta\Bigl(\frac{Z(t_1)}{Z(t_2)}-1\Bigr).
+\end{equation}
+\end{proposition}
+\begin{proof}
+Lending $N$ at $t_1$ and receiving $N(1+f\Delta)$ at $t_2$ has present value
+$-NZ(t_1)+Nf\Delta\,Z(t_2)+NZ(t_2)$. Setting it to zero gives $1+f\Delta=Z(t_1)/Z(t_2)$. If the market rate were
+higher, lend forward and short the replicating zeros (buy the $t_1$ zero, sell the $t_2$ zero) for a riskless
+profit, and vice versa.
+\end{proof}
+This is \cref{prop:forward} of \cref{ch:markets} with $F_{t_1t_2}=f\Delta$.
+

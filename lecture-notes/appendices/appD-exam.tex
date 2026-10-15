@@ -133,3 +133,159 @@ table with rows ``regression on $1,\dots,k$'' ($\hat{\bm y}_I\T\hat{\bm y}_I$, $
 $1,\dots,k$'' ($p-k$ d.f., mean square $MS_0$, $\hat F=MS_0/MS_{\text{Error}}$), ``error'' ($n-p$ d.f.) and ``total'' ($\bm y\T\bm y$,
 $n$ d.f.).
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section{Linear rates products (\cref{ch:rates})}\label{exam:ch06}
+
+\begin{exercise}[not from the course]\label{ch06:exam-1}
+Using the quotes of \cref{ch06:ex-boot}:
+
+(a) bootstrap $Z_1,Z_2,Z_3$ by hand;
+
+(b) show that CDF gives $Z_4=\sqrt{Z_3Z_5}$, write the scalar
+equation for $Z_5$ and solve it numerically;
+
+(c) compute the one-year forward rates $f(k-1,k)$,
+$k=1,\dots,5$, and the 4-year par rate;
+
+(d) prove \cref{ch06:prop-cdf} directly from the daily compounding
+definition, and show that the forward curve jumps at a knot unless
+the two adjacent segments have equal slopes of $\ln Z$.
+Its core is \cref{ch06:exam-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course]\label{ch06:exam-2}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Show that the gamma of slide 31 equals
+      $\epsilon\,\partial^2\mathrm{PV}/\partial r^2+O(\epsilon^3)$.
+  \item For a 10-year zero-coupon bond with continuously compounded
+      rate 4\% and notional \$100M, compute the PV01 and this gamma for
+      $\epsilon=1$\,bp.
+  \item How many revaluations does a full central-difference
+      cross-gamma matrix need for $N$ curve inputs?
+  \item Why does a Monte Carlo pricer need a larger $\epsilon$
+      (\cref{ch:markets})?
+\end{enumerate}
+Its core is \cref{ch06:exam-2-short} in the text.
+\end{exercise}
+
+% ------------------------------------------------------------------
+\section{PCA and factor models (\cref{ch:pca})}\label{exam:ch07}
+
+\begin{exercise}[PS2 (2024), Problem 3: principal components, special case]\label{ch07:ex-ps2}
+A portfolio holds $n$ assets with fixed weights $\bm w=(w_1,\dots,w_n)\T$; over a given horizon the assets have
+rates of return $\bm X=(X_1,\dots,X_n)\T$ with mean $\bm\mu$ and covariance $\Sigma=(\sigma_{ij})$, and the portfolio return
+is $Y=\bm w\T\bm X$.
+\begin{enumerate}[(a)]
+  \item Show that $\E[Y]=\bm w\T\bm\mu$ and $\Var[Y]=\bm w\T\Sigma\bm w$.
+  \item Prove that $\Sigma$ is positive semi-definite, for any random variables $X_1,\dots,X_n$.
+  \item Suppose all entries of $\Sigma$ are positive. Prove that the largest eigenvalue $\lambda_{\max}$ has multiplicity one and
+      an eigenvector $\bm v$ that can be chosen with all components positive.
+  \item Write the first principal component variable $PC1$ in terms of $\bm X$, $\bm\mu$ and $\bm v$. What are its mean and
+      variance?
+\end{enumerate}
+Its core is \cref{ch07:ex-ps2-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS3 (2024), Problem 4; also PS7 (2013), Problem 3: PCA of yield changes]\label{ch07:ex-ps3}
+Daily changes of the 9 FRED constant-maturity Treasury yields over 2001--2005 are analysed twice, with the sample
+covariance matrix and with the sample correlation matrix. The standard deviations of the PC variables are
+\begin{center}\small
+\begin{tabular}{@{}l rrrrrrrrr@{}}
+\toprule
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+\midrule
+covariance & 0.1618 & 0.0532 & 0.0299 & 0.0192 & 0.0135 & 0.0112 & 0.0096 & 0.0090 & 0.0081\\
+correlation & 2.6338 & 1.1892 & 0.5652 & 0.3971 & 0.2694 & 0.2080 & 0.1485 & 0.1366 & 0.1225\\
+\bottomrule
+\end{tabular}
+\end{center}
+(proportions of variance 84.9, 9.2, 2.9\,\% and 77.1, 15.7, 3.5\,\% for the first three) and the first three loading
+vectors are
+\begin{center}\small
+\begin{tabular}{@{}l rrr c rrr@{}}
+\toprule
+ & \multicolumn{3}{c}{covariance PCA} & & \multicolumn{3}{c}{correlation PCA}\\
+\cmidrule(lr){2-4}\cmidrule(l){6-8}
+Tenor & PC1 & PC2 & PC3 & & PC1 & PC2 & PC3\\
+\midrule
+3M  & 0.1088 & 0.5225 & 0.5434 & & $-0.2083$ & 0.6293 & 0.5831\\
+6M  & 0.1581 & 0.4817 & 0.2508 & & $-0.2830$ & 0.5154 & $-0.0654$\\
+1Y  & 0.2531 & 0.4107 & $-0.0514$ & & $-0.3369$ & 0.2698 & $-0.4066$\\
+2Y  & 0.3905 & 0.2071 & $-0.4750$ & & $-0.3625$ & 0.0064 & $-0.4005$\\
+3Y  & 0.4197 & 0.0873 & $-0.4022$ & & $-0.3664$ & $-0.0665$ & $-0.2719$\\
+5Y  & 0.4206 & $-0.1082$ & $-0.0311$ & & $-0.3670$ & $-0.1619$ & 0.0036\\
+7Y  & 0.4009 & $-0.2289$ & 0.1475 & & $-0.3608$ & $-0.2298$ & 0.1435\\
+10Y & 0.3697 & $-0.2837$ & 0.2710 & & $-0.3525$ & $-0.2656$ & 0.2554\\
+20Y & 0.3101 & $-0.3621$ & 0.3944 & & $-0.3290$ & $-0.3338$ & 0.4125\\
+\bottomrule
+\end{tabular}
+\end{center}
+(a) PC1 loadings are all positive in the covariance case and all negative in the correlation case. Is the
+difference in sign meaningful? (Does the eigen-decomposition change if an eigenvector is multiplied by $-1$?)
+(b) The PC1 loadings range more widely in the covariance case; the loading on the least variable change (3M) is
+larger in magnitude in the correlation case, and those on the most variable changes are smaller. Explain why,
+recalling that PC1 is the unit-norm weighted combination with the largest variance and that in the correlation
+case each yield change is scaled to unit variance.
+(c) Interpret the first three PCs of the correlation case and compare with the covariance case.
+(d) If the goal is to model the dynamics of the whole term structure across all tenors, argue why correlation PCA
+might be preferred.
+(e) (2024 only) Compute the total variance of the correlation-case PCs. Is it an integer? Explain.
+\end{exercise}
+
+\begin{exercise}[PS7 (2013), Problem 1: PCA of a bivariate vector]\label{ch07:ex-ps7-1}
+Let $\bm X=(X_1,X_2)\T$ have mean $\bm\alpha=(\alpha_1,\alpha_2)\T$ and covariance
+$\Sigma=\bigl(\begin{smallmatrix}\sigma_1^2&\rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2&\sigma_2^2\end{smallmatrix}\bigr)$.
+\begin{enumerate}[(a)]
+  \item Compute the eigenvalues $\lambda_1\ge\lambda_2\ge0$ of $\Sigma$.
+  \item Compute orthonormal eigenvectors $\bm\gamma_1,\bm\gamma_2$.
+  \item Verify $\Sigma=\sum_i\lambda_i\bm\gamma_i\bm\gamma_i\T$.
+  \item For $p_i=\bm\gamma_i\T(\bm X-\bm\alpha)$ prove $\E[p_i]=0$, $\Var(p_i)=\lambda_i$ and $\Cov(p_1,p_2)=0$.
+  \item Are the eigenvectors in (b) unique? If not, how are different solutions related?
+\end{enumerate}
+Its core is \cref{ch07:ex-ps7-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS7 (2013), Problem 4: dynamics of the PC scores]\label{ch07:ex-ps7-4}
+A VAR(3) with constant (\cref{ch:timeseries}) was fitted to the scores of the first three PCs of the
+correlation-matrix analysis of \cref{ch07:ex-ps3} ($T=1245$ days). Estimates and $t$-values:
+\begin{center}\small
+\begin{tabular}{@{}l rr c rr c rr@{}}
+\toprule
+ & \multicolumn{2}{c}{eq.\ Comp.1} & & \multicolumn{2}{c}{eq.\ Comp.2} & & \multicolumn{2}{c}{eq.\ Comp.3}\\
+\cmidrule(lr){2-3}\cmidrule(lr){5-6}\cmidrule(l){8-9}
+Regressor & est. & $t$ & & est. & $t$ & & est. & $t$\\
+\midrule
+Comp.1, lag 1 & 0.0527 & 1.86 & & $-0.0203$ & $-1.65$ & & $-0.0029$ & $-0.48$\\
+Comp.2, lag 1 & $-0.1340$ & $-2.08$ & & 0.1382 & 4.93 & & $-0.0143$ & $-1.03$\\
+Comp.3, lag 1 & $-0.1322$ & $-1.00$ & & $-0.0833$ & $-1.45$ & & 0.0163 & 0.58\\
+Comp.1, lag 2 & $-0.0530$ & $-1.87$ & & $-0.0072$ & $-0.59$ & & $-0.0135$ & $-2.23$\\
+Comp.2, lag 2 & $-0.0542$ & $-0.84$ & & 0.0370 & 1.32 & & $-0.0037$ & $-0.27$\\
+Comp.3, lag 2 & 0.1825 & 1.39 & & $-0.0195$ & $-0.34$ & & $-0.0523$ & $-1.86$\\
+Comp.1, lag 3 & $-0.0169$ & $-0.60$ & & $-0.0085$ & $-0.69$ & & $-0.0019$ & $-0.32$\\
+Comp.2, lag 3 & 0.0130 & 0.21 & & $-0.0403$ & $-1.46$ & & $-0.0030$ & $-0.22$\\
+Comp.3, lag 3 & 0.0830 & 0.63 & & 0.0148 & 0.26 & & $-0.0712$ & $-2.53$\\
+constant & $-0.0114$ & $-0.15$ & & 0.0121 & 0.38 & & 0.0002 & 0.01\\
+\midrule
+$R^2$; $F$-test $p$-value & 0.013 & 0.054 & & 0.029 & $4\cdot10^{-5}$ & & 0.013 & 0.059\\
+\bottomrule
+\end{tabular}
+\end{center}
+Residual standard errors are 2.60, 1.13, 0.56; residual correlations are below $0.025$ in absolute value; the
+largest root of the characteristic polynomial has modulus 0.438.
+(a)--(c) Interpret the estimated equations for Comp.1, Comp.2 and Comp.3.
+(d) For each equation, is there evidence of mean reversion or of momentum in the PC variable? Explain.
+\end{exercise}
+
+\begin{exercise}[not from the course]\label{ch07:ex-fly}
+Using the covariance-PCA loadings of \cref{ch07:ex-ps3}:
+\begin{enumerate}[(a)]
+  \item find the PC1-neutral 2s10s steepener and check
+      that its exposure to PC2 is non-zero;
+  \item find the PC1/PC2-neutral 2s5s10s fly (buy \$1 dv01 of 5y) and compute its
+      exposure to PC3;
+  \item prove the variance formula for the PC1-hedged portfolio $\bm V'=\bm V-(\bm V\T\bm\gamma_1)\bm\gamma_1$ and show
+      that it never exceeds $\Var(\bm V\T\bm r)$.
+\end{enumerate}
+\end{exercise}

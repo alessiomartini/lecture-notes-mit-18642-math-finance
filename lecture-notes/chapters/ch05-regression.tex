@@ -500,7 +500,7 @@ factorises \ts{24}{8}{22:13} \ts{13}{6}{1:02:09}:
   =\exp\Bigl(\bm t\T\bm\mu+\tfrac12\bm t\T\Sigma\bm t\Bigr),\qquad \Sigma=\sigma^2I_n .
 \]
 
-This is the multivariate normal law of \cref{ch03:sec-mvn}, recalled in the margin (the 2024 lecture's MGF definition and the proof for linear maps, as written for this chapter, are in \cref{ch05:sec-setaside}).
+This is the multivariate normal law of \cref{ch03:sec-mvn}, recalled in the margin (the 2024 lecture's MGF definition and the proof for linear maps, as written for this chapter, are in \hyperref[ch05:sec-setaside]{\emph{Set aside}} at the end of the chapter).
 \begin{recall}[multivariate normal]
 $\bm Y\sim N_n(\bm\mu,\Sigma)$ iff $M_{\bm Y}(\bm t)=\exp(\bm t\T\bm\mu+\frac12\bm t\T\Sigma\bm t)$; $\E[\bm Y]=\bm\mu$, $\Cov\bm Y=\Sigma$.
 Linear maps: $A\bm Y\sim N_m(A\bm\mu,A\Sigma A\T)$ for every $A$ (singular $\Sigma$ allowed), so sub-vectors are normal, and jointly normal sub-vectors with zero cross-covariance are independent (\cref{ch03:prop-mvn,ch03:thm-mvn}; here \cref{ch05:def-mvn,ch05:prop-linmap}).
@@ -522,7 +522,7 @@ $\hat\beta_j\sim N(\beta_j,\sigma^2C_{jj})$ \ts{24}{8}{26:31} \ts{13}{6}{1:04:19
 
 \subsection{The fundamental theorem}
 \begin{recall}[$\chi^2$, $t$ and $F$]
-With $Z,Z_k$ i.i.d.\ $N(0,1)$ and independent $V_i\sim\chi^2_{\nu_i}$: $\sum_{k\le\nu}Z_k^2\sim\chi^2_\nu$, $Z/\sqrt{V/\nu}\sim t_\nu$, $(V_1/\nu_1)/(V_2/\nu_2)\sim F_{\nu_1,\nu_2}$, $t_\nu^2\sim F_{1,\nu}$ (\cref{ch03:sec-chisq}; the definition as given in the lecture is in \cref{ch05:sec-setaside}).
+With $Z,Z_k$ i.i.d.\ $N(0,1)$ and independent $V_i\sim\chi^2_{\nu_i}$: $\sum_{k\le\nu}Z_k^2\sim\chi^2_\nu$, $Z/\sqrt{V/\nu}\sim t_\nu$, $(V_1/\nu_1)/(V_2/\nu_2)\sim F_{\nu_1,\nu_2}$, $t_\nu^2\sim F_{1,\nu}$ (\cref{ch03:sec-chisq}; the definition as given in the lecture is in \hyperref[ch05:sec-setaside]{\emph{Set aside}} at the end of the chapter).
 \end{recall}
 
 \begin{theorem}[Normal linear regression]\label{ch05:thm-normal}
@@ -1368,7 +1368,7 @@ $\hat{\bm\beta}_0=(\hat{\bm\beta}_I,\bm 0_{p-k})$.
 \noindent\emph{Longer exercise on this: \cref{ch05:ex-ps3-3cd} in \cref{app:exam}.}
 
 % ------------------------------------------------------------------
-\section*{Set aside}\label{ch05:sec-setaside}
+\section*{Set aside}\phantomsection\label{ch05:sec-setaside}
 \addcontentsline{toc}{section}{Set aside}
 Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
 

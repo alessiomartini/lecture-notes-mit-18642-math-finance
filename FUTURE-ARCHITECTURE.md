@@ -9,6 +9,7 @@ Requests in `lecture-notes/chapters/ch00-requests.tex` (Chapter 3 / Introduction
 | `keyformulas` -> `keyconcepts` (retrieval questions, then concepts with formula + `\cref`) | ch03 | 24 chapters still have `keyformulas` |
 | `casestudy` -> `lab` (question, data in `data/`, Python steps, course results as solution, script in `labs/`) | ch05 high-yield spread | ~30 case studies |
 | Course notes inline, numbered where they refer (`coursenote` inside the paragraph) | ch03 | other chapters: boxes already numbered, markers in text missing |
+| Keep the pace (2026-10-15): repetitions in `recall` boxes (cyan); long exercises verbatim to `appendices/appD-exam.tex` (one `\section` per chapter), core kept inline; removed passages to `\section*{Set aside}` | ch04 (2 recalls, 4 exercises) | all other chapters, then Mehrling and dynamical-systems repos (copy `recall` env + appendix) |
 | Exercises: short ones after the *paragraph* they practise, long structured ones in a final `\section*{Exercises}` | ch03 | other chapters (the 2026-10-06 pass placed them per *section*) |
 
 Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab`.

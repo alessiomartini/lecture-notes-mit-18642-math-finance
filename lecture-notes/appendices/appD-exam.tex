@@ -1,0 +1,56 @@
+% !TEX root = ../main.tex
+\chapter{Pseudo-exam and second reading}\label{app:exam}
+\begin{paracol}{2}
+
+The long exercises of each chapter (more than about a quarter of an hour, more than three parts, or proofs that
+need a new idea), moved here verbatim so that a first reading of the chapters is not held up by them. The
+chapters keep short, targeted exercises, often the core of the long ones below. Use this appendix as a second
+reading or, once the course is finished, as a cumulative self-test: retrieval spaced weeks after first study is
+among the best-supported ways to make material stick (Cepeda et al.\ 2006; Adesope et al.\ 2017).
+% once an exercise here gets a \begin{solution}, add \printsolutions at the end of this appendix
+
+% ------------------------------------------------------------------
+\section{Stochastic processes I (\cref{ch:sp1})}\label{exam:sp1}
+
+\begin{exercise}[PS2 (2024), Problem 1: random walk with bias]\label{ch04:ex-ps2-1}
+Let $X_n$ be i.i.d.\ steps with $\Prob(X_n=+1)=p$, $\Prob(X_n=0)=1-(p+q)$, $\Prob(X_n=-1)=q$, where $p,q>0$ and $p+q<1$
+(symmetric if $p=q$, biased upwards if $p>q$), and $S_n=\sum_{i=1}^nX_i$, $S_0=0$.
+\begin{enumerate}[(a)]
+  \item Derive the moment generating function $M_{X_i}(t)$ of a step and the mean and variance of $X_i$.
+  \item Derive the moment generating function $M_{S_n}(t)$ and the mean and variance of $S_n$.
+  \item With $\mu$, $\sigma^2$ the mean and variance of a step, prove that $Z_n=(S_n-n\mu)/\sqrt{n\sigma^2}$ converges in
+      distribution to $N(0,1)$.
+  \item Model the intraday price of a stock as such a walk with 78 five-minute steps (the six and a half hours of NYSE
+      trading), with $p=0.52$ and $q=0.47$. Which step size gives an expected daily price change of $+\$0.50$? With that
+      step size, what is the standard deviation of the daily price change?
+\end{enumerate}
+Part (d) is \cref{ch04:ex-ps2-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS2 (2013), A-3: identify Markov processes]\label{ch04:ex-a3}
+Which of the following are Markov processes?
+\begin{enumerate}[(a)]
+  \item The simple random walk $S_t$.
+  \item $X_t=|S_t|$.
+  \item $X_0=0$,
+      $X_{t+1}=X_t+(Y_t-\tfrac1\lambda)$ with $Y_t$ i.i.d.\ exponential with parameter $\lambda$.
+  \item $X_0=0$,
+      $X_{t+1}=X_t+Z_tZ_{t-1}\cdots Z_0$ with $Z_t$ i.i.d.\ log-normal.
+  \item $X_0=0$, $X_{t+1}=X_t+W_t+W_{t-1}+\dots+W_0$ with
+      $W_t$ i.i.d.\ normal.
+\end{enumerate}
+Parts (b) and (e) are \cref{ch04:ex-a3-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Stopping times (not from the course)]\label{ch04:ex-stoptimes}
+Let $\sigma,\tau$ be stopping times. Show that $\sigma\wedge\tau$, $\sigma\vee\tau$ and $\tau+1$ are stopping times, but that
+$\tau-1$ in general is not. Deduce that ``one step after the first peak'' is a stopping time and ``the first peak'' is
+not (\cref{ch04:ex-stop}). The part on $\tau\pm1$ is \cref{ch04:ex-stoptimes-short} in the text.
+\end{exercise}
+
+\begin{exercise}[Biased ruin by first-step analysis (not from the course)]\label{ch04:ex-biasedfsa}
+For the biased walk let $f(k)=\Prob(\text{hit }A\text{ before }-B\mid S_0=k)$. Show that
+$f(k)=pf(k+1)+qf(k-1)$, solve this linear recursion (characteristic roots $1$ and $q/p$) with $f(A)=1$, $f(-B)=0$, and
+recover \cref{ch04:prop-biased}. Then use Wald's identity to show that the expected duration tends to $AB$ as
+$p\to\frac12$. A checking version is \cref{ch04:ex-biasedfsa-short} in the text.
+\end{exercise}

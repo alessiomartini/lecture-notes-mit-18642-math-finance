@@ -14,5 +14,7 @@ generated study HTML in `study/` (see `study/README.md`). Course material in `18
   for the whole book (refreshes `build/book.pdf`). Render pages with `pdftoppm` to check layout.
 - Bash heredocs here eat backslashes: write Python helper scripts to the scratchpad with the Write tool.
 - Chapter files are CRLF: scripts should read in text mode and write with `newline='\r\n'`.
+- Keep the pace: repetitions → `recall` box; long exercises verbatim → `appendices/appD-exam.tex` (core kept
+  inline); nothing deleted (removed passages → `\section*{Set aside}` at the chapter end).
 - Pending pilot extensions (Try first, Key concepts, Labs, inline course notes, exercise placement) are
   listed in `FUTURE-ARCHITECTURE.md`.

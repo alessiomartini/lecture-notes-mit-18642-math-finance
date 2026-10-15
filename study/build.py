@@ -245,7 +245,7 @@ PLAIN = {  # name: (css class, title, goes to side column)
     "solution": ("exer hdr", "Solution", False),
     "sources": ("rem hdr", "Sources for this chapter", False), "secondary": ("sec", "Beyond the core", False),
     "mysolution": ("exer hdr", "My solution", False), "coursenote": ("rem hdr", "Course note", True),
-    "history": ("hist hdr", "History", True), "aside": ("hist hdr", "Aside", True),
+    "history": ("hist hdr", "History", True), "aside": ("hist hdr", "Aside", True), "recall": ("recall hdr", "Recall", True),
     "proof": ("pf", "Proof", True)}
 BLOCKNAMES = set(NUMBERED) | set(PLAIN) | {"itemize", "enumerate", "figure", "tabularx", "answer", "paracol"}
 PARA_END = re.compile(r"\n[ \t]*\n|\n[ \t]*\\(?:begin\{(?:%s)\}|section|subsection|subsubsection|chapter)"

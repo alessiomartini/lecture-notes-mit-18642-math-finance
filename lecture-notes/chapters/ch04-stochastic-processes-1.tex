@@ -86,7 +86,7 @@ $\Prob(X_i=+1)=\Prob(X_i=-1)=\tfrac12$ it is the (one-dimensional) \emph{simple 
 The path can be drawn as the graph of $n\mapsto S_n$, or as the trajectory of a walker taking unit steps
 left or right on a line \ts{13}{5}{13:40}. The 2013 course and the 2024 problem sets also use the
 \emph{biased} walk ($\Prob(X=+1)=p\ne\tfrac12$) and walks with a zero step (2024 PS2 Problem~1,
-\cref{ch04:ex-ps2-1}).
+\cref{ch04:ex-ps2-1-short}).
 
 \begin{proposition}[Basic properties]\label{ch04:prop-rw}
 For a random walk:
@@ -180,23 +180,17 @@ positive and makes returns, not price changes, i.i.d. Time-varying volatility co
 (\cref{ch:volatility}).
 \end{finance}
 
-\begin{exercise}[PS2 (2024), Problem 1: random walk with bias]\label{ch04:ex-ps2-1}
-Let $X_n$ be i.i.d.\ steps with $\Prob(X_n=+1)=p$, $\Prob(X_n=0)=1-(p+q)$, $\Prob(X_n=-1)=q$, where $p,q>0$ and $p+q<1$
-(symmetric if $p=q$, biased upwards if $p>q$), and $S_n=\sum_{i=1}^nX_i$, $S_0=0$.
-\begin{enumerate}[(a)]
-  \item Derive the moment generating function $M_{X_i}(t)$ of a step and the mean and variance of $X_i$.
-  \item Derive the moment generating function $M_{S_n}(t)$ and the mean and variance of $S_n$.
-  \item With $\mu$, $\sigma^2$ the mean and variance of a step, prove that $Z_n=(S_n-n\mu)/\sqrt{n\sigma^2}$ converges in
-      distribution to $N(0,1)$.
-  \item Model the intraday price of a stock as such a walk with 78 five-minute steps (the six and a half hours of NYSE
-      trading), with $p=0.52$ and $q=0.47$. Which step size gives an expected daily price change of $+\$0.50$? With that
-      step size, what is the standard deviation of the daily price change?
-\end{enumerate}
+\begin{exercise}[PS2 (2024), Problem 1(d): an intraday price walk]\label{ch04:ex-ps2-1-short}
+A stock price moves in 78 five-minute steps a day (the six and a half hours of NYSE trading); each step is $+s$, $0$ or
+$-s$ with probabilities $p=0.52$, $1-p-q$, $q=0.47$, independently. Which step size $s$ gives an expected daily price
+change of $+\$0.50$? With that $s$, what is the standard deviation of the daily price change? (The full problem, with
+the MGF and the CLT for this walk, is \cref{ch04:ex-ps2-1} in \cref{app:exam}.)
 \end{exercise}
 
 \begin{exercise}[\file{lecnote5}, Proposition 2.1]
 Prove the independent- and stationary-increment properties of the random walk (\cref{ch04:prop-rw}) directly from
 the definition, and check which of them survive if the steps are independent but not identically distributed.
+(The first half is the proof of \cref{ch04:prop-rw} above: on a first reading do only the second half.)
 \end{exercise}
 
 % ------------------------------------------------------------------
@@ -226,18 +220,14 @@ $\Prob(S_{n+1}=s\mid S_0,\dots,S_n)=\tfrac12$ if $s=S_n\pm1$ and $0$ otherwise \
 state space $\mathbb Z$ is infinite, so there is no finite transition matrix \ts{13}{5}{43:12}.
 \end{example}
 
-\begin{exercise}[PS2 (2013), A-3: identify Markov processes]
-Which of the following are Markov processes?
+\begin{exercise}[PS2 (2013), A-3(b),(e): identify Markov processes]\label{ch04:ex-a3-short}
+Are these Markov processes?
 \begin{enumerate}[(a)]
-  \item The simple random walk $S_t$.
-  \item $X_t=|S_t|$.
-  \item $X_0=0$,
-      $X_{t+1}=X_t+(Y_t-\tfrac1\lambda)$ with $Y_t$ i.i.d.\ exponential with parameter $\lambda$.
-  \item $X_0=0$,
-      $X_{t+1}=X_t+Z_tZ_{t-1}\cdots Z_0$ with $Z_t$ i.i.d.\ log-normal.
+  \item $X_t=|S_t|$, with $S_t$ the simple random walk.
   \item $X_0=0$, $X_{t+1}=X_t+W_t+W_{t-1}+\dots+W_0$ with
       $W_t$ i.i.d.\ normal.
 \end{enumerate}
+(All five cases of the problem: \cref{ch04:ex-a3} in \cref{app:exam}.)
 \end{exercise}
 
 \subsection{Transition matrices}
@@ -328,7 +318,9 @@ initial distribution
 in particular $P^{(n)}_{ij}\to\pi_j$ for all $i,j$: the chain forgets its initial state geometrically fast.
 \end{theorem}
 
-\paragraph{The course's argument} (2013 notes, Theorem~3.3, for $k=1$ \ts{13}{5}{49:36}).
+The course's argument (2013 notes, Theorem~3.3, for $k=1$ \ts{13}{5}{49:36}) is Perron--Frobenius from
+\cref{ch:linalg}, recalled in the margin; below is a self-contained proof that also gives the rate.
+\begin{recall}[convergence by Perron--Frobenius]
 $A=P\T$ is column-stochastic with positive entries. By \cref{prop:stochastic}
 its eigenvalues satisfy $|\lambda|\le1$ and $1$ is one of them; by
 Perron--Frobenius (\cref{thm:pf}) the dominant eigenvalue is simple, has a
@@ -336,6 +328,7 @@ positive eigenvector, and all other eigenvalues have $|\lambda|<1$. The positive
 eigenvector, normalised, is $\bm\pi$, and the other modes of $A^n\bm p\T$
 decay (as in the state equations of \cref{sec:eigen}), so
 $A^n\bm p\T\to\bm\pi\T$ \ts{13}{5}{52:41}.
+\end{recall}
 
 \begin{proof}[A self-contained proof (not from the course)]
 For two probability vectors $\bm\mu,\bm\nu$ let $\bm d=\bm\mu-\bm\nu$, so
@@ -532,14 +525,17 @@ Let $X_1,X_2,\dots$ be the observed process. The \emph{information set} $\mathca
 time $n$, i.e.\ the values of $X_1,\dots,X_n$ (formally, the $\sigma$-algebra they generate) \ts{24}{6}{8:32}.
 A random variable $Y$ is \emph{known at time $n$}, written $Y\in\mathcal F_n$, iff $Y=f(X_1,\dots,X_n)$ for
 some function $f$; the increasing family $\{\mathcal F_n\}$ is a \emph{filtration}, and one writes
-$\E[Z\mid\mathcal F_n]=\E[Z\mid X_1,\dots,X_n]$ \ts{24}{6}{13:00}. We use the following properties of
-conditional expectation (\cref{ch:probability}), valid for integrable $Z$:
+$\E[Z\mid\mathcal F_n]=\E[Z\mid X_1,\dots,X_n]$ \ts{24}{6}{13:00}. We use the properties of
+conditional expectation of \cref{ch03:prop-condexp}, recalled in the margin in the form needed here.
+\begin{recall}[conditional expectation]
+From \cref{ch03:prop-condexp}, for integrable $Z$:
 \begin{itemize}
   \item \emph{taking out what is known}: $\E[YZ\mid\mathcal F_n]=Y\,\E[Z\mid\mathcal F_n]$ if $Y\in\mathcal F_n$;
   \item \emph{tower property}: $\E\bigl[\E[Z\mid\mathcal F_n]\mid\mathcal F_m\bigr]=\E[Z\mid\mathcal F_m]$ for
         $m\le n$; in particular $\E\bigl[\E[Z\mid\mathcal F_n]\bigr]=\E[Z]$;
   \item \emph{independence}: $\E[Z\mid\mathcal F_n]=\E[Z]$ if $Z$ is independent of $X_1,\dots,X_n$.
 \end{itemize}
+\end{recall}
 
 \subsection{Definition and first properties}
 \begin{definition}[Martingale]\label{ch04:def-mart}
@@ -752,10 +748,10 @@ which is a martingale by \cref{ch04:thm-transform} \ts{24}{6}{20:29}. Then apply
 \end{itemize}
 \end{coursenote}
 
-\begin{exercise}[Stopping times (not from the course)]
-Let $\sigma,\tau$ be stopping times. Show that $\sigma\wedge\tau$, $\sigma\vee\tau$ and $\tau+1$ are stopping times, but that
-$\tau-1$ in general is not. Deduce that ``one step after the first peak'' is a stopping time and ``the first peak'' is
-not (\cref{ch04:ex-stop}).
+\begin{exercise}[Stopping times (not from the course)]\label{ch04:ex-stoptimes-short}
+Let $\tau$ be a stopping time. Show that $\tau+1$ is a stopping time, but that $\tau-1$ in general is not, and read
+\cref{ch04:ex-stop}(b),(c) in this light. (With $\sigma\wedge\tau$ and $\sigma\vee\tau$: \cref{ch04:ex-stoptimes} in
+\cref{app:exam}.)
 \end{exercise}
 
 \subsection{The optional stopping theorem}
@@ -997,11 +993,11 @@ $S_\tau$. (This is \cref{ch04:prop-ruin}; redo it without looking. The notes wri
 outcome; $-b$ is meant.)
 \end{exercise}
 
-\begin{exercise}[Biased ruin by first-step analysis (not from the course)]
+\begin{exercise}[Biased ruin by first-step analysis (not from the course)]\label{ch04:ex-biasedfsa-short}
 For the biased walk let $f(k)=\Prob(\text{hit }A\text{ before }-B\mid S_0=k)$. Show that
-$f(k)=pf(k+1)+qf(k-1)$, solve this linear recursion (characteristic roots $1$ and $q/p$) with $f(A)=1$, $f(-B)=0$, and
-recover \cref{ch04:prop-biased}. Then use Wald's identity to show that the expected duration tends to $AB$ as
-$p\to\frac12$.
+$f(k)=pf(k+1)+qf(k-1)$, and check that $f(k)=(r^{k+B}-1)/(r^{A+B}-1)$, $r=q/p$, satisfies it with $f(A)=1$, $f(-B)=0$;
+at $k=0$ this is \cref{ch04:prop-biased}. (Solving the recursion and the limit of the expected duration:
+\cref{ch04:ex-biasedfsa} in \cref{app:exam}.)
 \end{exercise}
 
 % ------------------------------------------------------------------

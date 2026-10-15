@@ -67,6 +67,7 @@
 \colorlet{exerdark}{exercol!60!black} % lime is too light for text: headings and tags use this
 \definecolor{srccol}{HTML}{546E7A}  % grey-blue: sources, course notes, remarks
 \definecolor{histcol}{HTML}{B8860B} % bronze: history boxes (classical columns)
+\definecolor{recallcol}{HTML}{00ACC1} % cyan: recall boxes (material already seen earlier)
 \definecolor{doubtcol}{HTML}{C62828}
 \definecolor{ideacol}{HTML}{1565C0}
 \definecolor{okcol}{HTML}{388E3C}
@@ -199,7 +200,7 @@
 %  \feedback{...} a comment on one of the reader's own solutions (indigo)
 %  \feedback*{...} the same when the solution contains an error (red); write it just before
 %                 \begin{mysolution}, so that it starts level with the solution
-%  \begin{history}[topic], \begin{aside}[topic], \begin{coursenote}[topic]
+%  \begin{history}[topic], \begin{aside}[topic], \begin{coursenote}[topic], \begin{recall}[topic]
 %  example and proof environments are also printed here (sideexample = example)
 %  Inside a coloured box of the main text, margin items appear right after the box.
 \makeatletter
@@ -236,6 +237,11 @@
     fontupper=\scriptsize\mdseries\upshape\raggedright,fonttitle=\scriptsize\sffamily\bfseries,coltitle=white,colbacktitle=#1}}
 \NewDocumentEnvironment{aside}{O{} +b}{\side@put{\begin{tcolorbox}[sidecontent=histcol,
   title={\boxtitle{Aside}{#1}}]#2\end{tcolorbox}}}{}
+% Recall: a repetition of something explained earlier (another chapter, earlier in this one, a
+% prerequisite), restated briefly with a \cref to the original, so that it is visibly a repetition.
+% Longer repeated passages go verbatim to a "Set aside" section at the end of the chapter.
+\NewDocumentEnvironment{recall}{O{} +b}{\side@put{\begin{tcolorbox}[sidecontent=recallcol,
+  title={\boxtitle{Recall}{#1}}]#2\end{tcolorbox}}}{}
 % A course note is numbered like a note: written inside a paragraph, right after the words it is
 % about, it prints the number there; written between paragraphs, only its box has the number.
 \NewDocumentEnvironment{coursenote}{O{} +b}{\side@numput[srccol]{\begin{tcolorbox}[sidecontent=srccol,

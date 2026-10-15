@@ -54,3 +54,82 @@ $f(k)=pf(k+1)+qf(k-1)$, solve this linear recursion (characteristic roots $1$ an
 recover \cref{ch04:prop-biased}. Then use Wald's identity to show that the expected duration tends to $AB$ as
 $p\to\frac12$. A checking version is \cref{ch04:ex-biasedfsa-short} in the text.
 \end{exercise}
+
+% ------------------------------------------------------------------
+\section{Regression (\cref{ch:regression})}\label{exam:regression}
+
+\begin{exercise}[not from the course: optimal design of a line fit]\label{ch05:exam-1}
+For $y=\beta_0+\beta_1x+\varepsilon$ under Gauss--Markov with $n$ even and $x_i\in[-1,1]$ at your choice:
+\begin{enumerate}[(a)]
+  \item derive
+      $\hat\beta_1=S_{xy}/S_{xx}$ and $\Var(\hat\beta_1)=\sigma^2/S_{xx}$ with $S_{xx}=\sum_i(x_i-\bar x)^2$;
+  \item find the design minimising
+      $\Var(\hat\beta_1)$ and compute the leverages $H_{ii}$ for it;
+  \item explain why this design cannot detect curvature, and how the
+      curvature test of \texttt{residualPlots()} would behave.
+\end{enumerate}
+Its core is \cref{ch05:exam-1-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: the Chow test]\label{ch05:exam-2}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Show that the residual sum of squares of the block-diagonal design $\bigl(\begin{smallmatrix}X_A&0\\0&X_B\end{smallmatrix}\bigr)$ is
+      $\text{RSS}_A+\text{RSS}_B$.
+  \item Show that $\bigl(\begin{smallmatrix}X_A&0\\X_B&X_B\end{smallmatrix}\bigr)$ has the same column space, and relate the two
+      parameter vectors.
+  \item For GE, compute $\hat\alpha_B$, $\hat\beta_B$ and the $F$ statistic from the numbers in the case study of
+      \cref{ch05:sec-chow}. Why can you not obtain the standard error of $\hat\beta_B$ from that table alone?
+\end{enumerate}
+Its core is \cref{ch05:exam-2-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS3 (2013), Problem 1(d)--(e): invariance and leverage]\label{ch05:ex-ps3-1de}
+(d) Prove that $H$ is unchanged if $X$ is replaced by $X'=XG$ for any invertible $p\times p$ matrix $G$.
+(e) Let $X$ be $n\times(p+1)$ with a first column of ones and $p$ covariates, and let $G$ be the identity except for the first
+row, which is $(1,-\bar x_1,\dots,-\bar x_p)$, with $\bar x_j=\frac1n\sum_ix_{i,j}$. By (d) the models with $X$ and $X'=XG$ have the
+same fitted values and residuals.
+\begin{itemize}
+  \item If $\bm\beta=(\beta_0,\dots,\beta_p)\T$ is the parameter for $X$, show that $\bm\beta'=G^{-1}\bm\beta$ is the parameter for $X'$; find
+        $G^{-1}$ and the elements of $\bm\beta'$ explicitly.
+  \item Show that $X'^{\mathsf T}X'=\bigl(\begin{smallmatrix}n&\bm 0_p\T\\ \bm 0_p&\mathcal X\T\mathcal X\end{smallmatrix}\bigr)$, where $\mathcal X$ has entries $x_{i,j}-\bar x_j$.
+  \item Prove $H_{ij}=\frac1n+(\bm x_i-\bar{\bm x})\T[\mathcal X\T\mathcal X]^{-1}(\bm x_j-\bar{\bm x})$, where $\bm x_i=(x_{i,1},\dots,x_{i,p})\T$. Hence the
+        leverage $H_{ii}$ increases with the (squared) Mahalanobis distance between $\bm x_i$ and $\bar{\bm x}$.
+\end{itemize}
+Its core is \cref{ch05:ex-ps3-1de-short} in the text.
+\end{exercise}
+
+\begin{exercise}[not from the course: ridge as augmented least squares]\label{ch05:exam-3}
+\leavevmode
+\begin{enumerate}[(a)]
+  \item Show that $\hat{\bm\beta}^{\text{ridge}}$ is the OLS estimate for the augmented data $\tilde{\bm y}=(\bm y,\bm 0_p)$,
+      $\tilde X=\bigl(\begin{smallmatrix}X\\ \sqrt\lambda I_p\end{smallmatrix}\bigr)$.
+  \item Using the SVD, show that $\|\hat{\bm\beta}^{\text{ridge}}\|$ decreases in $\lambda$ and compute
+      $\Cov(\hat{\bm\beta}^{\text{ridge}})$ under Gauss--Markov.
+  \item Show that ridge has smaller variance than OLS in every direction:
+      $\Cov(\hat{\bm\beta})-\Cov(\hat{\bm\beta}^{\text{ridge}})\succeq0$.
+\end{enumerate}
+Its core is \cref{ch05:exam-3-short} in the text.
+\end{exercise}
+
+\begin{exercise}[PS3 (2013), Problem 2(b)--(d): case-deletion influence]\label{ch05:ex-ps3-2bd}
+(b) Using Sherman--Morrison--Woodbury, show that the least-squares estimate with case $i$ deleted is
+$\hat{\bm\beta}_{(i)}=\hat{\bm\beta}-(X\T X)^{-1}\bm x_i\hat\varepsilon_i/(1-H_{ii})$, where $\bm x_i\T$ is the $i$-th row of $X$ and $\hat\varepsilon_i=y_i-\bm x_i\T\hat{\bm\beta}$.
+(c) Cook's distance is $CD_i=\|\hat{\bm y}-\hat{\bm y}_{(i)}\|^2/(p\hat\sigma^2)$ with $\hat{\bm y}_{(i)}=X\hat{\bm\beta}_{(i)}$. Show that
+$CD_i=\dfrac{\hat\varepsilon_i^2}{p\hat\sigma^2}\cdot\dfrac{H_{ii}}{(1-H_{ii})^2}$.
+(d) Let $\hat\sigma^2_{(i)}$ be the unbiased estimate of $\sigma^2$ with case $i$ deleted. Show that
+$\hat\sigma^2_{(i)}=\hat\sigma^2+\frac{1}{n-p-1}\bigl(\hat\sigma^2-\frac{\hat\varepsilon_i^2}{1-H_{ii}}\bigr)$.
+\end{exercise}
+
+\begin{exercise}[PS3 (2013), Problem 3(c)--(d): sequential ANOVA]\label{ch05:ex-ps3-3cd}
+Let $A=\bigl(\begin{smallmatrix}Q\T\\ W\T\end{smallmatrix}\bigr)$ be orthogonal as in the proof of \cref{ch05:thm-normal} and $\bm z=A\bm y=(z_1,\dots,z_n)\T$.
+(c) Prove that $\bm y\T\bm y=\sum_{i=1}^nz_i^2$, $\hat{\bm y}\T\hat{\bm y}=\sum_{i=1}^pz_i^2$, $\hat{\bm\varepsilon}\T\hat{\bm\varepsilon}=\sum_{i=p+1}^nz_i^2$, and for the constrained model
+$\hat{\bm y}_I\T\hat{\bm y}_I=\sum_{i=1}^kz_i^2$, $\hat{\bm\varepsilon}_I\T\hat{\bm\varepsilon}_I=\sum_{i=k+1}^nz_i^2$.
+(d) Using $\bm z_Q\sim N_p(R\bm\beta,\sigma^2I_p)$ independent of $\bm z_W\sim N_{n-p}(\bm 0,\sigma^2I_{n-p})$, deduce that
+$SS_{\text{ERROR}}=\hat{\bm\varepsilon}\T\hat{\bm\varepsilon}\sim\sigma^2\chi^2_{n-p}$; that under $H_0$
+$SS_{\text{REG}(k+1,\dots,p\mid1,\dots,k)}=\hat{\bm y}\T\hat{\bm y}-\hat{\bm y}_I\T\hat{\bm y}_I=\sum_{i=k+1}^pz_i^2\sim\sigma^2\chi^2_{p-k}$, independent of
+$SS_{\text{ERROR}}$; and that $\hat F=\dfrac{SS_{\text{REG}}/(p-k)}{SS_{\text{ERROR}}/(n-p)}\sim F_{p-k,\,n-p}$. Arrange the results in the ANOVA
+table with rows ``regression on $1,\dots,k$'' ($\hat{\bm y}_I\T\hat{\bm y}_I$, $k$ d.f.), ``regression on $k+1,\dots,p$ adjusting for
+$1,\dots,k$'' ($p-k$ d.f., mean square $MS_0$, $\hat F=MS_0/MS_{\text{Error}}$), ``error'' ($n-p$ d.f.) and ``total'' ($\bm y\T\bm y$,
+$n$ d.f.).
+\end{exercise}

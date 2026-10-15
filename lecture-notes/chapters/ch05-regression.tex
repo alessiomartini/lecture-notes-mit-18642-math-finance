@@ -351,7 +351,7 @@ the most stable of all and is the one used for ridge and PC regression in \cref{
 
 \subsection{Reparametrisation and standardised covariates}\label{ch05:sec-standard}
 If $X'=XG$ with $G\in\R^{p\times p}$ invertible, then $\operatorname{col}(X')=\operatorname{col}(X)$, so $H$, $\hat{\bm y}$ and
-$\hat{\bm\varepsilon}$ are unchanged and the new parameter is $\bm\beta'=G^{-1}\bm\beta$ (2013 PS3, \cref{ch05:ex-ps3-1de}).
+$\hat{\bm\varepsilon}$ are unchanged and the new parameter is $\bm\beta'=G^{-1}\bm\beta$ (2013 PS3, \cref{ch05:ex-ps3-1de-short}).
 The important special case is \emph{standardisation} \ts{24}{8}{54:05}: replace each covariate by its
 $z$-score $(X_{[j]}-\bar x_j\bm 1)/s_j$. Then
 \begin{itemize}
@@ -447,16 +447,8 @@ reappear as the \emph{leverage} $H_{ii}$ of a case (\cref{ch05:sec-diag}): the p
 also the ones that can pull it away.
 \end{intuition}
 
-\begin{exercise}[not from the course: optimal design of a line fit]
-For $y=\beta_0+\beta_1x+\varepsilon$ under Gauss--Markov with $n$ even and $x_i\in[-1,1]$ at your choice:
-\begin{enumerate}[(a)]
-  \item derive
-      $\hat\beta_1=S_{xy}/S_{xx}$ and $\Var(\hat\beta_1)=\sigma^2/S_{xx}$ with $S_{xx}=\sum_i(x_i-\bar x)^2$;
-  \item find the design minimising
-      $\Var(\hat\beta_1)$ and compute the leverages $H_{ii}$ for it;
-  \item explain why this design cannot detect curvature, and how the
-      curvature test of \texttt{residualPlots()} would behave.
-\end{enumerate}
+\begin{exercise}[not from the course: optimal design of a line fit]\label{ch05:exam-1-short}
+For $y=\beta_0+\beta_1x+\varepsilon$ under Gauss--Markov, $\Var(\hat\beta_1)=\sigma^2/\sum_i(x_i-\bar x)^2$. With $n$ even and $x_i\in[-1,1]$ at your choice, which design minimises $\Var(\hat\beta_1)$? (Derivation, leverages and curvature: \cref{ch05:exam-1} in \cref{app:exam}.)
 \end{exercise}
 
 % ------------------------------------------------------------------
@@ -508,29 +500,11 @@ factorises \ts{24}{8}{22:13} \ts{13}{6}{1:02:09}:
   =\exp\Bigl(\bm t\T\bm\mu+\tfrac12\bm t\T\Sigma\bm t\Bigr),\qquad \Sigma=\sigma^2I_n .
 \]
 
-\begin{definition}[Multivariate normal]\label{ch05:def-mvn}
-$\bm Y\sim N_n(\bm\mu,\Sigma)$, with $\bm\mu\in\R^n$ and $\Sigma$ symmetric positive semi-definite, if
-$M_{\bm Y}(\bm t)=\exp(\bm t\T\bm\mu+\frac12\bm t\T\Sigma\bm t)$ for all $\bm t$. Then $\E[\bm Y]=\bm\mu$ and $\Cov\bm Y=\Sigma$; if
-$\Sigma\succ0$ the density is $(2\pi)^{-n/2}(\det\Sigma)^{-1/2}\exp\bigl(-\frac12(\bm y-\bm\mu)\T\Sigma^{-1}(\bm y-\bm\mu)\bigr)$. Since an MGF
-finite around $\bm 0$ determines the distribution, recognising this form is enough to identify a normal vector.
-\end{definition}
-
-\begin{coursenote}[Vocabulary]
-In the 2024 L8 video Kempthorne often says ``multinomial'' \ts{24}{8}{20:07}: he means \emph{multinormal},
-i.e.\ multivariate normal. Nothing in this chapter involves the multinomial distribution.
-\end{coursenote}
-
-\begin{proposition}[Linear maps of normal vectors]\label{ch05:prop-linmap}
-If $\bm Y\sim N_n(\bm\mu,\Sigma)$ and $A\in\R^{m\times n}$ then $\bm Z=A\bm Y\sim N_m(A\bm\mu,A\Sigma A\T)$ \ts{24}{8}{31:59}
-\ts{13}{6}{1:14:49}. In particular every sub-vector, and every component, is normal; and two jointly normal
-sub-vectors with zero cross-covariance are independent.
-\end{proposition}
-\begin{proof}
-$M_{\bm Z}(\bm\tau)=\E[e^{\bm\tau\T A\bm Y}]=M_{\bm Y}(A\T\bm\tau)=\exp\bigl(\bm\tau\T A\bm\mu+\frac12\bm\tau\T A\Sigma A\T\bm\tau\bigr)$. For a component take
-$A=\bm e_j\T$ \ts{13}{6}{1:07:25}. If $\bm Z=(\bm Z_1,\bm Z_2)$ is normal with $\Cov(\bm Z_1,\bm Z_2)=0$, the quadratic form in the
-exponent splits and the joint MGF is the product $M_{\bm Z_1}(\bm\tau_1)M_{\bm Z_2}(\bm\tau_2)$, which characterises
-independence \ts{24}{8}{37:20}.
-\end{proof}
+This is the multivariate normal law of \cref{ch03:sec-mvn}, recalled in the margin (the 2024 lecture's MGF definition and the proof for linear maps, as written for this chapter, are in \cref{ch05:sec-setaside}).
+\begin{recall}[multivariate normal]
+$\bm Y\sim N_n(\bm\mu,\Sigma)$ iff $M_{\bm Y}(\bm t)=\exp(\bm t\T\bm\mu+\frac12\bm t\T\Sigma\bm t)$; $\E[\bm Y]=\bm\mu$, $\Cov\bm Y=\Sigma$.
+Linear maps: $A\bm Y\sim N_m(A\bm\mu,A\Sigma A\T)$ for every $A$ (singular $\Sigma$ allowed), so sub-vectors are normal, and jointly normal sub-vectors with zero cross-covariance are independent (\cref{ch03:prop-mvn,ch03:thm-mvn}; here \cref{ch05:def-mvn,ch05:prop-linmap}).
+\end{recall}
 Applying this with $A=(X\T X)^{-1}X\T$ \ts{24}{8}{24:21}: $\bm t=A\T\bm\tau=X(X\T X)^{-1}\bm\tau$ gives $\bm t\T\bm\mu=\bm\tau\T\bm\beta$ and
 $\bm t\T(\sigma^2I)\bm t=\bm\tau\T\sigma^2(X\T X)^{-1}\bm\tau$, so $\hat{\bm\beta}\sim N_p(\bm\beta,\sigma^2(X\T X)^{-1})$ and
 $\hat\beta_j\sim N(\beta_j,\sigma^2C_{jj})$ \ts{24}{8}{26:31} \ts{13}{6}{1:04:19}.
@@ -547,11 +521,9 @@ $\hat\beta_j\sim N(\beta_j,\sigma^2C_{jj})$ \ts{24}{8}{26:31} \ts{13}{6}{1:04:19
 \end{coursenote}
 
 \subsection{The fundamental theorem}
-\begin{definition}[$\chi^2$, $t$ and $F$ distributions]
-If $Z_1,\dots,Z_\nu$ are i.i.d.\ $N(0,1)$, $\sum_kZ_k^2\sim\chi^2_\nu$ \ts{13}{6}{1:16:57}. If $Z\sim N(0,1)$ and
-$V\sim\chi^2_\nu$ are independent, $Z/\sqrt{V/\nu}\sim t_\nu$ (Student) \ts{24}{8}{38:21}. If $V_1\sim\chi^2_{\nu_1}$ and
-$V_2\sim\chi^2_{\nu_2}$ are independent, $(V_1/\nu_1)/(V_2/\nu_2)\sim F_{\nu_1,\nu_2}$ \ts{24}{8}{45:38}. Note $t_\nu^2\sim F_{1,\nu}$.
-\end{definition}
+\begin{recall}[$\chi^2$, $t$ and $F$]
+With $Z,Z_k$ i.i.d.\ $N(0,1)$ and independent $V_i\sim\chi^2_{\nu_i}$: $\sum_{k\le\nu}Z_k^2\sim\chi^2_\nu$, $Z/\sqrt{V/\nu}\sim t_\nu$, $(V_1/\nu_1)/(V_2/\nu_2)\sim F_{\nu_1,\nu_2}$, $t_\nu^2\sim F_{1,\nu}$ (\cref{ch03:sec-chisq}; the definition as given in the lecture is in \cref{ch05:sec-setaside}).
+\end{recall}
 
 \begin{theorem}[Normal linear regression]\label{ch05:thm-normal}
 Let $\bm y=X\bm\beta+\bm\varepsilon$ with $X\in\R^{n\times p}$ of rank $p$ and $\bm\varepsilon\sim N_n(\bm 0,\sigma^2I_n)$. Then
@@ -958,16 +930,8 @@ regime changes; the structural break of July 2005 is visible at a glance. \file{
 package \texttt{fxregime}, which implements this regression together with formal tests for changes of regime.
 \end{casestudy}
 
-\begin{exercise}[not from the course: the Chow test]
-\leavevmode
-\begin{enumerate}[(a)]
-  \item Show that the residual sum of squares of the block-diagonal design $\bigl(\begin{smallmatrix}X_A&0\\0&X_B\end{smallmatrix}\bigr)$ is
-      $\text{RSS}_A+\text{RSS}_B$.
-  \item Show that $\bigl(\begin{smallmatrix}X_A&0\\X_B&X_B\end{smallmatrix}\bigr)$ has the same column space, and relate the two
-      parameter vectors.
-  \item For GE, compute $\hat\alpha_B$, $\hat\beta_B$ and the $F$ statistic from the numbers in the case study of
-      \cref{ch05:sec-chow}. Why can you not obtain the standard error of $\hat\beta_B$ from that table alone?
-\end{enumerate}
+\begin{exercise}[not from the course: the Chow test]\label{ch05:exam-2-short}
+Show that the residual sum of squares of the block-diagonal design $\bigl(\begin{smallmatrix}X_A&0\\0&X_B\end{smallmatrix}\bigr)$ is $\text{RSS}_A+\text{RSS}_B$. (Reparametrisation and the GE numbers: \cref{ch05:exam-2} in \cref{app:exam}.)
 \end{exercise}
 
 % ------------------------------------------------------------------
@@ -983,7 +947,7 @@ fit \ts{24}{8}{1:04:44}. With an intercept,
 \[
   H_{ii}=\frac1n+(\bm x_i-\bar{\bm x})\T(\mathcal X\T\mathcal X)^{-1}(\bm x_i-\bar{\bm x}),
 \]
-where $\mathcal X$ is the matrix of centred covariates (2013 PS3, \cref{ch05:ex-ps3-1de}): leverage grows with the
+where $\mathcal X$ is the matrix of centred covariates (2013 PS3, \cref{ch05:ex-ps3-1de-short}): leverage grows with the
 Mahalanobis distance of $\bm x_i$ from the centroid of the covariates (dividing by $n-1$ turns $\mathcal X\T\mathcal X$ into the sample
 covariance matrix). High leverage is a property of the $x$'s only. R's \texttt{influence.measures()} flags cases with
 $H_{ii}>3p/n$.
@@ -1061,18 +1025,8 @@ distances of the flagged cases are only $0.07$--$0.13$. Curvature tests: none si
 non-constancy of the variance.
 \end{casestudy}
 
-\begin{exercise}[PS3 (2013), Problem 1(d)--(e): invariance and leverage]\label{ch05:ex-ps3-1de}
-(d) Prove that $H$ is unchanged if $X$ is replaced by $X'=XG$ for any invertible $p\times p$ matrix $G$.
-(e) Let $X$ be $n\times(p+1)$ with a first column of ones and $p$ covariates, and let $G$ be the identity except for the first
-row, which is $(1,-\bar x_1,\dots,-\bar x_p)$, with $\bar x_j=\frac1n\sum_ix_{i,j}$. By (d) the models with $X$ and $X'=XG$ have the
-same fitted values and residuals.
-\begin{itemize}
-  \item If $\bm\beta=(\beta_0,\dots,\beta_p)\T$ is the parameter for $X$, show that $\bm\beta'=G^{-1}\bm\beta$ is the parameter for $X'$; find
-        $G^{-1}$ and the elements of $\bm\beta'$ explicitly.
-  \item Show that $X'^{\mathsf T}X'=\bigl(\begin{smallmatrix}n&\bm 0_p\T\\ \bm 0_p&\mathcal X\T\mathcal X\end{smallmatrix}\bigr)$, where $\mathcal X$ has entries $x_{i,j}-\bar x_j$.
-  \item Prove $H_{ij}=\frac1n+(\bm x_i-\bar{\bm x})\T[\mathcal X\T\mathcal X]^{-1}(\bm x_j-\bar{\bm x})$, where $\bm x_i=(x_{i,1},\dots,x_{i,p})\T$. Hence the
-        leverage $H_{ii}$ increases with the (squared) Mahalanobis distance between $\bm x_i$ and $\bar{\bm x}$.
-\end{itemize}
+\begin{exercise}[PS3 (2013), Problem 1(d): invariance of the hat matrix]\label{ch05:ex-ps3-1de-short}
+Prove that $H$ is unchanged if $X$ is replaced by $X'=XG$ for any invertible $p\times p$ matrix $G$. (Part (e), centring the covariates: \cref{ch05:ex-ps3-1de} in \cref{app:exam}.)
 \end{exercise}
 
 % ------------------------------------------------------------------
@@ -1125,16 +1079,8 @@ maximising it means minimising $\|\bm y-X\bm\beta\|^2+(\sigma^2/\tau^2)\|\bm\bet
 The isotropic prior says that a priori no direction of $\R^p$ is preferred \ts{24}{11}{26:58}; a strong prior (small
 $\tau$, large $\lambda$) pulls all coefficients towards zero.
 
-\begin{exercise}[not from the course: ridge as augmented least squares]
-\leavevmode
-\begin{enumerate}[(a)]
-  \item Show that $\hat{\bm\beta}^{\text{ridge}}$ is the OLS estimate for the augmented data $\tilde{\bm y}=(\bm y,\bm 0_p)$,
-      $\tilde X=\bigl(\begin{smallmatrix}X\\ \sqrt\lambda I_p\end{smallmatrix}\bigr)$.
-  \item Using the SVD, show that $\|\hat{\bm\beta}^{\text{ridge}}\|$ decreases in $\lambda$ and compute
-      $\Cov(\hat{\bm\beta}^{\text{ridge}})$ under Gauss--Markov.
-  \item Show that ridge has smaller variance than OLS in every direction:
-      $\Cov(\hat{\bm\beta})-\Cov(\hat{\bm\beta}^{\text{ridge}})\succeq0$.
-\end{enumerate}
+\begin{exercise}[not from the course: ridge as augmented least squares]\label{ch05:exam-3-short}
+Show that $\hat{\bm\beta}^{\text{ridge}}$ is the OLS estimate for the augmented data $\tilde{\bm y}=(\bm y,\bm 0_p)$, $\tilde X=\bigl(\begin{smallmatrix}X\\ \sqrt\lambda I_p\end{smallmatrix}\bigr)$. (Norm and covariance of the ridge estimate: \cref{ch05:exam-3} in \cref{app:exam}.)
 \end{exercise}
 
 \subsection{Principal-components regression}
@@ -1407,14 +1353,7 @@ inverses exist,
 \]
 \end{exercise}
 
-\begin{exercise}[PS3 (2013), Problem 2(b)--(d): case-deletion influence]\label{ch05:ex-ps3-2bd}
-(b) Using Sherman--Morrison--Woodbury, show that the least-squares estimate with case $i$ deleted is
-$\hat{\bm\beta}_{(i)}=\hat{\bm\beta}-(X\T X)^{-1}\bm x_i\hat\varepsilon_i/(1-H_{ii})$, where $\bm x_i\T$ is the $i$-th row of $X$ and $\hat\varepsilon_i=y_i-\bm x_i\T\hat{\bm\beta}$.
-(c) Cook's distance is $CD_i=\|\hat{\bm y}-\hat{\bm y}_{(i)}\|^2/(p\hat\sigma^2)$ with $\hat{\bm y}_{(i)}=X\hat{\bm\beta}_{(i)}$. Show that
-$CD_i=\dfrac{\hat\varepsilon_i^2}{p\hat\sigma^2}\cdot\dfrac{H_{ii}}{(1-H_{ii})^2}$.
-(d) Let $\hat\sigma^2_{(i)}$ be the unbiased estimate of $\sigma^2$ with case $i$ deleted. Show that
-$\hat\sigma^2_{(i)}=\hat\sigma^2+\frac{1}{n-p-1}\bigl(\hat\sigma^2-\frac{\hat\varepsilon_i^2}{1-H_{ii}}\bigr)$.
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch05:ex-ps3-2bd} in \cref{app:exam}.}
 
 \begin{exercise}[PS3 (2013), Problem 3(a)--(b): constrained least squares via QR]\label{ch05:ex-ps3-3ab}
 Consider $H_0:\beta_{k+1}=\dots=\beta_p=0$. Let $X_I=[X_{[1]}\cdots X_{[k]}]$, $\hat{\bm\beta}_I=(X_I\T X_I)^{-1}X_I\T\bm y$ and
@@ -1426,17 +1365,42 @@ $\hat{\bm\beta}_0=(\hat{\bm\beta}_I,\bm 0_{p-k})$.
 \end{enumerate}
 \end{exercise}
 
-\begin{exercise}[PS3 (2013), Problem 3(c)--(d): sequential ANOVA]\label{ch05:ex-ps3-3cd}
-Let $A=\bigl(\begin{smallmatrix}Q\T\\ W\T\end{smallmatrix}\bigr)$ be orthogonal as in the proof of \cref{ch05:thm-normal} and $\bm z=A\bm y=(z_1,\dots,z_n)\T$.
-(c) Prove that $\bm y\T\bm y=\sum_{i=1}^nz_i^2$, $\hat{\bm y}\T\hat{\bm y}=\sum_{i=1}^pz_i^2$, $\hat{\bm\varepsilon}\T\hat{\bm\varepsilon}=\sum_{i=p+1}^nz_i^2$, and for the constrained model
-$\hat{\bm y}_I\T\hat{\bm y}_I=\sum_{i=1}^kz_i^2$, $\hat{\bm\varepsilon}_I\T\hat{\bm\varepsilon}_I=\sum_{i=k+1}^nz_i^2$.
-(d) Using $\bm z_Q\sim N_p(R\bm\beta,\sigma^2I_p)$ independent of $\bm z_W\sim N_{n-p}(\bm 0,\sigma^2I_{n-p})$, deduce that
-$SS_{\text{ERROR}}=\hat{\bm\varepsilon}\T\hat{\bm\varepsilon}\sim\sigma^2\chi^2_{n-p}$; that under $H_0$
-$SS_{\text{REG}(k+1,\dots,p\mid1,\dots,k)}=\hat{\bm y}\T\hat{\bm y}-\hat{\bm y}_I\T\hat{\bm y}_I=\sum_{i=k+1}^pz_i^2\sim\sigma^2\chi^2_{p-k}$, independent of
-$SS_{\text{ERROR}}$; and that $\hat F=\dfrac{SS_{\text{REG}}/(p-k)}{SS_{\text{ERROR}}/(n-p)}\sim F_{p-k,\,n-p}$. Arrange the results in the ANOVA
-table with rows ``regression on $1,\dots,k$'' ($\hat{\bm y}_I\T\hat{\bm y}_I$, $k$ d.f.), ``regression on $k+1,\dots,p$ adjusting for
-$1,\dots,k$'' ($p-k$ d.f., mean square $MS_0$, $\hat F=MS_0/MS_{\text{Error}}$), ``error'' ($n-p$ d.f.) and ``total'' ($\bm y\T\bm y$,
-$n$ d.f.).
-\end{exercise}
+\noindent\emph{Longer exercise on this: \cref{ch05:ex-ps3-3cd} in \cref{app:exam}.}
+
+% ------------------------------------------------------------------
+\section*{Set aside}\label{ch05:sec-setaside}
+\addcontentsline{toc}{section}{Set aside}
+Passages taken out of the text because they repeat earlier material (a RECALL box in the text points here); kept verbatim.
+
+\begin{definition}[Multivariate normal]\label{ch05:def-mvn}
+$\bm Y\sim N_n(\bm\mu,\Sigma)$, with $\bm\mu\in\R^n$ and $\Sigma$ symmetric positive semi-definite, if
+$M_{\bm Y}(\bm t)=\exp(\bm t\T\bm\mu+\frac12\bm t\T\Sigma\bm t)$ for all $\bm t$. Then $\E[\bm Y]=\bm\mu$ and $\Cov\bm Y=\Sigma$; if
+$\Sigma\succ0$ the density is $(2\pi)^{-n/2}(\det\Sigma)^{-1/2}\exp\bigl(-\frac12(\bm y-\bm\mu)\T\Sigma^{-1}(\bm y-\bm\mu)\bigr)$. Since an MGF
+finite around $\bm 0$ determines the distribution, recognising this form is enough to identify a normal vector.
+\end{definition}
+
+\begin{coursenote}[Vocabulary]
+In the 2024 L8 video Kempthorne often says ``multinomial'' \ts{24}{8}{20:07}: he means \emph{multinormal},
+i.e.\ multivariate normal. Nothing in this chapter involves the multinomial distribution.
+\end{coursenote}
+
+\begin{proposition}[Linear maps of normal vectors]\label{ch05:prop-linmap}
+If $\bm Y\sim N_n(\bm\mu,\Sigma)$ and $A\in\R^{m\times n}$ then $\bm Z=A\bm Y\sim N_m(A\bm\mu,A\Sigma A\T)$ \ts{24}{8}{31:59}
+\ts{13}{6}{1:14:49}. In particular every sub-vector, and every component, is normal; and two jointly normal
+sub-vectors with zero cross-covariance are independent.
+\end{proposition}
+\begin{proof}
+$M_{\bm Z}(\bm\tau)=\E[e^{\bm\tau\T A\bm Y}]=M_{\bm Y}(A\T\bm\tau)=\exp\bigl(\bm\tau\T A\bm\mu+\frac12\bm\tau\T A\Sigma A\T\bm\tau\bigr)$. For a component take
+$A=\bm e_j\T$ \ts{13}{6}{1:07:25}. If $\bm Z=(\bm Z_1,\bm Z_2)$ is normal with $\Cov(\bm Z_1,\bm Z_2)=0$, the quadratic form in the
+exponent splits and the joint MGF is the product $M_{\bm Z_1}(\bm\tau_1)M_{\bm Z_2}(\bm\tau_2)$, which characterises
+independence \ts{24}{8}{37:20}.
+\end{proof}
+
+\begin{definition}[$\chi^2$, $t$ and $F$ distributions]
+If $Z_1,\dots,Z_\nu$ are i.i.d.\ $N(0,1)$, $\sum_kZ_k^2\sim\chi^2_\nu$ \ts{13}{6}{1:16:57}. If $Z\sim N(0,1)$ and
+$V\sim\chi^2_\nu$ are independent, $Z/\sqrt{V/\nu}\sim t_\nu$ (Student) \ts{24}{8}{38:21}. If $V_1\sim\chi^2_{\nu_1}$ and
+$V_2\sim\chi^2_{\nu_2}$ are independent, $(V_1/\nu_1)/(V_2/\nu_2)\sim F_{\nu_1,\nu_2}$ \ts{24}{8}{45:38}. Note $t_\nu^2\sim F_{1,\nu}$.
+\end{definition}
+
 
 \printsolutions

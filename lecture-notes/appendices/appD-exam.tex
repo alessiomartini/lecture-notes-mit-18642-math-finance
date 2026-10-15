@@ -7,7 +7,102 @@ need a new idea), moved here verbatim so that a first reading of the chapters is
 chapters keep short, targeted exercises, often the core of the long ones below. Use this appendix as a second
 reading or, once the course is finished, as a cumulative self-test: retrieval spaced weeks after first study is
 among the best-supported ways to make material stick (Cepeda et al.\ 2006; Adesope et al.\ 2017).
-% once an exercise here gets a \begin{solution}, add \printsolutions at the end of this appendix
+% solutions of the exercises moved here are printed by printsolutions at the end
+
+% ------------------------------------------------------------------
+\section{Probability (\cref{ch:probability})}\label{exam:ch03}
+
+\begin{exercise}[PS2 (2024), Problem 2: lognormal distribution]\label{ch03:ex-ps2}
+Let $X$ be lognormal$(\mu,\sigma^2)$, i.e.\ $Y=\ln X\sim N(\mu,\sigma^2)$.
+\begin{enumerate}[(a)]
+  \item Prove that $\mu_*=\E[X]=e^{\mu+\sigma^2/2}$.
+  \item Prove that $\sigma_*^2=\Var X=e^{2\mu+2\sigma^2}-e^{2\mu+\sigma^2}=\mu_*^2\,(e^{\sigma^2}-1)$.
+      For (a) and (b) use the MGF of the normal law; no integrals are needed.
+  \item A stock has price $S_0$ at $t=0$ and $S_0X$ at time $t$ (years), where $X$ is lognormal with $\mu=t\ln1.15$
+      and $\sigma=\sqrt t\,\ln1.3$. Find the mean and standard deviation of the total return $X$ for $t=1/12,\,3/12,\,1$.
+  \item Show that for a call with strike $K$ on a lognormal$(\mu,\sigma^2)$ price,
+      $\E[(X-K)^+]=e^{\mu+\sigma^2/2}\Phi\bigl(\frac{\mu-\ln K}{\sigma}+\sigma\bigr)-K\Phi\bigl(\frac{\mu-\ln K}{\sigma}\bigr)$.
+  \item For the stock of (c) with $S_0=\$100$, compute the expected payoff of the call for $T=1/12,\,3/12,\,1$ and
+      strikes $K=\$100$ (at the money) and $K=\$120$ (out of the money). Comment on the effect of a longer time to
+      expiration.
+\end{enumerate}
+\end{exercise}
+\begin{solution}[ch03:ex-ps2]
+\begin{enumerate}[(a)]
+  \item $\E[X]=\E[e^Y]=M_Y(1)=e^{\mu+\sigma^2/2}$ by \eqref{ch03:eq-normalmgf}.
+  \item $\E[X^2]=M_Y(2)=e^{2\mu+2\sigma^2}$, so $\Var X=e^{2\mu+2\sigma^2}-e^{2\mu+\sigma^2}=\mu_*^2(e^{\sigma^2}-1)$.
+  \item Mean and standard deviation of $X$: $t=1/12$: $1.0146$, $0.0770$; $t=3/12$: $1.0445$, $0.1376$; $t=1$: $1.1903$, $0.3177$.
+  \item $\E[(X-K)^+]=\E[X\mathbf 1\{X>K\}]-K\Prob(X>K)$, $\Prob(X>K)=\Prob(Y>\ln K)=\Phi(d)$ with $d=(\mu-\ln K)/\sigma$; and
+        $\E[e^Y\mathbf 1\{Y>\ln K\}]=e^{\mu+\sigma^2/2}\Prob(Y'>\ln K)$ with $Y'\sim N(\mu+\sigma^2,\sigma^2)$ (complete the square), which
+        is $e^{\mu+\sigma^2/2}\Phi(d+\sigma)$ (also \cref{ch03:cor-bl}).
+  \item Expected payoffs in dollars, $K=100$: $3.83$, $7.86$, $23.35$; $K=120$: $0.04$, $1.09$, $11.99$ for $T=1/12,3/12,1$. A longer
+        expiry raises both the drift and the dispersion of $X$, so the expected payoff grows; the out-of-the-money call grows
+        much faster in relative terms, since it needs a large move to pay anything.
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[PS2 (2013), A-1: exponential distribution]\label{ch03:ex-expo}
+$X$ has density $f_X(x)=\lambda e^{-\lambda x}$, $x\ge0$.
+\begin{enumerate}[(a)]
+  \item Compute its MGF.
+  \item Deduce mean and variance from the MGF.
+  \item Compute $\Prob(X>t)$ for $t>0$.
+  \item Prove the memoryless property $\Prob(X>s+t\mid X>s)=\Prob(X>t)$ for all $s,t>0$.
+  \item If $X_1,\dots,X_n$ are i.i.d.\ exponential$(\lambda)$, prove that $\min\{X_1,\dots,X_n\}$ is exponential.
+  \item Entering a bank you find all three tellers busy and nobody waiting. Service times of the three customers and
+      yours are i.i.d.\ exponential. What is the probability that you are the last of the four to leave?
+\end{enumerate}
+\end{exercise}
+\begin{solution}[ch03:ex-expo]
+\begin{enumerate}[(a)]
+  \item $M(t)=\int_0^\infty\lambda e^{-(\lambda-t)x}\dd x=\frac{\lambda}{\lambda-t}$ for $t<\lambda$.
+  \item $M'(0)=1/\lambda$, $M''(0)=2/\lambda^2$: mean $1/\lambda$, variance $1/\lambda^2$.
+  \item $\Prob(X>t)=e^{-\lambda t}$.
+  \item $\Prob(X>s+t\mid X>s)=e^{-\lambda(s+t)}/e^{-\lambda s}=e^{-\lambda t}$.
+  \item $\Prob(\min_iX_i>t)=\prod_i\Prob(X_i>t)=e^{-n\lambda t}$: exponential with rate $n\lambda$.
+  \item When the first of the three leaves you start, and by memorylessness you and the two others have fresh i.i.d.\ exponential
+        times. You are last if you are not the first of three to finish (probability $\frac23$) and then not the first of two
+        ($\frac12$): $\frac13$.
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[PS3 (2024), Problem 2: Stein's lemma for stochastic volatility]\label{ch03:ex-sv}
+(From A.~Gron, B.~J{\o}rgensen, N.~Polson, \emph{Optimal portfolio choice and stochastic volatility}, Applied
+Stochastic Models in Business and Industry, 2012; cited as a 2011 working paper in the problem set.)
+$X$ has \emph{stochastic volatility} if $X\mid V\sim N(\mu,\sigma^2V)$ with $V>0$ random with density $p(V)$; the
+law of $X$ is $p(X)=\int_0^\infty p(X\mid V)p(V)\dd V$ and has heavy tails. Assume $0<\E[V]<\infty$ and define the
+\emph{size-biased} density $q(V)=V\,p(V)/\E[V]$ and the induced $q(X)=\int_0^\infty p(X\mid V)q(V)\dd V$. The
+authors' theorem states
+\[
+  \Cov\bigl(g(X),X\bigr)=\E^Q[g'(X)]\,\Var X,\qquad(**)
+\]
+with $\E^Q$ the expectation under the measure induced by $q(V)$. Their proof reads
+\begin{align*}
+  \Cov(g(X),X)&\overset{(1)}{=}\E\bigl[g(X)(X-\E[X])\bigr]\\
+  &\overset{(2)}{=}\E_V\bigl[\E_{X|V}[g(X)(X-\E[X])]\bigr]\\
+  &\overset{(3)}{=}\E_V\bigl[\E_{X|V}[g(X)(X-\E[X\mid V])]\bigr].
+\end{align*}
+\begin{enumerate}[(a)]
+  \item Show that $q$ is a probability density on $(0,\infty)$.
+  \item Prove (1).
+  \item Does (2) follow from the law of
+      iterated expectations?
+  \item Prove (3) (compare $\E[X\mid V]$ and $\E[X]$).
+  \item Applying Stein's lemma conditionally
+      on $V$ they obtain $\Cov(g(X),X)=\E_V\{\E_{X|V}[g'(X)]\,\sigma^2V\}=\E\bigl[g'(X)\tfrac{V}{\E[V]}\bigr]\sigma^2\E[V]$ $(*)$. Does $(*)$
+      imply $(**)$? Explain.
+\end{enumerate}
+\end{exercise}
+\begin{solution}[ch03:ex-sv]
+\begin{enumerate}[(a)]
+  \item $q\ge0$ and $\int_0^\infty Vp(V)\dd V/\E[V]=1$.
+  \item $\Cov(g(X),X)=\E[g(X)X]-\E[g(X)]\E[X]=\E[g(X)(X-\E[X])]$.
+  \item Yes: it is $\E[Z]=\E\bigl[\E[Z\mid V]\bigr]$ for $Z=g(X)(X-\E[X])$.
+  \item $\E[X\mid V]=\mu$ for every $V$, so $\E[X\mid V]=\E[X]$ and (3) is the same expression as (2).
+  \item Yes. Under $Q$ the pair $(V,X)$ has density $q(V)p(X\mid V)=\frac{V}{\E[V]}p(V)p(X\mid V)$, so $\E\bigl[g'(X)\frac{V}{\E[V]}\bigr]=\E^Q[g'(X)]$;
+        and $\Var X=\E[\Var(X\mid V)]=\sigma^2\E[V]$. Then $(*)$ is exactly $(**)$.
+\end{enumerate}
+\end{solution}
 
 % ------------------------------------------------------------------
 \section{Stochastic processes I (\cref{ch:sp1})}\label{exam:sp1}
@@ -846,3 +941,5 @@ absorbing (Dirichlet) boundary conditions $\pi_0=\pi_{n+1}=0$.
 \end{enumerate}
 Its core is \cref{ch25:ex-x-discretize-short} in the text.
 \end{exercise}
+
+\printsolutions

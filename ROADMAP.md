@@ -11,7 +11,8 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 - [ ] Rivedere il pilota ed estenderlo agli altri capitoli (Try first, Key concepts, Labs, note inline)
 
 ## HTML di studio
-- [ ] Coprire i casi mancanti: itemize dentro `answer`, tabelle, `\texorpdfstring`
+- [x] Coprire i casi mancanti: itemize dentro `answer`, tabelle, `\texorpdfstring`
+- [ ] Study HTML: `\o` e le due figure TikZ di ch03 che non compilano in SVG (da verificare con pdflatex disponibile)
 
 ## Idee
 - [ ] Più figure come nelle slide (TikZ/pgfplots)
@@ -39,8 +40,12 @@ Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab
 
 - New envs are rewritten by `newer_envs()` into known ones; solutions are folded `<details>` right after
   the exercise.
-- Known gaps (older than the pilot): itemize inside `answer`, `table` env, `\texorpdfstring`, `\o`;
-  two ch03 TikZ figures fail to compile to SVG.
+- Covered since 2026-10-18: lists, tables (`tabular`/`table`, `\multicolumn` as colspan, rules and `\cmidrule`
+  dropped, header = rows before the first `\midrule`), `lstlisting` (as `<pre>`), `\texorpdfstring` (first argument),
+  `\hyperref`, `\subsubsection`, answers with blank lines inside a paragraph; environments met inside running text
+  (answer, boxes, lists) are passed to `blocks()`. Limits: tables are not numbered from the `.aux` (counted in source order);
+  tables without `\midrule` have no header row; `\o` not checked; two ch03 TikZ figures still fail to compile to SVG
+  (no pdflatex in this environment, not verified).
 
 ### Tried and reverted / decided against
 
@@ -50,6 +55,7 @@ Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab
   uncertain; solutions go to the chapter end instead.
 
 ## Log
+- 2026-10-18: 🤖 study HTML: liste dentro `answer`, tabelle (`table`/`tabular`, `\multicolumn`), `lstlisting`, `\texorpdfstring`, `\hyperref` e `\subsubsection` ora convertiti; 0 residui grezzi su tutti i capitoli
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
 - 2026-10-16: box RECALL in 8 capitoli (ripetizioni di capitoli precedenti), 71 esercizi lunghi spostati nell'Appendice D con il nucleo breve nel testo
 - 2026-10-15: creata la roadmap per Projects Overview

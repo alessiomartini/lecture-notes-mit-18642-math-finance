@@ -95,7 +95,8 @@ ACCENT = {"'": "\u0301", "`": "\u0300", '"': "\u0308", "^": "\u0302", "~": "\u03
 MATHENV = {"equation", "equation*", "align", "align*", "gather", "gather*", "multline*"}
 IGNORE = {"small", "footnotesize", "scriptsize", "tiny", "normalsize", "large", "centering", "smallskip",
           "medskip", "bigskip", "noindent", "leavevmode", "par", "itshape", "bfseries", "raggedright",
-          "newline", "clearpage", "hfill", "vspace", "qedhere"}
+          "newline", "clearpage", "hfill", "vspace", "qedhere", "sloppy", "phantomsection", "setlength",
+          "emergencystretch", "hline", "toprule", "midrule", "bottomrule"}
 
 # ---------------------------------------------------------------- math
 def math_clean(m):
@@ -184,10 +185,20 @@ def inline(s, sides=None):
                     else:
                         q, k0 = grab(s, j2); topic, k0 = grab_opt(s, k0); sides += answer_html(q, topic or "", s[k0:e0])
                     out.append(f'<sup class="sn{" cn" if en == "coursenote" else ""}">{S.sidenote}</sup>'); i = e1; continue
+                if en in BLOCKNAMES:
+                    e0, e1 = env_end(s, j2, en)
+                    for k, h in blocks(s[i:e1], False):
+                        if k == "m": out.append(h)
+                        else: sides.append((k, h))
+                    i = e1; continue
                 S.leftovers.append("\\begin{%s}" % en); out.append(f'<span class="lx">\\begin{{{esc(en)}}}</span>'); i = j2; continue
             i = j
             if name in ("emph", "textit"): g, i = grab(s, i); out.append(f"<em>{sub(g)}</em>")
             elif name == "textbf": g, i = grab(s, i); out.append(f"<strong>{sub(g)}</strong>")
+            elif name == "texorpdfstring": a, i = grab(s, i); b, i = grab(s, i); out.append(sub(a))
+            elif name == "hyperref":
+                lab, i = grab_opt(s, i); g, i = grab(s, i); out.append(f'<a href="#{esc(lab or "")}">{sub(g)}</a>')
+            elif name in ("textsf", "textrm", "textnormal"): g, i = grab(s, i); out.append(sub(g))
             elif name in ("texttt",): g, i = grab(s, i); out.append(f"<code>{sub(g)}</code>")
             elif name == "file": g, i = grab(s, i); out.append(f"<code>{esc(g)}</code>")
             elif name == "url": g, i = grab(s, i); out.append(f'<a href="{esc(g)}">{esc(g)}</a>')
@@ -217,6 +228,8 @@ def inline(s, sides=None):
             elif name in ("quad", "qquad"): out.append("&emsp;")
             elif name in IGNORE:
                 if name == "vspace": grab(s, i); i = grab(s, i)[1]
+                elif name == "setlength": i = grab(s, grab(s, i)[1])[1]
+                elif name == "emergencystretch": i = re.compile(r"\s*=\s*[\d.]+\s*[a-z]*").match(s, i).end()
             else:
                 S.leftovers.append("\\" + name); out.append(f'<span class="lx">\\{name}</span>')
             continue
@@ -247,7 +260,7 @@ PLAIN = {  # name: (css class, title, goes to side column)
     "mysolution": ("exer hdr", "My solution", False), "coursenote": ("rem hdr", "Course note", True),
     "history": ("hist hdr", "History", True), "aside": ("hist hdr", "Aside", True), "recall": ("recall hdr", "Recall", True),
     "proof": ("pf", "Proof", True)}
-BLOCKNAMES = set(NUMBERED) | set(PLAIN) | {"itemize", "enumerate", "figure", "tabularx", "answer", "paracol"}
+BLOCKNAMES = set(NUMBERED) | set(PLAIN) | {"itemize", "enumerate", "figure", "tabularx", "table", "lstlisting", "answer", "paracol"}
 PARA_END = re.compile(r"\n[ \t]*\n|\n[ \t]*\\(?:begin\{(?:%s)\}|section|subsection|subsubsection|chapter)"
                       % "|".join(re.escape(x) for x in BLOCKNAMES))
 
@@ -281,14 +294,38 @@ def list_html(kind, opt, body, units):
 def add_btn(): return '<button class="add" title="Add a note here" aria-label="Add a note here">+</button>'
 
 def table_html(body):
-    body = body[grab(body, grab(body, 0)[1])[1]:]
-    body = re.sub(r"\\(toprule|midrule|bottomrule)", "", body)
-    rows = [r.strip() for r in re.split(r"\\\\", body) if r.strip()]
+    spec, k0 = grab(body, grab(body, 0)[1]); body = body[k0:]
+    spec = re.sub(r"@\{[^}]*\}", "", re.sub(r"p\{[^}]*\}", "l", spec))
+    al = {"l": "left", "c": "center", "r": "right", "X": "left"}
+    aligns = [al[c] for c in spec if c in al]
+    body = re.sub(r"\\cmidrule(\([^)]*\))?\{[^}]*\}", "", body)
+    head_rows = body.count("\\") if "\\midrule" not in body else body[:body.index("\\midrule")].count("\\")
+    body = re.sub(r"\\(toprule|midrule|bottomrule|hline)", "", body)
+    rows = [r.strip() for r in re.split(r"\\\\(?:\[[^\]]*\])?", body) if r.strip()]
     h = '<div class="tw"><table>'
     for k, r in enumerate(rows):
-        c = "th" if k == 0 else "td"
-        h += "<tr>" + "".join(f"<{c}>{inline(x.strip())}</{c}>" for x in re.split(r"(?<!\\)&", r)) + "</tr>"
+        c = "th" if k < max(head_rows, 1) and head_rows < len(rows) else "td"
+        h += "<tr>"; col = 0
+        for x in re.split(r"(?<!\\)&", r):
+            x = x.strip(); span = 1; a = aligns[col] if col < len(aligns) else "left"
+            mc = re.match(r"\\multicolumn\{(\d+)\}\{([^}]*)\}", x)
+            if mc:
+                span = int(mc.group(1)); a = al.get(re.sub(r"[^lcr]", "", mc.group(2))[:1], a)
+                x = grab(x, mc.end())[0]
+            h += f'<{c} style="text-align:{a}"' + (f' colspan="{span}"' if span > 1 else "") + f">{inline(x)}</{c}>"
+            col += span
+        h += "</tr>"
     return h + "</table></div>"
+
+def table_env_html(body):
+    S.cnt["table"] = S.cnt.get("table", 0) + 1; k = S.cnt["table"]
+    cm = body.find("\\caption"); cap = ""
+    if cm >= 0:
+        cap, e = grab(body, cm + len("\\caption")); body = body[:cm] + body[e:]
+    lab = first_label(body) or uid("tab", cap)
+    inner = "".join(h for kind, h in blocks(re.sub(r"\\label\{[^}]*\}|\\centering", "", body), False) if kind == "m")
+    return (f'<figure class="u bx tabfig" id="{lab}">{inner}'
+            f'<figcaption><strong>Table {S.chap}.{k}.</strong> {inline(cap)}</figcaption></figure>')
 
 def figure_html(body):
     S.cnt["figure"] += 1; k = S.cnt["figure"]
@@ -365,12 +402,14 @@ def blocks(src, units=True):
                     h, sd = list_html(name, opt, body, units)
                     items.append(("m", f'<div class="u p" id="{uid("p", body)}">{h}{add_btn()}</div>' if units else h)); items += sd
                 elif name == "figure": items.append(("m", figure_html(body)))
+                elif name == "table": items.append(("m", table_env_html(body)))
+                elif name == "lstlisting": items.append(("m", f'<pre class="lst">{esc(body.strip(chr(10)))}</pre>'))
                 elif name in NUMBERED or name in PLAIN: items += box(name, opt, body, units)
                 else:
                     S.warn.append("unknown env " + name); items.append(("m", f'<p class="lx">[{name}]</p>'))
                 i = e1; continue
         if src.startswith("\\end{paracol}", i): i += len("\\end{paracol}"); continue
-        m = re.compile(r"\\(chapter|section|subsection)(\*?)").match(src, i)
+        m = re.compile(r"\\(chapter|section|subsection|subsubsection)(\*?)").match(src, i)
         if m:
             kind, star = m.group(1), m.group(2); t, j = grab(src, m.end())
             lab = None; lm = re.compile(r"\s*\\label\{([^}]*)\}").match(src, j)
@@ -378,11 +417,17 @@ def blocks(src, units=True):
             num = ""
             if kind == "section" and not star: S.sec += 1; S.sub = 0; num = f"{S.chap}.{S.sec} "
             elif kind == "subsection" and not star: S.sub += 1; num = f"{S.chap}.{S.sec}.{S.sub} "
-            lvl = {"chapter": 1, "section": 2, "subsection": 3}[kind]
+            lvl = {"chapter": 1, "section": 2, "subsection": 3, "subsubsection": 4}[kind]
             if kind == "chapter": num = f"Chapter {S.chap}. "; S.title = html.unescape(re.sub("<[^>]+>", "", inline(t)))
             hid = lab or uid("h", t)
             items.append(("m", f'<h{lvl} id="{hid}">{num}{inline(t)}</h{lvl}>')); i = j; continue
-        mm = PARA_END.search(src, i); j = mm.start() if mm else n
+        mm = PARA_END.search(src, i)
+        while mm:  # an answer/coursenote opened inside the paragraph may contain blank lines: extend to its end
+            seg = src[i:mm.start()]
+            open_env = [e for e in ("answer", "coursenote") if seg.count("\\begin{%s}" % e) > seg.count("\\end{%s}" % e)]
+            if not open_env: break
+            mm = PARA_END.search(src, env_end(src, src.rindex("\\begin{%s}" % open_env[0], i, mm.start()) + 1, open_env[0])[1])
+        j = mm.start() if mm else n
         text = src[i:j]; i = j
         sides = []; h = inline(text.strip(), sides)
         if h.strip():

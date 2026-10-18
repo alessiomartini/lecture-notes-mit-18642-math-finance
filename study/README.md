@@ -47,7 +47,7 @@ lost if the first words of a paragraph change (such notes then appear under "no 
 ## Known limits
 
 Why a custom converter: `make4ht` is installed but cannot follow paracol/tcolorbox/queued margin
-macros; pandoc is not installed. `\note`, `\answer`, `\feedback` are supported but untested on real
+macros; pandoc is not installed. `\note`, `\answer`, `\feedback` are supported (lists, tables and listings inside them too) but untested on real
 data (ch04 has none). Not built yet (roadmap): Claude importing notes (see `IMPORT.md`, manual for now),
 a live assistant via the Gemini free API, a study profile. The API/DB were kept generic
 (`chapter`, `paragraph_id`, `kind`, `imported_at`) so these can be added.

@@ -10,8 +10,7 @@ generated study HTML in `study/` (see `study/README.md`). Course material in `18
   macro reference: comments in `lecture-notes/preamble.tex`.
 - Structural notes are moved verbatim to `ch00-requests.tex` as `\request{...}`; content doubts become
   `answer` boxes in place. Never delete a note, never edit his `mysolution` boxes.
-- Build: saving a chapter runs `.vscode/build.py` (one chapter); `python lecture-notes/.vscode/build.py full`
-  for the whole book (refreshes `build/book.pdf`). Render pages with `pdftoppm` to check layout.
+- Build: `cd lecture-notes && python build.py` (full build, refreshes `build/book.pdf`); VS Code setup archived in `lecture-notes/archive/vscode/`. Page is 16:9 (32x18 cm): keep figures/tables < ~14.5 cm. Render pages with `pdftoppm` to check layout.
 - Bash heredocs here eat backslashes: write Python helper scripts to the scratchpad with the Write tool.
 - Chapter files are CRLF: scripts should read in text mode and write with `newline='\r\n'`.
 - Keep the pace: repetitions → `recall` box; long exercises verbatim → `appendices/appD-exam.tex` (core kept

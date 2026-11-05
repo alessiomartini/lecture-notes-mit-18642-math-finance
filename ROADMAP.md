@@ -56,6 +56,7 @@ Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab
   uncertain; solutions go to the chapter end instead.
 
 ## Log
+- 2026-11-05: layout 16:9 (32x18 cm, PC screen), VS Code setup archived in `lecture-notes/archive/vscode/`, single build `python build.py`. Annotations read with `pdf-annotations.py` before the rebuild: none open in the current PDFs (n/a for this book). Checked the full build: no content running off the page.
 - 2026-10-18: 🤖 study HTML: liste dentro `answer`, tabelle (`table`/`tabular`, `\multicolumn`), `lstlisting`, `\texorpdfstring`, `\hyperref` e `\subsubsection` ora convertiti; 0 residui grezzi su tutti i capitoli
 - 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
 - 2026-10-16: box RECALL in 8 capitoli (ripetizioni di capitoli precedenti), 71 esercizi lunghi spostati nell'Appendice D con il nucleo breve nel testo

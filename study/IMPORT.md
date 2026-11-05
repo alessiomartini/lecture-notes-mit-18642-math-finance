@@ -48,5 +48,5 @@ EOF
 ```
 
 Imported rows stay in the DB (they show as IMPORTED and cannot be deleted from the UI).
-Build the chapter (`lecture-notes/.vscode/build.py`) to check it compiles, then commit + push.
+Build the chapter (`lecture-notes/build.py`) to check it compiles, then commit + push.
 Do not commit `notes.db`.

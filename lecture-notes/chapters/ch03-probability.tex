@@ -48,7 +48,7 @@ A physicist can skim \cref{ch03:sec-rv,ch03:sec-moments} and the definitions of
 moment-generating functions, conditional expectation, Stein's lemma and the CAPM derivation.
 
 % ------------------------------------------------------------------
-\section{Random variables and distribution functions}\label{ch03:sec-rv}
+\clearpage\section{Random variables and distribution functions}\label{ch03:sec-rv}
 
 Financial random variables come in three kinds \ts{24}{4}{28:47}:
 \begin{itemize}
@@ -505,7 +505,7 @@ is about $100\cdot0.2\cdot\sqrt{0.25}=\$10$, so the option is worth about $0.4\c
 \end{answer}
 \end{finance}
 
-\begin{exercise}[not from the course: puts and parity]\label{ch03:ex-parity}
+\begin{exercise}[not from the course: puts and parity]\label{ch03:ex-parity}\note{fatto su notebook, ci ho messo un po a capire come giocare con i termini}
 With the notation of \cref{ch03:thm-call}, show that $\E[(K-X)^+]=\int_{-\infty}^KF(x)\dd x$ and that
 $\E[(X-K)^+]-\E[(K-X)^+]=\E[X]-K$. Interpret the second identity as put--call parity: a long call plus a short put is a
 forward contract (\cref{sec:forward}).
@@ -669,7 +669,7 @@ $t_2=\ln x$. The point, stressed by P.~Kempthorne from the audience \ts{13}{3}{2
 i.i.d.\ sample $\prod_jf(x_j\mid\theta)=\prod_jh(x_j)\,c(\theta)^n\exp\bigl(\sum_iw_i(\theta)\sum_jt_i(x_j)\bigr)$ has the
 same form and depends on the data only through the \emph{sufficient statistics} $\sum_jt_i(x_j)$. Normal,
 lognormal, exponential, Poisson and gamma laws are exponential families (2013 PS2 B-3); Cauchy and Student $t$
-are not.
+are not.\note{questo mi sembra un buon pounto per sottolineare una cosa: qual e' la filosofia, l'idea, dietro alle cose? cosa guadagnamo da definire exponential family? mi sembra di aver capito che l'idea e' che in questa famiglia la somma di random variable non cambia la forma funzionale della probability distribution, mentre stuednt-t no. e' giusto? IN GENERALE, LA SPIEGAZIONE SEMPLICE DEI CONCETTI, LA FILOSOFIA DELLA DEFINIZIONE, ETC. DEVE ESSERE EVIDENZIATA IN QUALCHE MODO, DATO CHE E' LA COSA CHE MI DEVO RICORDARE, DIREI ADDIRITTURA LA PIU IMPORTANTE PER SVILUPPARE INTUIZIONE }
 
 \begin{exercise}[PS2 (2013), B-3: exponential families]\label{ch03:ex-expfam}
 Prove that the lognormal, Poisson and exponential distributions are exponential families, i.e.\ that their
@@ -750,14 +750,14 @@ Cauchy & $1/(\pi(1+x^2))$ & a law without mean, variance or MGF\\
 \end{tikzpicture}
 \caption{The laws of \cref{ch03:tab-laws}. The $t_3$ and Cauchy densities look like the normal near $0$ but
 their tails decay like powers ($x^{-4}$, $x^{-2}$), not like $e^{-x^2/2}$: on the log scale the gap at $x=5$ is a
-factor $10^3$--$10^4$.}\label{ch03:fig-laws}
+factor $10^3$--$10^4$.\note{la distribuzione di cauchy, massimizza l'entropia se non sappiamo media e varianza, e la distribuzione prende lasse dei valori reali, e' giusto? e' la distribuzione con tail piu fat possibile?}}\label{ch03:fig-laws}
 \end{figure}
 
 % ------------------------------------------------------------------
 \section{Several random variables}\label{ch03:sec-multi}
 
 Independence of $X$ and $Y$ means that knowing one gives no information about the other; for densities
-it is the factorisation $f_{X,Y}=f_Xf_Y$ \ts{24}{4}{1:03:47}.
+it is the factorisation $f_{X,Y}=f_Xf_Y$ \ts{24}{4}{1:03:47}.\note{ho un dubbio: noi chiamiamo $f$ la probabilita' $\mathbb{P}$, ma $f$ non esiste sempre giusto? implica che anche $\mathbb{P}$ puo non esistere?}
 
 \begin{definition}[Covariance, correlation]
 $\Cov(X,Y)=\E[(X-\E[X])(Y-\E[Y])]=\E[XY]-\E[X]\,\E[Y]$ (so $\Cov(X,X)=\Var X$) and
@@ -785,7 +785,7 @@ More generally $\E[B\bm X+\bm b]=B\bm\mu+\bm b$ and $\Cov(B\bm X+\bm b)=B\Sigma 
 $\Var Y=\E[(\bm a\T(\bm X-\bm\mu))^2]=\E[\bm a\T(\bm X-\bm\mu)(\bm X-\bm\mu)\T\bm a]=\bm a\T\Sigma\bm a$: constants come out of the
 expectation, which acts entry by entry \ts{24}{4}{1:10:10}. The matrix version is identical.
 \end{proof}
-In particular $\Sigma$ is positive semi-definite, since $\bm a\T\Sigma\bm a=\Var(\bm a\T\bm X)\ge0$ (\cref{sec:symmetric}).
+In particular $\Sigma$ is positive semi-definite, since $\bm a\T\Sigma\bm a=\Var(\bm a\T\bm X)\ge0$ (\cref{sec:symmetric}).\note{Alessio rifai la dimostrazione dell'ugualgianza}
 If $\bm X$ are asset returns and $\bm a$ portfolio weights, $Y$ is the portfolio return: its variance is a
 quadratic form in the weights.
 
@@ -831,7 +831,7 @@ For integrable $Y$ and functions $g$:
 independence $f_{Y|X}=f_Y$.
 
 (iii) $\E[(Y-h)^2]=\E[(Y-m)^2]+\E[(m-h)^2]+2\E[(Y-m)(m-h)(X)]$, and by (i)--(ii) the
-cross term is $2\E\bigl[(m-h)(X)\,\E[Y-m(X)\mid X]\bigr]=0$.
+cross term is $2\E\bigl[(m-h)(X)\,\E[Y-m(X)\mid X]\bigr]=0$.\note{questa devo rileggerla perche' sembra potentissima}
 
 (iv) Apply the same decomposition to
 $Y-\E[Y]=(Y-m)+(m-\E[Y])$: the cross term vanishes, $\E[(Y-m)^2]=\E[\Var(Y\mid X)]$ by (i), and $\E[m(X)]=\E[Y]$.
@@ -843,12 +843,12 @@ projection of $Y$ on the subspace of functions of $X$: (iii) is Pythagoras. Line
 smaller subspace of affine functions $a+bX$ (\cref{ch:regression}); for jointly normal variables the two
 projections coincide (\cref{ch03:sec-mvn}). For a general information set $\mathcal G$ (e.g.\ the price history up
 to time $t$) $\E[Y\mid\mathcal G]$ is defined by the same orthogonality, $\E[(Y-\E[Y\mid\mathcal G])\,W]=0$ for every
-bounded $\mathcal G$-measurable $W$: this is the object in the definition of a martingale.
+bounded $\mathcal G$-measurable $W$: this is the object in the definition of a martingale.\note{difficile da capire ora, devo tornare a guardare qua}
 \end{intuition}
 
 \begin{exercise}[not from the course]\label{ch03:ex-pairwise}
 Let $X_1,X_2$ be independent with $\Prob(X_i=1)=\Prob(X_i=-1)=\frac12$, and $X_3=X_1X_2$. Show that $X_1,X_2,X_3$ are pairwise
-independent but not mutually independent.
+independent but not mutually independent.\note{dove hai definito mutual and pairwise independence?}
 \end{exercise}
 \begin{solution}[ch03:ex-pairwise]
 $X_3=\pm1$ with probability $\frac12$ each, and for $a,c\in\{\pm1\}$: $\Prob(X_1=a,X_3=c)=\Prob(X_1=a,X_2=c/a)=\frac14=\Prob(X_1=a)\Prob(X_3=c)$;
@@ -876,7 +876,7 @@ called \emph{jointly normal}.
 \end{proposition}
 \begin{proof}
 (i) $\bm t\T\bm X\sim N(\bm t\T\bm\mu,\bm t\T\Sigma\bm t)$; evaluate \eqref{ch03:eq-normalmgf} at $1$. Conversely this MGF restricted to
-$\bm t=s\bm a$ is the MGF of $N(\bm a\T\bm\mu,\bm a\T\Sigma\bm a)$.
+$\bm t=s\bm a$ is the MGF of $N(\bm a\T\bm\mu,\bm a\T\Sigma\bm a)$.\note{come dicevi, questa e' la partition function}
 
 (ii) $\E[e^{\bm t\T(\bm\mu+A\bm Z)}]=e^{\bm t\T\bm\mu}\prod_i\E[e^{(A\T\bm t)_iZ_i}]
 =e^{\bm t\T\bm\mu+\frac12|A\T\bm t|^2}$, and $|A\T\bm t|^2=\bm t\T\Sigma\bm t$; conclude by the $n$-dimensional version of
@@ -889,7 +889,7 @@ $|\det A|=(\det\Sigma)^{1/2}$ and $|\bm z|^2=(\bm x-\bm\mu)\T\Sigma^{-1}(\bm x-\
 \begin{theorem}[Properties of the multivariate normal]\label{ch03:thm-mvn}
 Let $\bm X\sim N_n(\bm\mu,\Sigma)$.
 \begin{enumerate}[(i)]
-  \item $B\bm X+\bm b\sim N(B\bm\mu+\bm b,\,B\Sigma B\T)$; in particular all marginals are normal.
+  \item $B\bm X+\bm b\sim N(B\bm\mu+\bm b,\,B\Sigma B\T)$; in particular all marginals are normal.\note{cosa sono i marginals?}
   \item Jointly normal variables are independent iff they are uncorrelated.
   \item Partition $\bm X=(\bm X_1,\bm X_2)$ with $\Sigma_{22}$ invertible. Then
         \[
@@ -916,18 +916,18 @@ $\sigma,\tau$ and correlation $\rho$, then
   Y=a+bX+\varepsilon,\qquad b=\frac{\rho\tau}{\sigma},\quad a=\mu_Y-b\mu_X,\quad \varepsilon\sim N\bigl(0,(1-\rho^2)\tau^2\bigr)\ \text{independent of }X .
 \end{equation}
 So $\E[Y\mid X]=\mu_Y+\rho\frac{\tau}{\sigma}(X-\mu_X)$ is exactly the regression line, and the conditional variance does
-not depend on $X$. This decomposition is the hint of 2024 PS3 Problem~1 (\cref{ch03:ex-stein}).
+not depend on $X$. This decomposition is the hint of 2024 PS3 Problem~1 (\cref{ch03:ex-stein}).\note{non ho capito bene quasta parte, mi sembra di starmi perdendo nei dettagli}
 
 \paragraph{Geometry.} The level sets of the density are the ellipsoids $(\bm x-\bm\mu)\T\Sigma^{-1}(\bm x-\bm\mu)=c$, centred at
 $\bm\mu$, with principal axes along the eigenvectors of $\Sigma$ and semi-axes $\sqrt{c\lambda_i}$; in two dimensions they
 are ellipses tilted upward for $\rho>0$ and downward for $\rho<0$ \ts{24}{5}{3:12}. Since
-$(\bm X-\bm\mu)\T\Sigma^{-1}(\bm X-\bm\mu)=|\bm Z|^2$, this quadratic form has the $\chi^2_n$ law of \cref{ch03:sec-chisq}.
+$(\bm X-\bm\mu)\T\Sigma^{-1}(\bm X-\bm\mu)=|\bm Z|^2$, this quadratic form has the $\chi^2_n$ law of \cref{ch03:sec-chisq}.\note{qui ci voleva assolutamente un plot-grafico. visto che qui ti sei dimenticato di metterlo, ricontrolla se ti sei dimenticato anche da altre parti.}
 
 \begin{remark}[Normal marginals are not enough; not discussed in class]
 Let $Z\sim N(0,1)$ and $S=\pm1$ with probability $\frac12$ each, independent of $Z$, and $W=SZ$. Then $W\sim N(0,1)$ and
 $\Cov(Z,W)=\E[S]\,\E[Z^2]=0$, yet $Z$ and $W$ are dependent ($|W|=|Z|$) and $Z+W=0$ with probability $\frac12$, so
 $(Z,W)$ is not jointly normal. Joint normality is a strong assumption about \emph{dependence}, and in
-particular it makes simultaneous extreme moves of several assets very unlikely.
+particular it makes simultaneous extreme moves of several assets very unlikely.\note{cool, i need to digest better why this is important}
 \end{remark}
 
 % ------------------------------------------------------------------
@@ -972,10 +972,10 @@ means $c_1=\dots=c_{k-1}=0$, and then the bound is $\lambda_k$. A variable with 
 
 \begin{intuition}[Shift and rotate]
 $\bm x\mapsto\bm p$ moves the origin to the mean and rotates the axes onto the principal axes of the
-density ellipsoids; no distance is changed \ts{24}{5}{8:39}. $\Sigma$ is the ``inertia tensor'' of the cloud of
+density ellipsoids; no distance is changed \ts{24}{5}{8:39}.\note{da come lo scrivi sembra che sia una rotazione rigida, e' cosi? in 2d ha senso, forse anche in general d} $\Sigma$ is the ``inertia tensor'' of the cloud of
 outcomes and PCA diagonalises it. A zero eigenvalue is a flat direction: before the euro the Deutsche Mark and
 the French franc moved so closely that the smallest PC of currency returns was almost degenerate
-\ts{24}{5}{19:59}.
+\ts{24}{5}{19:59}. \note{flat direction means zero variance, right? while in your example it is simply a degenerate eigenvalue, which maybe happened to be the smallest}
 \end{intuition}
 
 \paragraph{Factor form} \ts{24}{5}{9:43}. Split $\Gamma=[\Gamma_1\,\Gamma_2]$ and $\bm p=(\bm p_1,\bm p_2)$ with the $K<m$
@@ -1052,7 +1052,7 @@ Properties:
   \item $\E[F]=\E[W/m]\,\E[n/V]=n/(n-2)$ for $n>2$ (using $\E[1/V]=1/(n-2)$), and $T^2\sim F_{1,r}$ if $T\sim t_r$.
   \item $F$ statistics compare two independent variance estimates (analysis of variance, regression $F$ tests)
         \ts{24}{5}{25:16}. When the null hypothesis is false, the numerator is a \emph{non-central} $\chi^2$ and the
-        statistic has a non-central $F$ law, which governs the power of the test \ts{24}{5}{26:16}.
+        statistic has a non-central $F$ law, which governs the power of the test \ts{24}{5}{26:16}.\note{what is the null hypotesis?}
 \end{itemize}
 Where they come from (preview of \cref{ch:regression}): for an i.i.d.\ $N(\mu,\sigma^2)$ sample, $(n-1)s^2/\sigma^2\sim\chi^2_{n-1}$
 independently of $\bar X$, hence $\sqrt n(\bar X-\mu)/s\sim t_{n-1}$ (Student, 1908).
@@ -1127,7 +1127,7 @@ $\frac{1}{2b}e^{-|x|/b}$ has MGF $1/(1-b^2t^2)$: here $b=1/\sqrt2$. $\Var X=2b^2
 \begin{definition}[Modes of convergence]
 $X_n\to X$ \emph{in probability} if $\Prob(|X_n-X|>\varepsilon)\to0$ for every $\varepsilon>0$; \emph{in distribution} if
 $F_{X_n}(x)\to F_X(x)$ at every continuity point of $F_X$; \emph{almost surely} if $\Prob(X_n\to X)=1$. Almost sure
-convergence implies convergence in probability, which implies convergence in distribution.
+convergence implies convergence in probability, which implies convergence in distribution.\note{tell me pros and cons of the three point of views. isn't the distribution picture the most comprehensive-deep?}
 \end{definition}
 
 \begin{lemma}[Markov and Chebyshev inequalities]\label{ch03:lem-cheb}
@@ -1241,7 +1241,7 @@ of $N(0,\sigma^2)$, and \cref{ch03:thm-mgf}(ii) concludes.
         depend on $n$; it is the practical approximation \ts{24}{5}{32:47}.
   \item The MGF is only a convenience: with characteristic functions the same proof works whenever $\sigma^2<\infty$.
   \item Identical distribution is not needed (Lindeberg--Lyapunov CLT) \ts{24}{5}{38:04}, and weak dependence is
-        allowed (mixing sequences, martingale differences).
+        allowed (mixing sequences, martingale differences).\note{cool, should be marked as important}
 \end{itemize}
 \end{remark}
 
@@ -1329,7 +1329,7 @@ Schwinger--Dyson equations: with $g(y)=y^{k-1}$ it gives $\E[Y^k]=(k-1)\sigma^2\
 form says that the covariance of a nonlinear function $g(Y)$ with any jointly Gaussian $Y^*$ is that of its
 linearisation, $g'\cdot\Cov(Y,Y^*)$, with the slope $g'$ averaged over the law of $Y$. In the pricing argument
 $g=U'$: it converts ``covariance of marginal utility with the payoff'' into ``covariance of wealth with the
-payoff''.
+payoff''.\note{nice to know the connection to feynman dyagrams!}
 \end{intuition}
 
 \begin{exercise}[PS3 (2024), Problem 1: Stein's lemma]\label{ch03:ex-stein}
@@ -1373,7 +1373,7 @@ $Y^*=\tilde F$ gives
 \end{equation}
 Since $U''<0<U'$ the second term is negative: the price is the
 discounted expected payoff \emph{minus a risk adjustment}
-\ts{24}{5}{58:29}.
+\ts{24}{5}{58:29}.\note{non ho capito questa parte}
 
 \paragraph{CARA utility} \ts{24}{5}{59:30}. For $U(w)=c-e^{-Aw}$ with
 $A>0$: $U'(w)=Ae^{-Aw}>0$ and $U''(w)=-A^2e^{-Aw}=-A\,U'(w)$\begin{coursenote}[Erratum in the slides]
@@ -1480,11 +1480,11 @@ on the line; an asset above it (open dot) would have a positive ``alpha''.}\labe
   \item $\beta_i$ is the slope of the regression of $\tilde r_i$ on $\tilde r_m$ \ts{24}{5}{1:09:14} (\cref{def:alphabeta},
         \cref{ch:regression}). High-beta stocks must offer higher expected returns; $\beta<1$ is ``defensive''.
   \item Only systematic risk is priced: the idiosyncratic part of $\Var\tilde r_i$ can be diversified away
-        (\cref{ch03:sec-multi}) and earns nothing.
+        (\cref{ch03:sec-multi}) and earns nothing.\note{puoi spiegarmi la differenza tra questi due rischi?}
   \item Practice (not discussed in class): the cost of equity in corporate valuation is often set to
         $r_f+\beta\times$(equity risk premium); fund performance is measured by the \emph{alpha} over the SML.
         Empirically the SML is flatter than predicted (low-beta stocks earn more than the CAPM says), which
-        motivated multi-factor models (\cref{ch:pca,ch:portfolio}).
+        motivated multi-factor models (\cref{ch:pca,ch:portfolio}).\note{puoi mostrarmi la curva empirica SML?}
 \end{itemize}
 \end{finance}
 

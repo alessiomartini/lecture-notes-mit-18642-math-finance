@@ -16,6 +16,7 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 
 ## Idee
 - [ ] Più figure come nelle slide (TikZ/pgfplots)
+- [ ] Formato pagina 16:9: le note le leggo sempre da computer (oggi 25 × 29,7 cm; vale anche per il template `~/.claude/templates/lecture-notes/preamble.tex` e le altre note) (da Google Tasks, 2026-11-04)
 
 - [ ] More figures like the slides (TikZ/pgfplots).
 

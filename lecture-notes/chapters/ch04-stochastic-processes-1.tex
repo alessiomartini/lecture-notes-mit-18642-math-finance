@@ -41,8 +41,26 @@ questions in increasing generality and that return, in continuous time, for the 
         hard probability questions into one-line computations.
 \end{itemize}
 For a physicist: the random walk is diffusion, a Markov chain is a master equation relaxing to
-equilibrium, and a martingale is a quantity that is conserved \emph{on average};\note{non capisco, simmetria?} optional stopping is the
+equilibrium, and a martingale is a quantity that is conserved \emph{on average}; optional stopping is the
 use of such a conservation law to solve a boundary-value problem.
+\begin{answer}{non capisco, simmetria?}[Conserved on average]
+Not a symmetry in general. ``Conserved on average'' means: whatever you know at time $n$, your best
+forecast of the next value is the present value, $\E[M_{n+1}\mid\mathcal F_n]=M_n$ (\cref{ch04:def-mart}).
+Each path moves at random, but the cloud of paths starting from a point does not drift: its centre of
+mass stays where it is. For a physicist, it is a conservation law that holds in mean, branch by branch of
+the future.
+\answerpart{Where symmetry enters}
+Sometimes a symmetry produces it: the random walk $S_n$ is a martingale because the step law is symmetric
+around $0$ ($\E[X]=0$). Often it does not: $S_n^2-n\sigma^2$ is a martingale because one subtracts the
+predictable growth $n\sigma^2$ (a ``compensator''), not because of a symmetry. The definition only asks
+for no predictable drift.
+\answerpart{Conservation law $\to$ boundary-value problem}
+Optional stopping (\cref{ch04:thm-ost}) says $\E[M_\tau]=M_0$ at a stopping time. As with energy
+conservation, this gives the outcome without solving the dynamics: a fair walk from $0$, stopped at $A>0$
+or $-B<0$, has $0=\E[S_\tau]=A\,p-B(1-p)$, so $p=\Prob(\text{hit }A)=B/(A+B)$. Equivalently $p(x)$ solves
+the discrete Laplace equation $p(x)=\tfrac12p(x+1)+\tfrac12p(x-1)$ with boundary values $p(A)=1$,
+$p(-B)=0$: a boundary-value problem, whose harmonic solution is the linear one.
+\end{answer}
 
 % ------------------------------------------------------------------
 \section{Stochastic processes}\label{ch04:sec-processes}
@@ -52,8 +70,21 @@ A \emph{stochastic process} is a family $\{X_t,\ t\in\mathcal T\}$ of random var
 probability space $(\Omega,\mathcal F,\Prob)$, indexed by \emph{time}: $\mathcal T=\{0,1,2,\dots\}$
 (discrete time) or $\mathcal T=[0,\infty)$ (continuous time) \ts{13}{5}{1:03}. Equivalently, each outcome
 $\omega\in\Omega$ selects a whole \emph{path} $t\mapsto X_t(\omega)$, so a process is a probability
-distribution on a space of paths \ts{13}{5}{3:09}.\note{path integral formalism?}
+distribution on a space of paths \ts{13}{5}{3:09}.
 \end{definition}
+\begin{answer}{path integral formalism?}[Path integrals]
+Yes, the same idea. A Euclidean path integral is a weight on the space of paths, and here the weight is a
+probability. For a Markov chain the probability of a path is the product of the transition probabilities
+along it (\cref{ch04:prop-path}). In the continuum limit of the random walk (Brownian motion,
+\cref{ch11:int-physics}) the weight becomes formally $\exp\bigl(-\int\dot x^2\,\dd t/2\sigma^2\bigr)\,\mathcal Dx$, the
+Euclidean path integral of a free particle (Wiener measure).
+\answerpart{Difference with quantum mechanics}
+In QM the weights are complex phases $e^{iS/\hbar}$, not positive probabilities. The Wick rotation
+$t\to-i\tau$ maps one into the other: the Schr\"odinger equation becomes the diffusion equation.
+\answerpart{Why it matters in finance}
+The Feynman--Kac formula (\cref{ch:sde}) is the bridge used for pricing: a price is an expectation over
+paths, so it is a path integral, and it also solves a PDE (Black--Scholes, \cref{ch:bs}).
+\end{answer}
 The first reading is the intuitive one (a random value at each time); the second is the one needed to do
 mathematics: at time $t$ we observe the initial segment of a path drawn once and for all, and we reason
 about the unobserved rest of it.

@@ -19,7 +19,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends latexmk texlive-latex-recommended texlive-latex-extra \
-            texlive-pictures texlive-science texlive-plain-generic texlive-fonts-recommended texlive-fonts-extra
+            texlive-pictures texlive-science texlive-plain-generic cm-super texlive-fonts-recommended texlive-fonts-extra
       - name: Build A4 PDF
         working-directory: lecture-notes
         run: python3 build.py public

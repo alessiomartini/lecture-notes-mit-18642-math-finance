@@ -1,0 +1,33 @@
+# Builds ONLY the public A4 PDF (no personal notes) and publishes it as the release "latest-pdf" (overwritten).
+# The study PDF (16:9, annotations) is never built or uploaded here.
+name: public-pdf
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: public-pdf
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-recommended texlive-latex-extra \
+            texlive-pictures texlive-science texlive-fonts-recommended texlive-fonts-extra
+      - name: Build A4 PDF
+        working-directory: lecture-notes
+        run: python3 build.py public
+      - name: Publish release latest-pdf
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp lecture-notes/build/book-a4.pdf lecture-notes-mit-18642-A4.pdf
+          gh release view latest-pdf >/dev/null 2>&1 || gh release create latest-pdf --title "Latest PDF (A4)" \
+            --notes "Public A4 version of the lecture notes, rebuilt at every push to main. CC BY-NC-SA 4.0, based on MIT OpenCourseWare 18.642 / 18.S096."
+          gh release upload latest-pdf lecture-notes-mit-18642-A4.pdf --clobber

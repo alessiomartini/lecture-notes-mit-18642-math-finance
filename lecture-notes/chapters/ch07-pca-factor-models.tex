@@ -55,7 +55,7 @@ the factor-model sections, and $\gamma_k$, $\Gamma$ for eigenvectors (loadings) 
 % ------------------------------------------------------------------
 \section{Principal components of a random vector}\label{ch07:sec-pop}
 
-Principal components of a random vector were defined in \cref{ch03:sec-pca}; the essentials are recalled in the margin (this chapter's own statement and proof, in the 2013 notation, are in \hyperref[ch07:sec-setaside]{\emph{Set aside}} at the end of the chapter). Here $\bm x\in\R^p$ has mean $\bm\mu$ and covariance $\Sigma=\Gamma\Lambda\Gamma\T$, and the principal component variables are $\bm p=\Gamma\T(\bm x-\bm\mu)$.
+Principal components of a random vector were defined in \cref{ch03:sec-pca}; the essentials are recalled \inmargin{} (this chapter's own statement and proof, in the 2013 notation, are in \hyperref[ch07:sec-setaside]{\emph{Set aside}} at the end of the chapter). Here $\bm x\in\R^p$ has mean $\bm\mu$ and covariance $\Sigma=\Gamma\Lambda\Gamma\T$, and the principal component variables are $\bm p=\Gamma\T(\bm x-\bm\mu)$.
 \begin{recall}[principal components]
 $\Sigma$ is symmetric positive semi-definite, so $\Sigma=\Gamma\Lambda\Gamma\T=\sum_k\lambda_k\bm\gamma_k\bm\gamma_k\T$, $\lambda_1\ge\dots\ge\lambda_p\ge0$ (\cref{thm:spectral}). The $k$-th principal direction maximises $\bm w\T\Sigma\bm w$ over unit $\bm w\perp\bm\gamma_1,\dots,\bm\gamma_{k-1}$ and is $\bm\gamma_k$, with maximum $\lambda_k$. $\bm p=\Gamma\T(\bm x-\bm\mu)$: $\E[\bm p]=\bm0$, $\Cov\bm p=\Lambda$, $\bm x=\bm\mu+\Gamma\bm p$, $\tr\Sigma=\sum_k\lambda_k$; fraction explained $\lambda_k/\sum_j\lambda_j$ (\cref{ch03:prop-pca}; here \cref{ch07:def-pca,ch07:thm-pca}).
 \end{recall}

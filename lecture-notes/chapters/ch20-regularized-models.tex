@@ -43,7 +43,7 @@ the SVD of \cref{sec:svd}.
 \section{Bonds, swaps and the yield curve}\label{ch20:sec-bonds}
 
 \subsection{Bond price, yield, duration and convexity}\label{ch20:sec-yield}
-A fixed-rate bond with cash flows $C_i$ at times $t_i$ is priced, duration and convexity included, exactly as in \cref{sec:duration}; the lecture's version, in continuous compounding, is recalled in the margin (in full in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter). The yield is not a traded quantity but a convention to summarise price and cash flows \ts{13}{10}{10:34}.
+A fixed-rate bond with cash flows $C_i$ at times $t_i$ is priced, duration and convexity included, exactly as in \cref{sec:duration}; the lecture's version, in continuous compounding, is recalled \inmargin{} (in full in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter). The yield is not a traded quantity but a convention to summarise price and cash flows \ts{13}{10}{10:34}.
 \begin{recall}[yield, duration, convexity]
 $P(y)=\sum_ie^{-yt_i}C_i$, strictly decreasing in $y$. $D=-\frac1P\frac{\dd P}{\dd y}=\sum_it_i\pi_i$ and $\mathcal C=\frac1P\frac{\dd^2P}{\dd y^2}=\sum_it_i^2\pi_i$ with weights $\pi_i=e^{-yt_i}C_i/P$; $D=T$ for a zero, $D<t_N$ for a coupon bond; $\Delta P/P\approx-D\Delta y+\frac12\mathcal C(\Delta y)^2$ (\cref{prop:duration}, \cref{eq:durconv}; here \eqref{ch20:eq-yield}).
 \end{recall}
@@ -68,7 +68,7 @@ approximation before the crisis, but with a steep curve, where short rates sit n
 rise, it is not \ts{13}{10}{14:55}. \Cref{ch20:sec-bondspread} replaces $y$ by a full curve.
 
 \subsection{Interest-rate swaps}\label{ch20:sec-swaps}
-Swaps and the par swap rate are those of \cref{ch06:sec-swapval}, recalled in the margin (the lecture's derivation is in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter).
+Swaps and the par swap rate are those of \cref{ch06:sec-swapval}, recalled \inmargin{} (the lecture's derivation is in \hyperref[ch20:sec-setaside]{\emph{Set aside}} at the end of the chapter).
 \begin{recall}[swap rate]
 With $w_i=\delta_i\Lambda_i$, $PV_{\rm fixed}=C\sum_iw_i$ and $PV_{\rm float}=\sum_ir_iw_i$; a swap costs nothing to enter, so $C=\sum_ir_iw_i/\sum_iw_i$, a weighted average of forward rates \ts{13}{10}{20:27}; with single-curve forwards the floating leg telescopes to $1-\Lambda_n$ and $C=(1-\Lambda_n)/\sum_i\delta_i\Lambda_i$ (\cref{ch06:cor-par}; here \eqref{ch20:eq-swaprate}).
 \end{recall} The fixed leg is a bond coupon stream, which is why a swap can be

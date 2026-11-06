@@ -35,6 +35,10 @@ Sezioni: `## <fase>` (checkbox, contano nella percentuale), `## Idee` (checkbox,
 - Se `ROADMAP.md` non esiste, crealo da `templates/ROADMAP.md` di projects-overview.
 - Includi l'aggiornamento di `ROADMAP.md` nello stesso commit del lavoro.
 
+## Public A4 version (2026-11-06)
+
+`python build.py public` -> `lecture-notes/build/book-a4.pdf` (flag `\publicmode`, block at the end of `preamble.tex`, wrapper `main-a4.tex`). Anything personal must disappear there: new personal macros/environments (notes, answers, feedback, own solutions, requests) need an empty definition in that block; new right-column environments need an inline box. Check it builds with no undefined references and that `pdftotext` shows no personal text. The workflow `.github/workflows/public-pdf.yml` publishes ONLY this PDF as release `latest-pdf`; never publish the study PDF (annotations, personal notes). Use `\inmargin{}` instead of writing "in the margin" in the text.
+
 ## Scroll book (2026-11-05)
 
 `build/book.pdf` is a **continuous-scroll** book: one long page per chapter (no page breaks inside a chapter), bookmarks per chapter; chapter PDFs are in `lecture-notes/build/scroll/`. `python build.py` recompiles only the chapters whose .tex changed and reassembles (a few seconds to a minute); `python build.py ch05` forces a chapter; `python build.py all` = full latexmk build + all chapters; `python build.py pages` = old paged book (`build/book-pages.pdf`, use it to check Overfull boxes). Mechanism: `scroll.py` + `\ifdefined\scrollmode` in `preamble.tex` (100 cm tall header-free pages, cut to the inked part and stacked; PDF viewers stop around 508 cm, longer chapters are split). Links between chapters are not kept.

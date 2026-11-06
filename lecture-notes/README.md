@@ -49,6 +49,21 @@ cd lecture-notes && python build.py   # full build (latexmk) -> build/main.pdf, 
 
 No VS Code needed (its old per-chapter setup is in `archive/vscode/`). Open `build/book.pdf` in a PDF viewer.
 
+## Public A4 version
+
+```bash
+cd lecture-notes && python build.py public   # -> build/book-a4.pdf (A4, one column, ~580 pages)
+```
+
+Same sources, built with the flag `\publicmode` (`main-a4.tex` defines it and reads `main.tex`; the code is at the end
+of `preamble.tex`). Left out: `\note`, `answer`, `\feedback`, `mysolution`, the "Requests about these notes" chapter, the
+study-only text on the title page. Right-column boxes (examples, proofs, history, asides, recalls, course notes) become
+ordinary boxes in the text. Output goes to `build/public/` so it never touches the study build.
+It is licensed CC BY-NC-SA 4.0 like the MIT OpenCourseWare originals (attribution on the title page).
+A GitHub Action (`.github/workflows/public-pdf.yml`) builds only this version at every push to `main` and
+publishes it as the release **latest-pdf** (file `lecture-notes-mit-18642-A4.pdf`, overwritten); the study PDF
+(personal annotations) is never uploaded.
+
 ## Layout
 
 Screen layout, not print: 16:9 pages (32x18 cm, the PC screen), two parallel columns (`paracol`; every chapter file is

@@ -1,4 +1,4 @@
-\documentclass[12pt,oneside,openany]{book}
+\ifdefined\publicmode\documentclass[11pt,oneside,openany]{book}\else\documentclass[12pt,oneside,openany]{book}\fi
 \input{preamble}
 
 % Compile only some chapters while working on them, e.g.:
@@ -7,6 +7,45 @@
 \begin{document}
 
 \frontmatter
+\ifdefined\publicmode
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries Topics in Mathematics\\[4pt] with Applications in Finance\par}
+  \vspace{1cm}
+  {\Large Lecture notes\par}
+  \vspace{0.5cm}
+  {\large based on MIT 18.642 (Fall 2024) and MIT 18.S096 (Fall 2013)\par}
+  \vspace{1.5cm}
+  {\large Alessio Martini\par}
+  \vfill
+  \begin{minipage}{0.92\textwidth}\small
+    \textbf{Attribution.} These notes are an adaptation of the MIT OpenCourseWare courses
+    \emph{18.642 Topics in Mathematics with Applications in Finance} (Fall 2024; Peter Kempthorne,
+    Vasily Strela, Jake Xia; \url{https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/})
+    and \emph{18.S096 Topics in Mathematics with Applications in Finance} (Fall 2013; Peter Kempthorne,
+    Choongbum Lee, Vasily Strela, Jake Xia; \url{https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/}),
+    \copyright{} Massachusetts Institute of Technology, and of the guest lectures given in them.
+    \smallskip
+
+    \textbf{Changes made.} The lecture content was reorganised by topic, paraphrased and re-derived (not
+    transcribed), and extended with intuition and finance boxes, figures, exercises and solutions. Any mistake
+    is mine. This adaptation is not endorsed by MIT, by the course instructors or by OpenCourseWare.
+    \smallskip
+
+    \textbf{Licence.} Like the original material, this work is licensed under the Creative Commons
+    Attribution-NonCommercial-ShareAlike 4.0 International licence (CC BY-NC-SA 4.0),
+    \url{https://creativecommons.org/licenses/by-nc-sa/4.0/}; see also \url{https://ocw.mit.edu/terms}.
+    You may share and adapt it for non-commercial purposes, giving credit and distributing your
+    contributions under the same licence. Third-party material cited in the course (guest slides, data
+    sets, papers) remains the property of its authors.
+    \smallskip
+
+    Source: \url{https://github.com/alessiomartini/lecture-notes-mit-18642-math-finance}
+  \end{minipage}
+  \vspace{1cm}
+\end{titlepage}
+\else
 \begin{titlepage}
   \centering
   \vspace*{3cm}
@@ -30,9 +69,44 @@
   \end{minipage}
   \vspace{1cm}
 \end{titlepage}
+\fi
 
 \chapter*{How to use these notes}
 \addcontentsline{toc}{chapter}{How to use these notes}
+\ifdefined\publicmode
+Each chapter covers one \emph{topic} of the course. Chapters are ordered as the topics first
+appear in the 2024 course (18.642); lectures from 2013 (18.S096) on the same topic are merged
+into the same chapter, while 2013 lectures with no 2024 counterpart form
+Part~\ref{part:2013}. Every chapter opens with a \textbf{Sources} box listing the lectures
+(with their videos), slides, notes, case studies and problem sets it is built on.
+
+\paragraph{Boxes.}
+\begin{itemize}
+  \item \textcolor{defcol}{\textbf{Definitions}} (blue), \textcolor{thmcol}{\textbf{theorems}} (red),
+        \textcolor{intcol}{\textbf{examples}} (green), \textcolor{exerdark}{\textbf{exercises}} and
+        \textcolor{srccol}{\textbf{remarks}} are marked with a coloured bar on the left.
+  \item \textcolor{keycol}{\textbf{Key concepts}} boxes close each chapter: questions to answer without looking,
+        then the concepts to remember with their formulas (some chapters still have \textbf{Key formulas}).
+  \item \textcolor{exerdark}{\textbf{Try first}} exercises are computations to attempt before reading the
+        solution, printed in a \emph{Solutions} section at the end of the chapter (with links both ways).
+  \item \textcolor{intucol}{\textbf{Intuition}} boxes give the ``physicist's reading'' of a result.
+  \item \textcolor{fincol}{\textbf{In finance}} boxes explain where the mathematics is used in practice.
+  \item \textcolor{cscol}{\textbf{Lab}} and \textbf{Case study} boxes are the R case studies of the course.
+  \item \textcolor{srccol}{\textbf{Course notes}} record errata in the slides, differences between the 2013 and
+        2024 versions and material that was not recorded; \textcolor{recallcol}{\textbf{Recall}} boxes restate
+        briefly something explained earlier; \textcolor{histcol}{\textbf{History}} boxes and
+        \textcolor{histcol}{\textbf{asides}} are curiosities.
+  \item \textbf{Beyond the core} blocks (grey bar on the left, smaller type) hold material that can be
+        skipped on a first reading.
+\end{itemize}
+
+\paragraph{Video timestamps.} A tag such as \ts{24}{12}{23:10} means: lecture~12 of the 2024
+course, at minute 23:10 of the video, is where the point is explained in class (a link to the video). The 2024
+lecture~1 is split into three videos, written \ts{24}{1-II}{12:36}.
+
+\paragraph{Versions.} This is the A4 version of the notes. The repository also builds a screen version
+(16:9, with a side column for annotations) used for study; it is not published.
+\else
 \begin{paracol}{2}
 
 Each chapter covers one \emph{topic} of the course. Chapters are ordered as the topics first
@@ -77,8 +151,9 @@ lecture~1 is split into three videos, written \ts{24}{1-II}{12:36}.
 
 \flushside
 \end{paracol}
+\fi
 
-\include{chapters/ch00-requests}
+\ifdefined\publicmode\else\include{chapters/ch00-requests}\fi
 
 \tableofcontents
 

@@ -19,7 +19,7 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 - [x] Attribuzione e licenza CC BY-NC-SA 4.0 (MIT OCW) nella pagina iniziale
 - [x] GitHub Action: a ogni push su main compila solo la versione A4 e la pubblica nella release `latest-pdf`
 - [ ] Rivedere a occhio i 3 Overfull (pagine ~61, 409, 513) e le figure larghe
-- [ ] Appendice A (mappa dei file OCW): una riga "planned" da togliere o chiarire
+- [x] Appendice A (mappa dei file OCW): una riga "planned" da togliere o chiarire
 
 ## Idee
 - [ ] Più figure come nelle slide (TikZ/pgfplots)
@@ -67,6 +67,7 @@ Scelta (a) della inbox di projects-overview: release pubblica, ma solo della ver
   uncertain; solutions go to the chapter end instead.
 
 ## Log
+- 2026-11-07: 🤖 Appendice A: la riga "planned" (`21m383-...-lecture-28_transcript.pdf`) chiarita come trascrizione di un altro corso OCW (21M.383, dal nome del file), segnata "--"; non compilato (niente LaTeX nel sandbox).
 - 2026-11-06: versione pubblica A4 di tutte le note (`python build.py public`, release `latest-pdf` aggiornata da GitHub Action ad ogni push su main); fuori note, answer, feedback, mysolution, richieste; box della colonna destra messi nel testo; template `~/.claude/templates/lecture-notes` aggiornato col flag `public`.
 - 2026-11-05: tight margins and 12pt: geometry 31.5x18 cm with 0.9 left, 0.4+header top, 1.5 bottom, columns 18.8 + 10 cm, page number in the one-line header (no footer). Rebuilt; content that ran below the page edge fixed (history boxes moved or `\Needspace`, `\clearpage`, `\allowdisplaybreaks`).
 - 2026-11-05: layout 16:9 (32x18 cm, PC screen), VS Code setup archived in `lecture-notes/archive/vscode/`, single build `python build.py`. Annotations read with `pdf-annotations.py` before the rebuild: none open in the current PDFs (n/a for this book). Checked the full build: no content running off the page.

@@ -1,38 +1,35 @@
 # Roadmap
 
-<!--
-Unico file per todo, idee, decisioni e diario, letto da Projects Overview
-(https://alessiomartini.github.io/projects-overview/). Protocollo: templates/ROADMAP.md di projects-overview.
--->
+<!-- Single file for todo, ideas, decisions and log, read by Projects Overview (https://alessiomartini.github.io/projects-overview/). Protocol: templates/ROADMAP.md in projects-overview. -->
 
-## Pilota (capitolo 4)
-- [x] Pilota sul capitolo 4: box RECALL, esercizi lunghi in appendice
-- [x] Ritmo esteso a tutti i capitoli: RECALL, esercizi lunghi nell'Appendice D, sezione Set aside
-- [ ] Rivedere il pilota ed estenderlo agli altri capitoli (Try first, Key concepts, Labs, note inline)
+## Pilot (chapter 4)
+- [x] Pilot on chapter 4: RECALL box, long exercises in an appendix
+- [x] Pace extended to all chapters: RECALL, long exercises in Appendix D, Set aside section
+- [ ] Review the pilot and extend it to the other chapters (Try first, Key concepts, Labs, inline notes)
 
-## HTML di studio
-- [x] Coprire i casi mancanti: itemize dentro `answer`, tabelle, `\texorpdfstring`
-- [x] Study HTML: `\o` e le due figure TikZ di ch03 che non compilano in SVG (da verificare con pdflatex disponibile)
+## Study HTML
+- [x] Cover the missing cases: itemize inside `answer`, tables, `\texorpdfstring`
+- [x] Study HTML: `\o` and the two ch03 TikZ figures that did not compile to SVG (to check with pdflatex available)
 
-## Versione pubblica A4
-- [x] `python build.py public` -> `build/book-a4.pdf`: A4, una colonna, senza note personali (flag `\publicmode`)
-- [x] Attribuzione e licenza CC BY-NC-SA 4.0 (MIT OCW) nella pagina iniziale
-- [x] GitHub Action: a ogni push su main compila solo la versione A4 e la pubblica nella release `latest-pdf`
-- [x] Rivedere a occhio i 3 Overfull (pagine ~61, 409, 513) e le figure larghe (resta un Overfull di 1,4 pt in ch25, trascurabile)
-- [x] Appendice A (mappa dei file OCW): una riga "planned" da togliere o chiarire
+## Public A4 version
+- [x] `python build.py public` -> `build/book-a4.pdf`: A4, one column, no personal notes (flag `\publicmode`)
+- [x] Attribution and CC BY-NC-SA 4.0 licence (MIT OCW) on the title page
+- [x] GitHub Action: on every push to main it builds only the A4 version and publishes it as the `latest-pdf` release
+- [x] Check by eye the 3 Overfull boxes (pages ~61, 409, 513) and the wide figures (one 1.4 pt Overfull remains in ch25, negligible)
+- [x] Appendix A (OCW file map): one "planned" row to remove or clarify
 
-## Idee
-- [x] Capitolo 3: aggiungere un grafico nel paragrafo sulla normale multivariata (ellissi di livello) e controllare se mancano figure in altri punti (nota di Alessio, vedi ch00)
-- [ ] Capitolo 3: grafico della SML empirica con dati reali (portafogli ordinati per beta, es. libreria dati di French), non inventati
-- [x] Capitolo 3: correggere l'allineamento tra dimostrazione del chi-quadro e coursenote (la dimostrazione ha la precedenza)
-- [x] Capitolo 3: figure ancora mancanti (emerse dal controllo): (a) sezione «Several random variables»: nuvola di punti/densità congiunta per correlazione diversa; ~~(b) PCA: nuvola di punti con la prima componente principale~~ fatto 2026-11-21 (campione simulato); ~~(c) utilità concava e Jensen (premio per il rischio)~~ fatto 2026-11-21; ~~(d) diversificazione: volatilità del portafoglio in funzione di n~~ fatto 2026-11-21; (e) funzione generatrice dei momenti: esempio grafico di $M_X(t)$ e del suo dominio; ~~(a) e (e) fatte 2026-11-21~~ (pmf congiunta indipendente vs $Y=X^2$; MGF di $N(1,1)$ ed Exp(2) con le tangenti in 0)
-- [ ] Tutto il libro: evidenziare in ogni definizione importante «l'idea in una riga» (filosofia della definizione) e un tag per i punti «importanti» (richieste di Alessio, vedi ch00)
-- [ ] Più figure come nelle slide (TikZ/pgfplots)
-- [ ] Formato pagina 16:9: le note le leggo sempre da computer (oggi 25 × 29,7 cm; vale anche per il template `~/.claude/templates/lecture-notes/preamble.tex` e le altre note) (da Google Tasks, 2026-11-04)
+## Page layout
+- [x] 16:9 page format: the notes are always read on a computer (was 25 x 29.7 cm; should also apply to the template `~/.claude/templates/lecture-notes/preamble.tex` and the other notes) (from Google Tasks, 2026-11-04). Done 2026-11-05 for this book: `lecture-notes/preamble.tex` has `paperwidth=31.5cm,paperheight=18cm` (see Log). The template and the other notes are tracked in their own repos.
 
-- [ ] More figures like the slides (TikZ/pgfplots).
+## Ideas
+- [x] Chapter 3: add a plot in the multivariate normal paragraph (level ellipses) and check whether figures are missing elsewhere (Alessio's note, see ch00)
+- [ ] Chapter 3: empirical SML plot with real data (portfolios sorted by beta, e.g. French data library), not invented
+- [x] Chapter 3: fix the alignment between the chi-square proof and the coursenote (the proof takes precedence)
+- [x] Chapter 3: figures still missing (found by the check): (a) section "Several random variables": scatter/joint density for different correlations; ~~(b) PCA: scatter plot with the first principal component~~ done 2026-11-21 (simulated sample); ~~(c) concave utility and Jensen (risk premium)~~ done 2026-11-21; ~~(d) diversification: portfolio volatility as a function of n~~ done 2026-11-21; (e) moment generating function: graphical example of $M_X(t)$ and its domain; ~~(a) and (e) done 2026-11-21~~ (joint pmf independent vs $Y=X^2$; MGF of $N(1,1)$ and Exp(2) with tangents at 0)
+- [ ] Whole book: in every important definition highlight "the idea in one line" (the philosophy of the definition) and add a tag for "important" points (Alessio's requests, see ch00)
+- [ ] More figures like the slides (TikZ/pgfplots); also listed in `lecture-notes/README.md` "Future ideas"
 
-## Decisioni e cose provate
+## Decisions and things tried
 
 ### Piloted on 2026-10-07, to extend after Alessio has looked at the pilot
 
@@ -61,9 +58,9 @@ Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab
   the chapter-local `\pgfplotsset` styles (`lawplot`, `retplot`) and the `data/*.dat` tables were not visible to the figure
   compile: now they are (checked with pdflatex 2026-11-21, all 8 ch03 figures build; ch09-fig1 needed `tabularx`).
 
-### Versione pubblica (2026-11-06)
+### Public version (2026-11-06)
 
-Scelta (a) della inbox di projects-overview: release pubblica, ma solo della versione A4 (il PDF di studio contiene annotazioni personali e non viene mai pubblicato). Gli stessi sorgenti, un flag `\publicmode`; i box che stavano a destra diventano box normali nel testo (i riferimenti "recalled in the margin" usano `\inmargin{}`). Le risposte (`answer`) alle mie domande non sono nella versione pubblica, anche se sono contenuto: se servono, trasformarle in `coursenote`/`remark`.
+Option (a) from the projects-overview inbox: public release, but only of the A4 version (the study PDF contains personal annotations and is never published). Same sources, one `\publicmode` flag; boxes that were on the right become normal boxes in the text ("recalled in the margin" references use `\inmargin{}`). The answers (`answer`) to my questions are not in the public version even though they are content: if needed, turn them into `coursenote`/`remark`.
 
 ### Tried and reverted / decided against
 
@@ -73,12 +70,12 @@ Scelta (a) della inbox di projects-overview: release pubblica, ma solo della ver
   uncertain; solutions go to the chapter end instead.
 
 ## Log
-- 2026-11-21: 🤖 letto le note del capitolo 3: 13 note con risposta (15 box answer), 8 commenti segnati come visti, 4 richieste spostate in ch00-requests (aperte); compilazione latexmk senza errori. Study HTML: `\o`, `\inmargin` e le figure TikZ di ch03/ch09 ora compilano in SVG; versione A4: 2 dei 3 Overfull sistemati (resta 1,4 pt in ch25), figure larghe senza sbordi. Capitolo 3: figura delle ellissi di livello della normale bivariata (ρ = 0, ±0,6) con gli assi principali; coursenote del chi-quadro spostato nella dimostrazione (stessa notazione, nessun contenuto tolto); due richieste di ch00 segnate done; elencate in Idee le altre figure mancanti. Aggiunte 3 figure al capitolo 3: diversificazione (volatilità vs n), PCA con la prima componente su campione simulato, utilità concava con Jensen, certainty equivalent e premio per il rischio; aggiunte anche (a) pmf congiunta (indipendenti vs dipendenti ma incorrelate) ed (e) MGF di $N(1,1)$ ed Exp(2) con tangente in 0 e polo in $t=\lambda$: figure del capitolo 3 complete. Study HTML: gli avvisi «unresolved ref» di ch03:fig-* non erano un bug ma un artefatto, le etichette si leggono dai `.aux` in `build/` e dopo una build completa sono risolte (nessuna modifica a study/build.py). Verifica indipendente (sandbox pulito): study HTML ch03 = 14 figure SVG su 14, ch09 ok; `python build.py public` senza riferimenti indefiniti, un solo Overfull (1,4 pt, ch25). Per compilare serve anche `texlive-fonts-extra`, `texlive-plain-generic` e `tex-gyre` (pacchetti `newpx`, `binhex`, TeX Gyre Heros): senza, `pdflatex failed` per ogni figura.
-- 2026-11-07: 🤖 Appendice A: la riga "planned" (`21m383-...-lecture-28_transcript.pdf`) chiarita come trascrizione di un altro corso OCW (21M.383, dal nome del file), segnata "--"; non compilato (niente LaTeX nel sandbox).
-- 2026-11-06: versione pubblica A4 di tutte le note (`python build.py public`, release `latest-pdf` aggiornata da GitHub Action ad ogni push su main); fuori note, answer, feedback, mysolution, richieste; box della colonna destra messi nel testo; template `~/.claude/templates/lecture-notes` aggiornato col flag `public`.
+- 2026-11-21: 🤖 Docs cleanup: ROADMAP translated to English, 16:9 item ticked, duplicate figures item merged, CLAUDE.md condensed, root README added. 🤖 Read the chapter 3 notes: 13 notes answered (15 answer boxes), 8 comments marked as seen, 4 requests moved to ch00-requests (open); latexmk build without errors. Study HTML: `\o`, `\inmargin` and the ch03/ch09 TikZ figures now compile to SVG; A4 version: 2 of the 3 Overfull boxes fixed (1.4 pt remains in ch25), wide figures no longer overflow. Chapter 3: figure of the level ellipses of the bivariate normal (rho = 0, +-0.6) with the principal axes; chi-square coursenote moved into the proof (same notation, no content removed); two ch00 requests marked done; the other missing figures listed in Ideas. Added 3 figures to chapter 3: diversification (volatility vs n), PCA with the first component on a simulated sample, concave utility with Jensen, certainty equivalent and risk premium; also (a) joint pmf (independent vs dependent but uncorrelated) and (e) MGF of $N(1,1)$ and Exp(2) with tangent at 0 and pole at $t=\lambda$: chapter 3 figures complete. Study HTML: the "unresolved ref" warnings for ch03:fig-* were not a bug but an artefact, labels are read from the `.aux` files in `build/` and are resolved after a full build (no change to study/build.py). Independent check (clean sandbox): study HTML ch03 = 14 SVG figures out of 14, ch09 ok; `python build.py public` without undefined references, a single Overfull (1.4 pt, ch25). Building also needs `texlive-fonts-extra`, `texlive-plain-generic` and `tex-gyre` (packages `newpx`, `binhex`, TeX Gyre Heros): without them `pdflatex failed` for every figure.
+- 2026-11-07: 🤖 Appendix A: the "planned" row (`21m383-...-lecture-28_transcript.pdf`) clarified as a transcript of another OCW course (21M.383, from the file name), marked "--"; not compiled (no LaTeX in the sandbox).
+- 2026-11-06: public A4 version of all the notes (`python build.py public`, release `latest-pdf` updated by a GitHub Action on every push to main); notes, answers, feedback, mysolution and requests left out; right-column boxes put in the text; template `~/.claude/templates/lecture-notes` updated with the `public` flag.
 - 2026-11-05: tight margins and 12pt: geometry 31.5x18 cm with 0.9 left, 0.4+header top, 1.5 bottom, columns 18.8 + 10 cm, page number in the one-line header (no footer). Rebuilt; content that ran below the page edge fixed (history boxes moved or `\Needspace`, `\clearpage`, `\allowdisplaybreaks`).
 - 2026-11-05: layout 16:9 (32x18 cm, PC screen), VS Code setup archived in `lecture-notes/archive/vscode/`, single build `python build.py`. Annotations read with `pdf-annotations.py` before the rebuild: none open in the current PDFs (n/a for this book). Checked the full build: no content running off the page.
-- 2026-10-18: 🤖 study HTML: liste dentro `answer`, tabelle (`table`/`tabular`, `\multicolumn`), `lstlisting`, `\texorpdfstring`, `\hyperref` e `\subsubsection` ora convertiti; 0 residui grezzi su tutti i capitoli
-- 2026-10-18: FUTURE-ARCHITECTURE.md unito in ROADMAP.md (protocollo unico)
-- 2026-10-16: box RECALL in 8 capitoli (ripetizioni di capitoli precedenti), 71 esercizi lunghi spostati nell'Appendice D con il nucleo breve nel testo
-- 2026-10-15: creata la roadmap per Projects Overview
+- 2026-10-18: 🤖 study HTML: lists inside `answer`, tables (`table`/`tabular`, `\multicolumn`), `lstlisting`, `\texorpdfstring`, `\hyperref` and `\subsubsection` now converted; 0 raw leftovers in all chapters
+- 2026-10-18: FUTURE-ARCHITECTURE.md merged into ROADMAP.md (single protocol)
+- 2026-10-16: RECALL box in 8 chapters (repetitions of earlier chapters), 71 long exercises moved to Appendix D with the short core kept in the text
+- 2026-10-15: created the roadmap for Projects Overview

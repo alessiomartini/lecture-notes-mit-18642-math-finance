@@ -66,7 +66,7 @@ publishes it as the release **latest-pdf** (file `lecture-notes-mit-18642-A4.pdf
 
 ## Layout
 
-Screen layout, not print: 16:9 pages (32x18 cm, the PC screen), two parallel columns (`paracol`; every chapter file is
+Screen layout, not print: 16:9 pages (31.5x18 cm, the PC screen), two parallel columns (`paracol`; every chapter file is
 one `paracol` environment, opened and closed by `include` hooks in `preamble.tex`). Left: the text,
 15 cm (the old A4 text width). Right, 6.5 cm: proofs, examples, course notes, history, asides
 (`\scriptsize`) and the reader's notes, answers and feedback (`\tiny`). Right-column items are queued

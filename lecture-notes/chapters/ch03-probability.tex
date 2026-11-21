@@ -832,10 +832,27 @@ $\rho$ instead (not discussed in class),
 \begin{finance}[Systematic and idiosyncratic risk]
 Diversification removes the part of the risk that is specific to each asset, but not the part common to
 all of them: with $\rho=0.3$ and $\sigma=30\%$, even an infinitely diversified equal-weighted portfolio keeps a
-volatility of $\sqrt{0.3}\cdot30\%\approx16\%$. Only this common, \emph{systematic} risk should command a risk
+volatility of $\sqrt{0.3}\cdot30\%\approx16\%$ (\cref{ch03:fig-divers}). Only this common, \emph{systematic} risk should command a risk
 premium in equilibrium: this is the content of the CAPM (\cref{ch03:sec-capm}) and the starting point of
 factor models (\cref{ch:pca}).
 \end{finance}
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm,height=5.6cm,tick label style={font=\scriptsize},label style={font=\small},legend style={font=\scriptsize,at={(0.97,0.97)},anchor=north east},
+  xmin=1,xmax=50,ymin=0,ymax=32,xlabel={number of assets $n$},ylabel={volatility of the portfolio (\%)},xtick={1,10,20,30,40,50},ytick={0,10,20,30}]
+\addplot[thick,defcol,domain=1:50,samples=80] {30*sqrt(0.3+0.7/x)};
+\addplot[thick,thmcol,domain=1:50,samples=80] {30*sqrt(0.6+0.4/x)};
+\addplot[thick,black!60,domain=1:50,samples=80] {30*sqrt(0.1+0.9/x)};
+\addplot[dashed,defcol,domain=1:50] {30*sqrt(0.3)};
+\legend{$\rho=0.3$,$\rho=0.6$,$\rho=0.1$,floor $\sigma\sqrt\rho$ ($\rho=0.3$)}
+\end{axis}
+\end{tikzpicture}
+\caption{Volatility $\sqrt{\Var\bigl(\frac1n\sum_iX_i\bigr)}=\sigma\sqrt{\rho+(1-\rho)/n}$ of an equal-weighted portfolio of $n$ assets with common
+volatility $\sigma=30\%$ and common pairwise correlation $\rho$. It falls from $\sigma$ at $n=1$ towards the systematic floor $\sigma\sqrt\rho$
+(dashed, $\approx16.4\%$ for $\rho=0.3$), which no amount of diversification removes. Computed from the formula, not from market data.}\label{ch03:fig-divers}
+\end{figure}
 
 \subsection{Conditional distributions and conditional expectation}\label{ch03:sec-condexp}
 This material is only used implicitly in the lectures; it is needed for martingales (\cref{ch:sp1}) and in
@@ -1044,7 +1061,7 @@ means $c_1=\dots=c_{k-1}=0$, and then the bound is $\lambda_k$. A variable with 
 
 \begin{intuition}[Shift and rotate]
 $\bm x\mapsto\bm p$ moves the origin to the mean and rotates the axes onto the principal axes of the
-density ellipsoids; no distance is changed \ts{24}{5}{8:39}.\begin{answer}{da come lo scrivi sembra che sia una rotazione rigida, e' cosi? in 2d ha senso, forse anche in general d}[Rigid motion?]
+density ellipsoids; no distance is changed \ts{24}{5}{8:39}. \Cref{ch03:fig-pca} shows $\bm\gamma_1$ on a simulated cloud.\begin{answer}{da come lo scrivi sembra che sia una rotazione rigida, e' cosi? in 2d ha senso, forse anche in general d}[Rigid motion?]
 Yes, in any dimension $d$. If $\Gamma$ is the orthogonal matrix whose columns are the eigenvectors, the map $\bm x\mapsto\Gamma\T(\bm x-\bm\mu)$ is a
 translation followed by an orthogonal map, and $\Gamma\T\Gamma=I$ preserves lengths and angles. It is a proper rotation if
 $\det\Gamma=+1$; if $\det\Gamma=-1$ it is a rotation combined with a reflection, which can be removed by flipping the sign of one
@@ -1059,6 +1076,24 @@ also right that ``degenerate'' was loose wording: in linear algebra a degenerate
 different thing; here the point is that the smallest one is (almost) zero.
 \end{answer}
 \end{intuition}
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm,height=5.6cm,axis equal image,xmin=-4,xmax=4,ymin=-2.6,ymax=2.6,tick label style={font=\scriptsize},label style={font=\small},
+  legend style={font=\scriptsize,at={(0.02,0.98)},anchor=north west},xlabel={$x_1$},ylabel={$x_2$},xtick={-4,-2,0,2,4},ytick={-2,0,2}]
+\addplot[only marks,mark=*,mark size=1.2pt,black!55] coordinates {(3.30,0.47) (0.74,0.11) (-0.39,-0.42) (-2.20,-1.70) (-2.06,0.96) (0.45,0.06) (-0.03,-0.50) (-1.02,-0.99) (0.71,0.33) (1.24,0.73) (-0.43,0.82) (0.87,0.25) (-0.33,0.16) (2.40,1.49) (-0.56,0.34) (-0.86,-0.81) (0.89,1.05) (-0.06,0.45) (-3.56,-1.75) (-0.48,-1.54) (0.15,0.61) (-0.08,-0.83) (0.11,0.05) (1.44,1.55) (-0.09,0.75) (0.14,-0.56) (0.55,0.81) (0.08,-0.50) (1.18,-0.97) (0.70,0.85) (-1.85,-1.25) (-1.31,-0.36) (-1.98,-2.04) (0.50,1.19) (-2.26,-1.94) (0.65,0.02) (2.31,0.76) (0.83,-0.17) (1.70,1.18) (0.22,-1.08) (1.76,1.78) (0.55,1.21) (0.69,0.02) (-0.59,-0.99) (2.15,0.45) (-0.52,-0.59) (0.13,0.51) (-0.79,-1.80) (-0.35,0.64) (0.87,0.77) (-0.40,-0.06) (-0.49,0.25) (-0.90,-0.53) (-0.25,0.22) (-0.54,1.47) (1.29,1.99) (-2.18,-1.77) (-0.82,-0.18) (-2.97,-1.23) (1.74,0.29)};
+\addplot[very thick,thmcol] coordinates {(-2.55,-1.68) (2.55,1.68)};
+\addplot[very thick,thmcol,dashed] coordinates {(0.71,-1.07) (-0.71,1.07)};
+\legend{simulated sample,$\bm\gamma_1$ (first PC),$\bm\gamma_2$}
+\end{axis}
+\end{tikzpicture}
+\caption{First principal component of a correlated two-dimensional cloud. The 60 points are \emph{simulated} (a pseudo-random draw from a
+centred bivariate normal law, then de-meaned), not market data. The sample covariance has eigenvalues $\hat\lambda_1\approx2.33$ and
+$\hat\lambda_2\approx0.41$; the solid axis is $\hat{\bm\gamma}_1\approx(0.83,0.55)\T$, the direction of largest variance, and the dashed one is
+$\hat{\bm\gamma}_2$. Each axis is drawn with half-length $\sqrt{4\hat\lambda_i}$, as in \cref{ch03:fig-mvn}. The PC variables are the coordinates
+of the points along these axes.}\label{ch03:fig-pca}
+\end{figure}
 
 \paragraph{Factor form} \ts{24}{5}{9:43}. Split $\Gamma=[\Gamma_1\,\Gamma_2]$ and $\bm p=(\bm p_1,\bm p_2)$ with the $K<m$
 largest eigenvalues in the first block. Then
@@ -1405,8 +1440,35 @@ expected logarithm of wealth \ts{24}{5}{49:47}. The well-documented debate is be
 against maximising expected log-wealth, and the proponents of the \emph{Kelly criterion} (J.~Kelly,
 C.~Shannon, E.~Thorp); see W.~Poundstone, \emph{Fortune's Formula} (2005). Log utility has $A(w)=1/w$.
 \end{coursenote}: with $U$ concave,
-Jensen's inequality gives $\E[U(\tilde w)]\le U(\E[\tilde w])$, so the agent prefers a sure amount to a gamble with the
+Jensen's inequality gives $\E[U(\tilde w)]\le U(\E[\tilde w])$ (\cref{ch03:fig-jensen}), so the agent prefers a sure amount to a gamble with the
 same mean. The ratio $A(w)=-U''(w)/U'(w)$ is the (Arrow--Pratt) coefficient of absolute risk aversion.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm,height=6cm,tick label style={font=\scriptsize},label style={font=\small},xmin=0.4,xmax=4.8,ymin=-0.3,ymax=1.9,
+  xlabel={final wealth $w$},ylabel={$U(w)$},xtick={1,4},ytick=\empty,clip=false]
+\addplot[thick,defcol,domain=0.75:4.7,samples=80] {ln(x)};
+\addplot[thick,thmcol] coordinates {(1,0) (4,1.3863)};
+\addplot[only marks,mark=*,thmcol] coordinates {(1,0) (4,1.3863)};
+\addplot[only marks,mark=*,black] coordinates {(2.5,0.6931) (2.5,0.9163) (2,0.6931)};
+\addplot[dotted] coordinates {(2.5,-0.3) (2.5,0.9163)};
+\addplot[dotted] coordinates {(2,-0.3) (2,0.6931)};
+\addplot[dotted] coordinates {(0.4,0.6931) (2.5,0.6931)};
+\addplot[dotted] coordinates {(0.4,0.9163) (2.5,0.9163)};
+\node[font=\scriptsize,anchor=west] at (axis cs:2.6,0.6931) {$\E[U(w)]$};
+\node[font=\scriptsize,anchor=south east] at (axis cs:2.45,0.93) {$U(\E[w])$};
+\node[font=\scriptsize,anchor=north east] at (axis cs:2.02,-0.12) {$\mathrm{CE}=2$};
+\node[font=\scriptsize,anchor=north west] at (axis cs:2.48,-0.12) {$\E[w]=2.5$};
+\draw[<->,thick] (axis cs:2,0.2) -- (axis cs:2.5,0.2);
+\node[font=\scriptsize,anchor=west] at (axis cs:2.58,0.2) {risk premium $0.5$};
+\end{axis}
+\end{tikzpicture}
+\caption{Concave utility and Jensen's inequality for $U(w)=\ln w$ and a gamble paying $w=1$ or $w=4$ with probability $\frac12$ each. The chord
+joins the two outcomes; its midpoint is $\E[U(w)]=\frac12\ln4\approx0.69$, below $U(\E[w])=\ln2.5\approx0.92$ on the curve. The sure amount with the same
+utility as the gamble is the certainty equivalent $\mathrm{CE}=U^{-1}(\E[U(w)])=2$, so the risk premium $\E[w]-\mathrm{CE}$ is $0.5$.
+Illustrative numbers, not data.}\label{ch03:fig-jensen}
+\end{figure}
 
 \subsection{Stein's lemma}
 \begin{lemma}[Stein]\label{ch03:lem-stein}

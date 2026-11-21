@@ -966,8 +966,34 @@ needed only to solve the problem cited.
 
 \paragraph{Geometry.} The level sets of the density are the ellipsoids $(\bm x-\bm\mu)\T\Sigma^{-1}(\bm x-\bm\mu)=c$, centred at
 $\bm\mu$, with principal axes along the eigenvectors of $\Sigma$ and semi-axes $\sqrt{c\lambda_i}$; in two dimensions they
-are ellipses tilted upward for $\rho>0$ and downward for $\rho<0$ \ts{24}{5}{3:12}. Since
+are ellipses tilted upward for $\rho>0$ and downward for $\rho<0$ \ts{24}{5}{3:12} (\cref{ch03:fig-mvn}). Since
 $(\bm X-\bm\mu)\T\Sigma^{-1}(\bm X-\bm\mu)=|\bm Z|^2$, this quadratic form has the $\chi^2_n$ law of \cref{ch03:sec-chisq}.
+
+\begin{figure}[!htb]
+\centering
+\pgfplotsset{mvnplot/.style={width=4.2cm,height=4.2cm,axis equal image,xmin=-3.2,xmax=3.2,ymin=-3.2,ymax=3.2,
+  tick label style={font=\scriptsize},label style={font=\small},title style={font=\small},xtick={-2,0,2},ytick={-2,0,2},xlabel={$x_1$}}}
+\begin{tikzpicture}
+\def\mvnell#1#2{% #1 = rho, #2 = c (so that the level set is (x-mu)' Sigma^{-1} (x-mu) = c)
+  \addplot[thick,defcol,domain=0:360,samples=90] ({sqrt(#2)*(sqrt(1+#1)*cos(x)+sqrt(1-#1)*sin(x))/sqrt(2)},{sqrt(#2)*(sqrt(1+#1)*cos(x)-sqrt(1-#1)*sin(x))/sqrt(2)});}
+\def\mvnaxes#1{% principal axes, length sqrt(c lambda_i) with c=4
+  \addplot[thick,thmcol] coordinates {(-{sqrt(4*(1+#1)/2)},-{sqrt(4*(1+#1)/2)}) ({sqrt(4*(1+#1)/2)},{sqrt(4*(1+#1)/2)})};
+  \addplot[thick,thmcol,dashed] coordinates {(-{sqrt(4*(1-#1)/2)},{sqrt(4*(1-#1)/2)}) ({sqrt(4*(1-#1)/2)},-{sqrt(4*(1-#1)/2)})};}
+\begin{axis}[mvnplot,at={(0,0)},title={$\rho=0$},ylabel={$x_2$}]
+  \mvnell{0}{1}\mvnell{0}{4}\mvnaxes{0}
+\end{axis}
+\begin{axis}[mvnplot,at={(4.9cm,0)},title={$\rho=0.6$}]
+  \mvnell{0.6}{1}\mvnell{0.6}{4}\mvnaxes{0.6}
+\end{axis}
+\begin{axis}[mvnplot,at={(9.8cm,0)},title={$\rho=-0.6$}]
+  \mvnell{-0.6}{1}\mvnell{-0.6}{4}\mvnaxes{-0.6}
+\end{axis}
+\end{tikzpicture}
+\caption{Level sets $(\bm x-\bm\mu)\T\Sigma^{-1}(\bm x-\bm\mu)=c$ ($c=1,4$) of a bivariate normal density with $\bm\mu=\bm0$,
+unit variances and correlation $\rho$. The axes are the eigenvectors of $\Sigma$ (solid: eigenvalue $1+\rho$, direction $(1,1)$;
+dashed: eigenvalue $1-\rho$, direction $(1,-1)$), and the semi-axes are $\sqrt{c\lambda_i}$ as in the Geometry paragraph; for $\rho=0$ the
+ellipses are circles and the axes are arbitrary.}\label{ch03:fig-mvn}
+\end{figure}
 
 \begin{remark}[Normal marginals are not enough; not discussed in class]
 Let $Z\sim N(0,1)$ and $S=\pm1$ with probability $\frac12$ each, independent of $Z$, and $W=SZ$. Then $W\sim N(0,1)$ and
@@ -1074,11 +1100,7 @@ If $Z\sim N(0,1)$, $U=Z^2$ has the \emph{chi-squared law with 1 degree of freedo
 i.i.d.\ $N(0,1)$, $V=Z_1^2+\dots+Z_n^2\sim\chi^2_n$ \ts{24}{5}{22:06}.
 \end{definition}
 \begin{proposition}
-$\chi^2_1=\mathrm{Gamma}(\frac12,\frac12)$\begin{coursenote}[Erratum in the slides]
-Slide~34 of \file{lec04_1} calls $\lambda$ in Gamma$(\alpha,\lambda)$ ``the scale parameter''. With the density
-$\lambda^\alpha x^{\alpha-1}e^{-\lambda x}/\Gamma(\alpha)$ used on slide~33, $\lambda$ is the \emph{rate}; the scale is $1/\lambda$ ($=2$ for
-$\chi^2$). R uses the same convention: \texttt{dgamma(x, shape = a, rate = l)}.
-\end{coursenote} and $\chi^2_n=\mathrm{Gamma}(\frac n2,\frac12)$, with
+$\chi^2_1=\mathrm{Gamma}(\frac12,\frac12)$ and $\chi^2_n=\mathrm{Gamma}(\frac n2,\frac12)$, with
 \[
   f_U(u)=\frac{u^{-1/2}e^{-u/2}}{\sqrt{2\pi}},\qquad
   f_V(v)=\frac{v^{n/2-1}e^{-v/2}}{2^{n/2}\Gamma(n/2)},\qquad M_V(t)=(1-2t)^{-n/2}\ \ (t<\tfrac12),
@@ -1087,7 +1109,12 @@ $\E[V]=n$, $\Var V=2n$.
 \end{proposition}
 \begin{proof}
 $F_U(u)=\Prob(-\sqrt u\le Z\le\sqrt u)=2\Phi(\sqrt u)-1$, so $f_U(u)=\phi(\sqrt u)/\sqrt u$ (the map $z\mapsto z^2$ is two-to-one,
-so \cref{ch03:thm-cov} is applied on each branch). For the Gamma$(\alpha,\lambda)$ density,
+so \cref{ch03:thm-cov} is applied on each branch); this is $\frac{(1/2)^{1/2}}{\Gamma(1/2)}u^{-1/2}e^{-u/2}$ because $\Gamma(\frac12)=\sqrt\pi$,
+i.e.\ the Gamma$(\frac12,\frac12)$ density. For the Gamma$(\alpha,\lambda)$ density\begin{coursenote}[Erratum in the slides]
+Slide~34 of \file{lec04_1} calls $\lambda$ in Gamma$(\alpha,\lambda)$ ``the scale parameter''. With the density
+$\lambda^\alpha x^{\alpha-1}e^{-\lambda x}/\Gamma(\alpha)$ used on slide~33, $\lambda$ is the \emph{rate}; the scale is $1/\lambda$ ($=2$ for
+$\chi^2$). R uses the same convention: \texttt{dgamma(x, shape = a, rate = l)}.
+\end{coursenote},
 $\int_0^\infty\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-(\lambda-t)x}\dd x=(1-t/\lambda)^{-\alpha}$ for $t<\lambda$, which is
 $(1-2t)^{-1/2}$ for $\alpha=\lambda=\frac12$. The MGF of a sum of $n$ independent copies is the $n$-th power, $(1-2t)^{-n/2}$,
 the MGF of Gamma$(\frac n2,\frac12)$; conclude by \cref{ch03:thm-mgf}. Mean $\alpha/\lambda=n$, variance $\alpha/\lambda^2=2n$.

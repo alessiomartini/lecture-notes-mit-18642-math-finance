@@ -22,6 +22,10 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 - [x] Appendice A (mappa dei file OCW): una riga "planned" da togliere o chiarire
 
 ## Idee
+- [ ] Capitolo 3: aggiungere un grafico nel paragrafo sulla normale multivariata (ellissi di livello) e controllare se mancano figure in altri punti (nota di Alessio, vedi ch00)
+- [ ] Capitolo 3: grafico della SML empirica con dati reali (portafogli ordinati per beta, es. libreria dati di French), non inventati
+- [ ] Capitolo 3: correggere l'allineamento tra dimostrazione del chi-quadro e coursenote (la dimostrazione ha la precedenza)
+- [ ] Tutto il libro: evidenziare in ogni definizione importante «l'idea in una riga» (filosofia della definizione) e un tag per i punti «importanti» (richieste di Alessio, vedi ch00)
 - [ ] Più figure come nelle slide (TikZ/pgfplots)
 - [ ] Formato pagina 16:9: le note le leggo sempre da computer (oggi 25 × 29,7 cm; vale anche per il template `~/.claude/templates/lecture-notes/preamble.tex` e le altre note) (da Google Tasks, 2026-11-04)
 
@@ -67,6 +71,7 @@ Scelta (a) della inbox di projects-overview: release pubblica, ma solo della ver
   uncertain; solutions go to the chapter end instead.
 
 ## Log
+- 2026-11-21: 🤖 letto le note del capitolo 3: 13 note con risposta (15 box answer), 8 commenti segnati come visti, 4 richieste spostate in ch00-requests (aperte); compilazione latexmk senza errori.
 - 2026-11-07: 🤖 Appendice A: la riga "planned" (`21m383-...-lecture-28_transcript.pdf`) chiarita come trascrizione di un altro corso OCW (21M.383, dal nome del file), segnata "--"; non compilato (niente LaTeX nel sandbox).
 - 2026-11-06: versione pubblica A4 di tutte le note (`python build.py public`, release `latest-pdf` aggiornata da GitHub Action ad ogni push su main); fuori note, answer, feedback, mysolution, richieste; box della colonna destra messi nel testo; template `~/.claude/templates/lecture-notes` aggiornato col flag `public`.
 - 2026-11-05: tight margins and 12pt: geometry 31.5x18 cm with 0.9 left, 0.4+header top, 1.5 bottom, columns 18.8 + 10 cm, page number in the one-line header (no footer). Rebuilt; content that ran below the page edge fixed (history boxes moved or `\Needspace`, `\clearpage`, `\allowdisplaybreaks`).

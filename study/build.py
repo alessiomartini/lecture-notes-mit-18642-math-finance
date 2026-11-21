@@ -7,7 +7,7 @@ macros of lecture-notes/preamble.tex and nothing else. LaTeX stays the single so
 
 Usage:  python study/build.py [ch04]        (default ch04; any chNN-*.tex works)
 """
-import hashlib, html, json, re, shutil, subprocess, sys, tempfile, unicodedata
+import hashlib, html, json, os, re, shutil, subprocess, sys, tempfile, unicodedata
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -223,6 +223,13 @@ def inline(s, sides=None):
                 else:
                     sides.append(("s", side_card("feedbackerr" if star else "feedback", body,
                                                  "FEEDBACK: ERROR" if star else "FEEDBACK")))
+            elif name in ("o", "O", "ae", "AE", "oe", "OE", "ss", "aa", "AA", "l", "L"):  # text letters ({\o}rgensen)
+                out.append({"o": "&oslash;", "O": "&Oslash;", "ae": "&aelig;", "AE": "&AElig;", "oe": "&oelig;",
+                            "OE": "&OElig;", "ss": "&szlig;", "aa": "&aring;", "AA": "&Aring;", "l": "&lstrok;", "L": "&Lstrok;"}[name])
+                if i < n and s[i] == "{" and s[i + 1:i + 2] == "}": i += 2
+            elif name == "inmargin":
+                out.append("in the margin")
+                if i < n and s[i] == "{" and s[i + 1:i + 2] == "}": i += 2
             elif name == "S": out.append("&sect;")
             elif name in ("ldots", "dots", "textellipsis"): out.append("&hellip;")
             elif name in ("quad", "qquad"): out.append("&emsp;")
@@ -437,7 +444,7 @@ def blocks(src, units=True):
 
 # ---------------------------------------------------------------- figures (TikZ -> svg)
 FIG_PRE = r"""\documentclass{article}
-\usepackage[T1]{fontenc}\usepackage{amsmath,amsthm,mathtools}\usepackage{newpxtext,newpxmath}\usepackage{bm}
+\usepackage[T1]{fontenc}\usepackage{amsmath,amsthm,mathtools}\usepackage{newpxtext,newpxmath}\usepackage{bm}\usepackage{tabularx}
 \usepackage[paperwidth=40cm,paperheight=40cm,textwidth=15cm]{geometry}
 \usepackage[dvipsnames]{xcolor}\usepackage{tikz}\usepackage{pgfplots}
 %(extra)s
@@ -451,6 +458,13 @@ def figure_svgs():
     pre = (NOTES / "preamble.tex").read_text(encoding="utf8")
     extra = "\n".join(l for l in pre.split("\n") if re.match(
         r"\\(definecolor|colorlet|usetikzlibrary|pgfplotsset|DeclareMathOperator|newcommand\{\\(R|N|E|Prob|Q|T|dd|ind|eqd)\})", l))
+    for chf in (NOTES / "chapters").glob(S.chapname + "*.tex"):  # chapter-local \pgfplotsset styles (e.g. lawplot)
+        ctx = chf.read_text(encoding="utf8")
+        for m in re.finditer(r"^\\pgfplotsset\{", ctx, re.M):
+            d, k = 1, m.end()
+            while d and k < len(ctx):
+                d += (ctx[k] == "{") - (ctx[k] == "}"); k += 1
+            extra += "\n" + ctx[m.start():k]
     FIG = OUT / "fig"; FIG.mkdir(parents=True, exist_ok=True)
     pdflatex, cairo = shutil.which("pdflatex"), shutil.which("pdftocairo")
     for name, code, fid in S.figs:
@@ -462,7 +476,8 @@ def figure_svgs():
         if not (pdflatex and cairo and code): S.warn.append(f"figure {name}: no pdflatex/pdftocairo"); continue
         with tempfile.TemporaryDirectory() as td:
             Path(td, "f.tex").write_text(tex, encoding="utf8")
-            r = subprocess.run([pdflatex, "-interaction=nonstopmode", "-halt-on-error", "f.tex"], cwd=td, capture_output=True, text=True)
+            r = subprocess.run([pdflatex, "-interaction=nonstopmode", "-halt-on-error", "f.tex"], cwd=td, capture_output=True, text=True,
+                               env={**os.environ, "TEXINPUTS": str(NOTES) + os.pathsep})
             if r.returncode != 0 or not Path(td, "f.pdf").exists():
                 S.warn.append(f"figure {name}: pdflatex failed"); print(r.stdout[-800:]); continue
             subprocess.run([cairo, "-svg", "f.pdf", str(dst)], cwd=td, check=True)

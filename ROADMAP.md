@@ -12,13 +12,13 @@ Unico file per todo, idee, decisioni e diario, letto da Projects Overview
 
 ## HTML di studio
 - [x] Coprire i casi mancanti: itemize dentro `answer`, tabelle, `\texorpdfstring`
-- [ ] Study HTML: `\o` e le due figure TikZ di ch03 che non compilano in SVG (da verificare con pdflatex disponibile)
+- [x] Study HTML: `\o` e le due figure TikZ di ch03 che non compilano in SVG (da verificare con pdflatex disponibile)
 
 ## Versione pubblica A4
 - [x] `python build.py public` -> `build/book-a4.pdf`: A4, una colonna, senza note personali (flag `\publicmode`)
 - [x] Attribuzione e licenza CC BY-NC-SA 4.0 (MIT OCW) nella pagina iniziale
 - [x] GitHub Action: a ogni push su main compila solo la versione A4 e la pubblica nella release `latest-pdf`
-- [ ] Rivedere a occhio i 3 Overfull (pagine ~61, 409, 513) e le figure larghe
+- [x] Rivedere a occhio i 3 Overfull (pagine ~61, 409, 513) e le figure larghe (resta un Overfull di 1,4 pt in ch25, trascurabile)
 - [x] Appendice A (mappa dei file OCW): una riga "planned" da togliere o chiarire
 
 ## Idee
@@ -56,8 +56,9 @@ Each chapter needs `\printsolutions` at its end once it has a `tryfirst` or `lab
   dropped, header = rows before the first `\midrule`), `lstlisting` (as `<pre>`), `\texorpdfstring` (first argument),
   `\hyperref`, `\subsubsection`, answers with blank lines inside a paragraph; environments met inside running text
   (answer, boxes, lists) are passed to `blocks()`. Limits: tables are not numbered from the `.aux` (counted in source order);
-  tables without `\midrule` have no header row; `\o` not checked; two ch03 TikZ figures still fail to compile to SVG
-  (no pdflatex in this environment, not verified).
+  tables without `\midrule` have no header row; `\o` (and other text letters such as `\ae`, `\ss`) and `\inmargin` are now converted. The two ch03 TikZ figures failed because
+  the chapter-local `\pgfplotsset` styles (`lawplot`, `retplot`) and the `data/*.dat` tables were not visible to the figure
+  compile: now they are (checked with pdflatex 2026-11-21, all 8 ch03 figures build; ch09-fig1 needed `tabularx`).
 
 ### Versione pubblica (2026-11-06)
 
@@ -71,7 +72,7 @@ Scelta (a) della inbox di projects-overview: release pubblica, ma solo della ver
   uncertain; solutions go to the chapter end instead.
 
 ## Log
-- 2026-11-21: 🤖 letto le note del capitolo 3: 13 note con risposta (15 box answer), 8 commenti segnati come visti, 4 richieste spostate in ch00-requests (aperte); compilazione latexmk senza errori.
+- 2026-11-21: 🤖 letto le note del capitolo 3: 13 note con risposta (15 box answer), 8 commenti segnati come visti, 4 richieste spostate in ch00-requests (aperte); compilazione latexmk senza errori. Study HTML: `\o`, `\inmargin` e le figure TikZ di ch03/ch09 ora compilano in SVG; versione A4: 2 dei 3 Overfull sistemati (resta 1,4 pt in ch25), figure larghe senza sbordi.
 - 2026-11-07: 🤖 Appendice A: la riga "planned" (`21m383-...-lecture-28_transcript.pdf`) chiarita come trascrizione di un altro corso OCW (21M.383, dal nome del file), segnata "--"; non compilato (niente LaTeX nel sandbox).
 - 2026-11-06: versione pubblica A4 di tutte le note (`python build.py public`, release `latest-pdf` aggiornata da GitHub Action ad ogni push su main); fuori note, answer, feedback, mysolution, richieste; box della colonna destra messi nel testo; template `~/.claude/templates/lecture-notes` aggiornato col flag `public`.
 - 2026-11-05: tight margins and 12pt: geometry 31.5x18 cm with 0.9 left, 0.4+header top, 1.5 bottom, columns 18.8 + 10 cm, page number in the one-line header (no footer). Rebuilt; content that ran below the page edge fixed (history boxes moved or `\Needspace`, `\clearpage`, `\allowdisplaybreaks`).
